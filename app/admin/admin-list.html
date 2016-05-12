@@ -1,0 +1,189 @@
+<!-- page container -->
+<div class="page-container">
+
+    <!-- page header -->
+    <div class="page-header">
+
+        <!-- page header holder -->
+        <nav class="navbar navbar-default-admin">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a class="brand" ui-sref="admin"><img class="img-responsive" src="../img/logo.png" /></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
+                        <li><a ui-sref="admin">Landing Page</a></li>
+                        <li><a ui-sref="admin-list">Edit Admins</a></li>
+                        <li><a ui-sref="workerprof">Edit Workers</a></li>
+                        <li><a ui-sref="offices">Edit Offices</a></li>
+                        <!--<li><a class="btn" title="Log Out" ng-click="authCtrl.logout()"><span class="fa fa-sign-out"></span></a></li>-->
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+        <!-- ./page header holder -->
+
+    </div>
+    <!-- ./page header -->
+
+    <!-- page content -->
+    <div class="page-content">
+
+        <!-- page content wrapper -->
+        <div class="page-content-wrap">
+            <div class="container">
+                <h2>Admins Profile Page:    <small> Admin list </small></h2>
+            </div>
+            <div class="divider">
+                <div class="box"><span class="fa fa-angle-down"></span></div>
+            </div>
+
+            <!-- page content holder -->
+            <div class="page-content-wrap">
+                <div class="container">
+                    <div class="row">
+                        <br>
+                        <!--<br>-->
+                        <!--FILTER-->
+                        <!--<div class="container">-->
+                        <!--    <div class="row">-->
+                        <!--        <h2 class="col-sm-3 text-left">Filter:</h2>-->
+                        <!--    </div>-->
+                        <!--    <!--    <div class="well" style="max-height: 400px;overflow: auto;">-->
+                        <!--        <div class="col-xs-3">-->
+                        <!--            <div class="form-group">-->
+                        <!--                <label for="sel3">Lokasi Cabang:</label>-->
+                        <!--                <select class="form-control" id="lokasi">-->
+                        <!--                    <option>Select</option>-->
+                        <!--                    <option>Jakarta</option>-->
+                        <!--                    <option>Bandung</option>-->
+                        <!--                    <option>Surabaya</option>-->
+                        <!--                    <option>Medan</option>-->
+                        <!--                    <option>Semarang</option>-->
+                        <!--                    <option>Ambon</option>-->
+                        <!--                    <option>Balikpapan</option>-->
+                        <!--                    <option>Banda Aceh</option>-->
+                        <!--                    <option>Bandar Lampung</option>-->
+                        <!--                    <option>Banjarmasin</option>-->
+                        <!--                    <option>Batam</option>-->
+                        <!--                    <option>Bekasi</option>-->
+                        <!--                    <option>Bengkulu</option>-->
+                        <!--                    <option>Bogor</option>-->
+                        <!--                    <option>Cirebon</option>-->
+                        <!--                    <option>Denpasar</option>-->
+                        <!--                    <option>Depok</option>-->
+                        <!--                    <option>Gorontalo</option>-->
+                        <!--                    <option>Jambi</option>-->
+                        <!--                    <option>Jayapura</option>-->
+                        <!--                    <option>Kediri</option>-->
+                        <!--                    <option>Kendari</option>-->
+                        <!--                    <option>Madiun</option>-->
+                        <!--                    <option>Makassar</option>-->
+                        <!--                    <option>Malang</option>-->
+                        <!--                    <option>Manado</option>-->
+                        <!--                    <option>Padang</option>-->
+                        <!--                    <option>Palembang</option>-->
+                        <!--                    <option>Pekanbaru</option>-->
+                        <!--                    <option>Pontianak</option>-->
+                        <!--                    <option>Samarinda</option>-->
+                        <!--                    <option>Serang</option>-->
+                        <!--                    <option>Tangerang</option>-->
+                        <!--                    <option>Tasikmalaya</option>-->
+                        <!--                    <option>Tegal</option>-->
+                        <!--                    <option>Yogyakarta</option>-->
+                        <!--                </select>-->
+                        <!--            </div>-->
+                        <!--            <a href="#" class="btn btn-primary">-->
+                        <!--                <span class="glyphicon glyphicon-filter"></span> Filter-->
+                        <!--            </a>-->
+                        <!--        </div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+                        <!--END FILTER-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<br>-->
+                    <!--RESULTS-->
+                    <div class="container">
+                        <!--<h3>Search Results:</h3>-->
+                        
+                        <div class="row">
+                            <a ui-sref="admin-add" class="btn btn-success btn-lg col-md-2">
+                                <span class="glyphicon glyphicon-plus-sign"></span> Add Admin
+                            </a>
+                            <a ui-sref="admin-profile" class="btn btn-primary btn-lg col-md-2 col-md-offset-8">
+                                <span class="glyphicon glyphicon-plus-sign"></span> Edit Your Profile
+                            </a>
+                        </div>
+                        <br>
+                        <div class="container">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Branch
+                                    </th>
+                                    <th>
+                                        
+                                    </th>
+                                </tr>
+                                <tr ng-repeat="administrator in administrators">
+                                    <td>
+                                        {{$index+1}}
+                                    </td>
+                                    <td>
+                                        {{administrator.displayName}}
+                                    </td>
+                                    <td>
+                                        {{administrator.email}}
+                                    </td>
+
+                                    <td>
+                                        {{administrator.branch}}
+                                    </td>
+                                    <td>
+                                        <button class="btn">Edit</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <hr>
+                    </div>
+
+                    <!--/RESULTS-->
+
+
+                </div>
+
+            </div>
+            <!-- ./page content holder -->
+        </div>
+        <!-- ./page content wrapper -->
+
+    </div>
+    <!-- ./page content -->
+
+
+
+</div>
+<!-- ./page container -->

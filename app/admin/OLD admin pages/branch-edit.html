@@ -1,0 +1,89 @@
+<div class="page-container">
+    <div class="page-header">
+
+        <!-- page header holder -->
+        <nav class="navbar navbar-default-admin">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                      </button>
+                    <a class="brand" ui-sref="home"><img class="img-responsive" src="../img/logo.png" /></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
+                        <li><a ui-sref="admin">Landing Page</a></li>
+                        <li><a ui-sref="admin-list">Edit Admins</a></li>
+                        <li><a ui-sref="workerprof">Edit Workers</a></li>
+                        <li><a ui-sref="offices">Edit Offices</a></li>
+                        <li><a class="btn" title="Log Out" ng-click="authCtrl.logout()"><span class="fa fa-sign-out"></span></a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+        <!-- ./page header holder -->
+    </div>
+<div class="page-content">
+    <div class="page-content-wrap">
+        <hr><br>        
+
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal col-lg-8 col-sm-offset-1" ng-submit="editBranch()">
+                
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Kotamadya</label>
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" class="form-control" id="inputKodya" ng-model="branch.kotamadya" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Kantor</label>
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" class="form-control" id="inputNama" ng-model="branch.nama" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Alamat</label>
+                    <div class="col-md-6 col-xs-12">
+                        <textarea class="form-control" rows="5" id="inputAlamat" ng-model="branch.alamat" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">No. Telp</label>
+                    <div class="col-md-6 col-xs-12">
+                        <input type="text" class="form-control" id="inputTelp" ng-model="branch.telp" onkeypress="return event.charCode >= 45 && event.charCode <=57"
+                            required/>
+                    </div>
+                </div>
+
+                <div class="col-xs-9">
+                    <button type="submit" id="buttonAdd" class="btn btn-primary pull-right">Save</button>
+                    <button type="cancel" class="btn btn-danger" ng-click="removeBranch(branch)">Remove</button>
+                    <button type="cancel" class="btn btn-primary" ui-sref="offices">Cancel</button>
+                    
+                </div>
+
+
+
+
+            </form>
+
+
+        </div>
+        <br>
+    </div>
+</div>
+</div>
+</div>

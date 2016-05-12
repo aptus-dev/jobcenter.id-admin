@@ -1,0 +1,127 @@
+<!-- page container -->
+        <div class="page-container" ng-controller="searchController">
+
+            <!-- page header -->
+            <div class="page-header">
+
+                <!-- page header holder -->
+                <nav class="navbar navbar-default-admin">
+                  <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                      </button>
+                      <a class="brand" ui-sref="home"><img class="img-responsive" src="../img/logo.png"/></a>
+                    </div>
+                
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                      <ul class="nav navbar-nav navbar-right">
+                        <!--<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>-->
+                        <li><a ui-sref="home">Landing Page</a></li>
+                        <li><a ui-sref="admin-list">Admins</a></li>
+                        <li>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Workers
+                            </a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" ui-sref="worker">Register Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-available">Available Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-booked">Booked Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-unavailable">Unavailable List</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
+                            </div>
+                        </li>
+                        <li><a ui-sref="offices">Offices</a></li>
+                        <!-- <li><a ng-click="dashboardCtrl.logout()"><span class="fa fa-sign-out"></span> Log Out</a></li> -->
+                      </ul>
+                    </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container -->
+                </nav><!-- /.navbar -->
+                <!-- ./page header holder -->
+
+            </div>
+            <!-- ./page header -->
+
+            <!-- page content -->
+            <div class="page-content">
+
+                <!-- page content wrapper -->
+                <div class="page-content-wrap">
+                <ul class="nav nav-pills nav-justified">
+                    <li><a ui-sref="worker.add">Registrasi</a></li>
+                    <li class="active"><a href="">Verifikasi</a></li>
+                </ul>
+                <div class="container">
+                    <h2>Register Workers:    <small> Add New Workers or Verify Existing Ones </small></h2>
+                </div>
+                <div class="page-content-wrap">
+                    <div class="container">
+                        <div class="row">
+
+                            <form class="form-horizontal col-lg-5 col-sm-offset-1" ng-controller="laborPushController" ng-submit="pushWorker()">
+
+                                <div class="form-group">
+                                    <div class="col-lg-8" align="center">
+                                        <img ng-src="{{data.b64}}"></img>
+                                        <div class="caption">
+                                            <h5>Upload KTP</h5>
+                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>
+                                            <div style="word-wrap:break-word" ng-if="data.b64">
+                                                <h5>Gambar berhasil diupload!</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-lg-8" align="center">
+                                        <img ng-src="{{data.b64}}"></img>
+                                        <div class="caption">
+                                            <h5>Upload KK</h5>
+                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>
+                                            <div style="word-wrap:break-word" ng-if="data.b64">
+                                                <h5>Gambar berhasil diupload!</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-lg-8" align="center">
+                                        <img ng-src="{{data.b64}}"></img>
+                                        <div class="caption">
+                                            <h5>Upload SK Domisili</h5>
+                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>
+                                            <div style="word-wrap:break-word" ng-if="data.b64">
+                                                <h5>Gambar berhasil diupload!</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-8 col-lg-offset-2">
+                                    <!-- Publish button goes to 'available' workflow and data is published on the website -->
+                                    <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Save</button>
+                                    <button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>
+                                </div>
+
+
+                            </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT WRAPPER -->
+    </div>
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
