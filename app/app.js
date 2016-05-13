@@ -146,7 +146,7 @@ angular
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-register.html'
       })
-      .state('worker.verify', {
+      .state('worker-verify', {
         url: '/verify',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-verify.html'
