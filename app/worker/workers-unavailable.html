@@ -181,7 +181,10 @@
                     <span ng-show="sortType == 'lokasi' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'lokasi' && sortReverse" class="fa fa-caret-up"></span>
                     </a></th>
-                  <th width="50">&nbsp;</th>
+                  <th><a style="color:#56688A">
+                    Change Status
+                  </a></th>
+                  <!--<th width="50">&nbsp;</th>-->
                   
                 </thead>
                 <tbody>
@@ -193,9 +196,9 @@
                     <td>{{data.gender}}</td>                   
                     <td>{{data.lokasi}}</td>
                     <td>
-                      <!--<button title="Edit Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(data)">
-                        <span class="fa fa-pencil"></span>
-                      </button>-->
+                      <button title="Change Status" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(data)">
+                        <span class="fa fa-rotate-left"></span>
+                      </button>
                     </td>
                   </tr>                  
                 </tbody>
