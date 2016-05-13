@@ -141,7 +141,7 @@ angular
         //   }
         // }
       })
-      .state('worker.add', {
+      .state('worker-add', {
         url: '/add',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-register.html'

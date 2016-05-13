@@ -1,6 +1,18 @@
-var db = angular.module("dbApp", ["firebase", "angularUtils.directives.dirPagination"]);
+var db = angular.module("dbApp", ["firebase", "angularUtils.directives.dirPagination","ngTagsInput"]);
 
 var URL = "https://jobcenter.firebaseio.com/";
+
+db.controller("tagsCtrl", function($scope, $http) {
+  $scope.tags = [
+    { text: 'Tag1' },
+    { text: 'Tag2' },
+    { text: 'Tag3' }
+  ];
+
+  $scope.loadTags = function(query) {
+    return $http.get('tags.json');
+  };
+});
 
 db.controller("searchController", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$firebaseObject', '$http', function($scope, $firebaseArray, $state, $stateParams, $rootScope, $firebaseObject, $http) {
   
