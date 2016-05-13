@@ -11,7 +11,7 @@ db.controller("tagsCtrl", function($scope, $http) {
 
   $scope.loadTags = function(query) {
     return $http.get('tags.json');
-  };
+  };  
 });
 
 db.controller("searchController", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$firebaseObject', '$http', function($scope, $firebaseArray, $state, $stateParams, $rootScope, $firebaseObject, $http) {
@@ -235,7 +235,7 @@ db.controller("branchViewController", function($scope, $firebaseArray) {
   
 }); // end of branch view controller
 
-db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', function ($scope, $firebaseArray, $state) {
+db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', function ($scope, $firebaseArray, $state) {    
   
   var ref2 = new Firebase(URL + 'branch');
   $scope.branches = $firebaseArray(ref2);
@@ -246,7 +246,7 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
   var tanggal = document.getElementById('inputTanggal');
   var gaji = document.getElementById('inputGaji');
   
-  $scope.pushWorker = function() {
+  $scope.registerWorker = function() {
   $scope.push.$add({
     foto: $scope.data.b64,
     nama: $scope.inputNama,
@@ -256,7 +256,7 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
     lokasi: $scope.inputLokasi,
     kategori: $scope.inputKategori,
     profesi: $scope.inputProfesi,
-    tersedia: "ya",
+    tersedia: "registered",
     gender: $scope.inputGender,
     waktu: $scope.inputWaktu,
     pendidikan: $scope.inputPend,
@@ -282,7 +282,7 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
         }).catch(function(error) {
         alert('Error!')        
         });
-        $state.go('workerprof');
+        $state.go('worker');
   };  //end of push worker
   
   // upload picture and convert to base64
@@ -312,13 +312,10 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
 
           //here you can send data over your server as desired
         }
-
         r.readAsDataURL(f); //once defined all callbacks, begin reading the file
-
       };
   // end of upload picture and convert to base64  
-  
-  			
+    			
     $(function(){
       // Set up the number formatting.
       $('#inputGaji').number( true, '', '.' );
@@ -328,37 +325,7 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
     });         
 
   }]); //end of labor push controller
-
-  /* push data into database with unique id
-  pushRef.push({
-    "nama": "Maryati",
-    "tanggallahir": "27/04/1985",
-    "asal": "Padang Panjang",
-    "alamat": "Depok 2",
-    "lokasi": "Depok",
-    "kategori": "Rumah Tangga",
-    "profesi": "Nanny",
-    "tersedia": "ya",
-    "gender": "Perempuan",
-    "waktu": "Menginap",
-    "pendidikan": "SD",
-    "status": "Lajang",
-    "anak": "0",
-    "agama": "Islam",
-    "suku": "Padang",
-    "gaji": "2.700.000",
-    "ketrampilan": "memasak, mencuci",
-    "anjing": "ya",
-    "pengalaman": "7",
-    "luarnegri": "tidak",
-    "inggris": "tidak",
-    "tinggi": "162",
-    "berat": "50",
-    "images": "./Gallery/gadis_1.jpg",
-    "non-halal": "ya",
-    "lembur": "ya"
-  });
-*/
+//-----------------------------------------------------------//  
 
 db.controller("branchPushController", function () {
   

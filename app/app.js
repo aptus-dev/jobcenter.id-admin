@@ -119,7 +119,7 @@ angular
       .state('worker', {
         url: '/worker',
         // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'worker/workers.html',
+        templateUrl: 'worker/worker-registered.html',
         // resolve: {
         //   auth: function($state, Users, Auth){
         //     return Auth.$requireAuth().catch(function(){
@@ -144,7 +144,7 @@ angular
       .state('worker-add', {
         url: '/add',
         // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'worker/worker-register.html'
+        templateUrl: 'worker/worker-add.html'
       })
       .state('worker-verify', {
         url: '/verify',
@@ -159,22 +159,22 @@ angular
       .state('worker-available', {
         url: '/available',
         // controller: 'searchController',
-        templateUrl: 'worker/workers-available.html'
+        templateUrl: 'worker/worker-available.html'
       })
       .state('worker-booked', {
         url: '/booked',
         // controller: 'searchController',
-        templateUrl: 'worker/workers-booked.html'
+        templateUrl: 'worker/worker-booked.html'
       })
       .state('worker-unavailable', {
         url: '/unavailable',
         // controller: 'searchController',
-        templateUrl: 'worker/workers-unavailable.html'
+        templateUrl: 'worker/worker-unavailable.html'
       })
       .state('worker-cancelled', {
         url: '/cancelled',
         // controller: 'searchController',
-        templateUrl: 'worker/workers-cancelled.html'
+        templateUrl: 'worker/worker-cancelled.html'
       })
       // END WORKER PAGES - Admin Page UI Routes
 
