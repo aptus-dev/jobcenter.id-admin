@@ -12,7 +12,8 @@ angular
   .module('mainApp', [
     'firebase',
     'ui.router',
-    'dbApp'
+    'dbApp',
+    'worker'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -147,7 +148,7 @@ angular
         templateUrl: 'worker/worker-add.html'
       })
       .state('worker-verify', {
-        url: '/verify',
+        url: '/verify/:workerId',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-verify.html'
       })

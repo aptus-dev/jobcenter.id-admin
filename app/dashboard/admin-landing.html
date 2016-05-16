@@ -63,15 +63,17 @@
                       <br>
                       <br>
                       <p> Insert GOOGLE analytics here</p>
-                      <div ng-controller="tagsCtrl" class="form-group">
+                      <form ng-controller="tagsCtrl" class="form-horizontal">
                         <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
                         <div class="col-sm-8">
                             <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan ketrampilan pekerja" required>
                               <auto-complete source="loadTags($query)"></auto-complete>
                             </tags-input>
                             <p>Model: {{tags}}</p>
+                            <p ng-repeat="tag in tags">data: {{tag.text}}</p>
                         </div>
-                    </div>
+                        <button type="submit" ng-click="submit()">BUTANG</button>
+                    </form>
                       <br>
                       <br>
                      </div>
