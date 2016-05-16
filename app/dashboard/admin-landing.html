@@ -71,8 +71,11 @@
                             </tags-input>
                             <p>Model: {{tags}}</p>
                             <p ng-repeat="tag in tags">data: {{tag.text}}</p>
+                            <div class="panel-heading">
+                            <span class="label label-default label-form" ng-repeat="tag in tags">{{tag.text}}</span>
+                            
+                            </div>                            
                         </div>
-                      </div>
                       <!--<h3>Markup</h3>
                       <p>Just add <code>data-role="tagsinput"</code> to your input field to automatically change it to a tags input field.</p>
                       <div class="bs-example">
