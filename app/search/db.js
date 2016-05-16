@@ -2,24 +2,37 @@ var db = angular.module("dbApp", ["firebase", "angularUtils.directives.dirPagina
 
 var URL = "https://jobcenter.firebaseio.com/";
 
-db.controller("tagsCtrl", function($scope, $http) {
-  //needs "ngTagsInput" in var db
-  $scope.tags = [
-    { text: 'Tag1' },
-    { text: 'Tag2' },
-    { text: 'Tag3' }
-  ];
+db.controller("tagsCtrl", function($scope, $http, $firebaseObject, $firebaseArray) {
+  var ref = new Firebase(URL + 'tags');
+  var ref2 = new Firebase(URL + 'ketrampilan');
+  //$scope.tags = $firebaseArray(ref2);
+  
+  ref2.on("value", function (snap) {
+    $scope.tags = snap.val();
+  });
+  // [
+  //   { text: 'Tag1' },
+  //   { text: 'Tag2' },
+  //   { text: 'Tag3' }
+  // ];
 
   $scope.loadTags = function(query) {
-    return $http.get('tags.json');
-  };
-  
-  $scope.tagAdded = function(tag) {
-        console.log('Tag added: ', tag);
+    return $http.get('https://jobcenter.firebaseio.com/tags.json');
   };
     
-  $scope.tagRemoved = function(tag) {
-      console.log('Tag removed: ', tag);
+  $scope.submit = function() {
+    
+    ref2.set(angular.fromJson(angular.toJson($scope.tags)))
+    .then(function() {
+        ref.update(angular.fromJson(angular.toJson($scope.tags)));
+      })
+    //myRef.push(angular.fromJson(angular.toJson(myAngularObject)))
+    
+    .then(function() {
+        alert('Branch Updated!');
+      }).catch(function(error) {
+        alert('Error!')        
+      });
   }; 
 });
 
@@ -256,16 +269,20 @@ db.controller("branchViewController", function($scope, $firebaseArray) {
   
 }); // end of branch view controller
 
-db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', function ($scope, $firebaseArray, $state) {    
+db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', '$http', function ($scope, $firebaseArray, $state, $http) {    
   
   var ref2 = new Firebase(URL + 'branch');
   $scope.branches = $firebaseArray(ref2);
    
-  var ref = new Firebase(URL + 'labor');
+  var ref = new Firebase(URL + 'registered');
   $scope.push = $firebaseArray(ref);
   
   var tanggal = document.getElementById('inputTanggal');
   var gaji = document.getElementById('inputGaji');
+  
+  $scope.loadTags = function(query) {
+    return $http.get('https://jobcenter.firebaseio.com/tags.json');
+  };
   
   $scope.registerWorker = function() {
   $scope.push.$add({
@@ -287,7 +304,7 @@ db.controller("laborPushController", ['$scope', '$firebaseArray', '$state', func
     agama: $scope.inputAgama,
     suku: $scope.inputSuku,
     gaji: gaji.value,
-    ketrampilan: $scope.inputKetrampilan,
+    ketrampilan: $scope.tags,
     anjing: $scope.inputAnjing,
     exp: $scope.inputExp,
     luarnegri: $scope.inputExpln,
