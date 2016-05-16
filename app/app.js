@@ -133,17 +133,17 @@ angular
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-add.html'
       })
-      .state('worker.verify', {
+      .state('worker-verify', {
         url: '/verify/:workerId',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-verify.html'
       })
-      .state('worker.edit', {
+      .state('worker-edit', {
         url: '/edit/:workerId',
         // controller: 'searchController',
         templateUrl: 'worker/worker-edit.html'
       })
-      .state('worker.available', {
+      .state('worker-available', {
         url: '/available',
         // controller: 'searchController',
         templateUrl: 'worker/worker-available.html'

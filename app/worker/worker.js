@@ -166,7 +166,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     $scope.pageSize = 15;
 
     //sort table
-    $scope.sortType = "kategori";
+    $scope.sortType = "profesi";
     $scope.sortReverse = true;
 
     $(function () {
@@ -189,6 +189,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 //-----------------------------------------------------------//
 
 worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject){
+    
     var brRef = new Firebase(URL + 'branch');
     $scope.branches = $firebaseArray(brRef);
 
@@ -196,4 +197,126 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
     $scope.push = $firebaseArray(workRef);
     $scope.pus = $firebaseObject(ref);
-});  
+    
+    $scope.updateWorker = function (pus) {
+    $rootScope.pus = pus;
+    $state.go('worker-edit', {workerId: $rootScope.pus.$id});        
+  }; //end of update worker
+  
+  var tanggal = document.getElementById('inputTanggal');
+  var gaji = document.getElementById('inputGaji');
+   
+  $scope.editWorker = function () {      
+    $scope.pus.$save()
+    .then(ref.update({tanggallahir: tanggal.value, gaji: gaji.value}))
+    .then(function() {
+        alert('Pekerja Telah Di Update!');
+      }).catch(function(error) {
+        alert('Error!')        
+      });
+      $state.go('worker-available');
+  };  //end of edit worker
+  
+  $scope.removeWorker = function (pus) {         
+    $scope.pus.$remove()
+    .then(function() {
+        alert('Pekerja Telah Di Hapus!');
+      }).catch(function(error) {
+        alert('Error!')        
+      });
+      $state.go('worker-available');
+  };  //end of remove worker
+  
+  //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 15;
+
+    //sort table
+    $scope.sortType = "profesi";
+    $scope.sortReverse = true;
+    
+    // upload picture and convert to base64
+    $scope.data = {}; //init variable
+    $scope.click = function () { //default function, to be override if browser supports input type='file'
+        $scope.data.alert = "Your browser doesn't support HTML5 input type='File'"
+    }
+
+    var fileSelect = document.createElement('input'); //input it's not displayed in html, I want to trigger it form other elements
+    fileSelect.type = 'file';
+    var fileSelectKtp = document.createElement('input'); //input it's not displayed in html, I want to trigger it form other elements
+    fileSelectKtp.type = 'file';
+    var fileSelectKk = document.createElement('input'); //input it's not displayed in html, I want to trigger it form other elements
+    fileSelectKk.type = 'file';
+    var fileSelectSk = document.createElement('input'); //input it's not displayed in html, I want to trigger it form other elements
+    fileSelectSk.type = 'file';
+
+    if (fileSelect.disabled) { //check if browser support input type='file' and stop execution of controller
+        return;
+    }
+
+    $scope.click = function () { //activate function to begin input file on click
+        fileSelect.click();
+    }
+
+    fileSelect.onchange = function () { //set callback to action after choosing file
+        var f = fileSelect.files[0], r = new FileReader();
+
+        r.onloadend = function (e) { //callback after files finish loading
+            $scope.data.b64 = e.target.result;
+            $scope.$apply();
+            console.log($scope.data.b64.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+
+            //here you can send data over your server as desired
+        }
+
+        r.readAsDataURL(f); //once defined all callbacks, begin reading the file
+    };
+    // end of upload profile picture and convert to base64
+
+    $scope.clickKtp = function () { //activate function to begin input file on click
+        fileSelectKtp.click();
+    }
+    fileSelectKtp.onchange = function () {
+        var f = fileSelectKtp.files[0], ktp = new FileReader();
+
+        ktp.onloadend = function (e) { //callback after files finish loading
+            $scope.data.ktp = e.target.result;
+            $scope.$apply();
+            console.log($scope.data.ktp.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //here you can send data over your server as desired
+        }
+        ktp.readAsDataURL(f);
+    };  //end of ktp upload 
+
+    $scope.clickKk = function () { //activate function to begin input file on click
+        fileSelectKk.click();
+    }
+    fileSelectKk.onchange = function () {
+        var f = fileSelectKk.files[0], kk = new FileReader();
+
+        kk.onloadend = function (e) { //callback after files finish loading
+            $scope.data.kk = e.target.result;
+            $scope.$apply();
+            console.log($scope.data.kk.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //here you can send data over your server as desired
+        }
+        kk.readAsDataURL(f);
+    };  //end of kk upload
+
+    $scope.clickSk = function () { //activate function to begin input file on click
+        fileSelectSk.click();
+    }
+    fileSelectSk.onchange = function () {
+        var f = fileSelectSk.files[0], sk = new FileReader();
+
+        sk.onloadend = function (e) { //callback after files finish loading
+            $scope.data.sk = e.target.result;
+            $scope.$apply();
+            console.log($scope.data.sk.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //here you can send data over your server as desired
+        }
+        sk.readAsDataURL(f);
+    };  //end of sk upload
+    
+});  //end available worker controller
+//-----------------------------------------------------------//
