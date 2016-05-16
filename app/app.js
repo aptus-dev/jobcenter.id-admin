@@ -19,11 +19,11 @@ angular
     $stateProvider
     
     // Front page UI Routes
-      .state('home', {
-        url: '/',
-        // controller: 'DashboardCtrl as dashboardCtrl',
-        templateUrl: 'dashboard/admin-landing.html'
-      })
+      // .state('home', {
+      //   url: '/',
+      //   // controller: 'DashboardCtrl as dashboardCtrl',
+      //   templateUrl: 'dashboard/admin-landing.html'
+      // })
       // .state('contact-us', {
       //   url: '/contact-us',
       //   templateUrl: 'views/contact-us.html'
@@ -46,74 +46,60 @@ angular
         url: '/login',
         controller: 'AuthCtrl as authCtrl',
         templateUrl: 'auth/login.html',
-        // resolve: {
-        //   requireNoAuth: function($state, Auth){
-        //     return Auth.$requireAuth().then(function(auth){
-        //       $state.go('admin');
-        //     }, function(error){
-        //       return;
-        //     });
-        //   }
-        // }
+        resolve: {
+          requireNoAuth: function($state, Auth){
+            return Auth.$requireAuth().then(function(auth){
+              $state.go('superadmin');
+            }, function(error){
+              return;
+            });
+          }
+        }
       })
-      // .state('superlogin', {
-      //   url: '/superlogin',
-      //   controller: 'AuthCtrl as authCtrl',
-      //   templateUrl: 'auth/superlogin.html',
-      //   resolve: {
-      //     requireNoAuth: function($state, Auth){
-      //       return Auth.$requireAuth().then(function(auth){
-      //         $state.go('superadmin');
-      //       }, function(error){
-      //         return;
-      //       });
-      //     }
-      //   }
-      // })
       .state('reset-password', {
         url: '/reset-password',
         controller: 'AuthCtrl as authCtrl',
         templateUrl: 'auth/reset-password.html'
       })
-      // .state('admin', {
-      //   url: '/admin',
-      //   controller: 'DashboardCtrl as dashboardCtrl',
-      //   templateUrl: 'dashboard/admin-landing.html',
-        // resolve: {
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.displayName){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin-profile');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
-      // })
+      .state('admin', {
+        url: '/admin',
+        controller: 'DashboardCtrl as dashboardCtrl',
+        templateUrl: 'dashboard/admin-landing.html',
+        resolve: {
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
       .state('superadmin', {
         url: '/superadmin',
         controller: 'DashboardCtrl as dashboardCtrl',
         templateUrl: 'dashboard/superadmin-landing.html',
-        // resolve: {
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.super){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        resolve: {
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.super){
+                  return profile;
+                } else {
+                  $state.go('admin');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       
       // WORKER PAGES - Admin Page UI Routes
@@ -121,33 +107,33 @@ angular
         url: '/worker',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-registered.html',
-        // resolve: {
-        //   auth: function($state, Users, Auth){
-        //     return Auth.$requireAuth().catch(function(){
-        //       $state.go('login');
-        //     });
-        //   },
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.displayName){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin-profile');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-add', {
-        url: '/add',
+        url: '/worker-add',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-add.html'
       })
-      .state('worker-verify', {
+      .state('worker.verify', {
         url: '/verify/:workerId',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-verify.html'
@@ -157,22 +143,22 @@ angular
         // controller: 'searchController',
         templateUrl: 'worker/worker-edit.html'
       })
-      .state('worker-available', {
+      .state('worker.available', {
         url: '/available',
         // controller: 'searchController',
         templateUrl: 'worker/worker-available.html'
       })
-      .state('worker-booked', {
+      .state('worker.booked', {
         url: '/booked',
         // controller: 'searchController',
         templateUrl: 'worker/worker-booked.html'
       })
-      .state('worker-unavailable', {
+      .state('worker.unavailable', {
         url: '/unavailable',
         // controller: 'searchController',
         templateUrl: 'worker/worker-unavailable.html'
       })
-      .state('worker-cancelled', {
+      .state('worker.cancelled', {
         url: '/cancelled',
         // controller: 'searchController',
         templateUrl: 'worker/worker-cancelled.html'
@@ -333,6 +319,6 @@ angular
     // END Admin page UI Routes
 
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/superadmin');
   })
   .constant('FirebaseUrl', 'https://jobcenter-id-auth.firebaseio.com/');

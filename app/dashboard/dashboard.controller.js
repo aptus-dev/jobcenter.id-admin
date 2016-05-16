@@ -8,6 +8,6 @@ angular.module('mainApp')
         
         dashboardCtrl.logout = function() {
             Auth.$unauth();
-            $state.go('home');
+            $state.go('login');
         }
     });

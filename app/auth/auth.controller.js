@@ -42,7 +42,7 @@ angular.module('mainApp')
         
         authCtrl.logout = function(){
             Auth.$unauth();
-            $state.go('home');
+            $state.go('login');
         };
         
         authCtrl.resetPass = function(){
