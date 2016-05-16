@@ -5,16 +5,11 @@ var URL = "https://jobcenter.firebaseio.com/";
 db.controller("tagsCtrl", function($scope, $http, $firebaseObject, $firebaseArray) {
   var ref = new Firebase(URL + 'tags');
   var ref2 = new Firebase(URL + 'ketrampilan');
-  //$scope.tags = $firebaseArray(ref2);
+  $scope.tags = $firebaseArray(ref2);
   
-  ref2.on("value", function (snap) {
-    $scope.tags = snap.val();
-  });
-  // [
-  //   { text: 'Tag1' },
-  //   { text: 'Tag2' },
-  //   { text: 'Tag3' }
-  // ];
+  // ref2.on("value", function (snap) {
+  //   $scope.tags = snap.val();
+  // });
 
   $scope.loadTags = function(query) {
     return $http.get('https://jobcenter.firebaseio.com/tags.json');

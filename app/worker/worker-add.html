@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-md-12">
                         <!--col-lg-5 col-sm-offset-1"-->
-                        <form class="form-horizontal" ng-controller="laborPushController" ng-submit="registerWorker()">
+                        <form class="form-horizontal" ng-controller="registerWorker" ng-submit="registerWorker()">
                         <div class="panel panel-default">
                         <div class="panel-body">
                         <div class="row">
@@ -207,6 +207,9 @@
                                         </select>
                                 </div>
                             </div>
+                            
+                            </div>
+                            <div class="col-md-6">
 
                             <div class="form-group">
                                 <label for="anak" class="col-lg-3 control-label">Anak</label>
@@ -236,10 +239,7 @@
                                         <option>Lainnya</option>
                                         </select>
                                 </div>
-                            </div>
-                            
-                            </div>
-                            <div class="col-md-6">
+                            </div>                            
 
                             <div class="form-group">
                                 <label for="suku" class="col-lg-3 control-label">Suku</label>
@@ -267,35 +267,15 @@
                                 </div>
                             </div>
 
-                            <div ng-controller="tagsCtrl" class="form-group">
-                                <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
-                                <div class="col-sm-8">
-                                <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan Ketrampilan Pekerja" required>
-                                <auto-complete source="loadTags($query)"></auto-complete>
-                                </tags-input>
-                                <p>{{tags}}</p>
-                                </div>
-                                 <!--<button type="submit" ng-click="">Tambah Ketrampilan</button>-->
-                             </div>
-                             <div class="form-group">
-                                <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputKetrampilan" ng-model="inputKetrampilan" placeholder="Masukkan ketrampilan pekerja"
-                                        required/>
-                                </div>
-                            </div>  
-                             <br>
                             <div class="form-group">
                                 <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputKetrampilan" ng-model="inputKetrampilan" placeholder="Masukkan ketrampilan pekerja"
-                                        />
-                                    <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan ketrampilan pekerja" required>
-                                     <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                    <!--<button type="submit" ng-click="">Tambah Ketrampilan</button>-->
+                                <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan Ketrampilan Pekerja (enter untuk lebih dari 1)" required>
+                                <!--<auto-complete source="loadTags($query)"></auto-complete>-->
+                                </tags-input>
                                 </div>
-                            </div>                                                                                                                                              
+                                 <!--<button type="submit" ng-click="">Tambah Ketrampilan</button>-->
+                             </div>                                                                                                                                                                           
 
                             <div class="form-group">
                                 <label for="anjing" class="col-lg-3 control-label">Takut Anjing?</label>
@@ -383,12 +363,7 @@
                                     <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" />
                                     <span class="help-block">Jika Ada</span>
                                 </div>
-                            </div>
-
-                            <!--<div class="col-lg-6 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary pull-right">Save</button>
-                                <button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>
-                            </div>-->
+                            </div>                            
                             
                         </div> 
                         </div>
@@ -402,9 +377,10 @@
                         
                     </div>
                 </div>
-        </div>
+            </div>
         <!-- END PAGE CONTENT WRAPPER -->
     </div>
     <!-- END PAGE CONTENT -->
+</div>
 </div>
 <!-- END PAGE CONTAINER -->

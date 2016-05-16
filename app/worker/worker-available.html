@@ -50,7 +50,7 @@
             <!-- ./page header -->
 
             <!-- page content -->
-            <div class="page-content">
+            <div class="page-content" ng-controller="availableWorker">
 
                 <!-- page content wrapper -->
                 <div class="page-content-wrap">
@@ -78,18 +78,8 @@
                        </div>
                     <div class="well" style="max-height: 400px;overflow: auto;">
                       
-                        <div class="col-sm-3">
+                        <div class="col-sm-3">                            
                             <div class="form-group">
-                                <!--<label for="sel1">Kategori:</label>-->
-                                <select class="form-control" id="kategori" ng-model="input.kategori">
-                                    <option value="">Kategori</option>
-                                    <option>Rumah Tangga</option>
-                                    <option>Pekerja Umum</option>
-                                    <option>Pekerja Berketrampilan</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <!--<label for="sel1">Kategori:</label>-->
                                 <input placeholder="Masukkan Nama" class="form-control" id="nama" ng-model="input.nama"/>
                             </div>                           
                         </div>
@@ -102,26 +92,26 @@
                                </select>
                             </div>
                             <div class="form-group"> 
-                              <input placeholder="Gaji Harian" class="form-control" id="gaji" />
-                         </div> 
-                            
+                              <input type="text" class="" id="tersedia" ng-model="input.tersedia" ng-init="input.tersedia='available'" hidden/>
+                         </div>                             
                         </div>
                         
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <select class="form-control" id="profesi" ng-model="input.profesi">
-                                    <option value="">Profesi:</option>
-                                    <option>PRT</option>
-                                    <option>Nanny</option>
-                                    <option>Baby Sitter</option>
-                                    <option>Perawat Lansia</option>
+                                <select class="form-control select" id="profesi" ng-model="input.profesi">
+                                    <option value="">Pekerjaan yang Diminati</option>
+                                    <option>Infal / Cuci-gosok</option>
+                                    <option>Pembantu (Full-time)</option>
                                     <option>Tukang Kebun</option>
+                                    <option>Penjaga Binatang Peliharaan</option>
                                     <option>Sopir</option>
-                                    <option>Pekerja Beketrampilan</option>
-                                    <option>Lainnya</option>
+                                    <option>Tukang / Maintenance</option>
+                                    <option>Baby Sitter</option>
+                                    <option>Nanny / Perawat Orang Sakit</option>
+                                    <option>Satpam</option>
+                                    <option>Pekerja Umum</option>
                                 </select>
-                            </div>
-                          
+                            </div>                          
                         </div>
 
                         <div class="col-sm-3">
@@ -131,17 +121,14 @@
                                     <option>Laki-laki</option>
                                     <option>Perempuan</option>
                                 </select>
-                            </div>
-                           
-                            <br>
-                            
-                        </div>
-                        
+                            </div>                           
+                            <br>                            
+                        </div>                        
                         
                     </div>
-                    <a class="btn btn-primary pull-right" ng-click="apply()">
+                    <!--<a class="btn btn-primary pull-right" ng-click="apply()">
                       <span class="glyphicon glyphicon-filter"></span> Update
-                    </a>
+                    </a>-->
                 </div>
                </div>
                <!--end of filter-->
@@ -151,9 +138,8 @@
                <h3>Search Results:</h3>                   
                 <hr>              
                       
-               <table class="table table-striped table-actions">
-                <thead>
-                  <th>id</th>
+              <table class="table table-striped table-actions">
+                <thead>                  
                   <th>
                     <a style="color:#56688A" href="" ng-click="sortType = 'nama'; sortReverse = !sortReverse">
                     Nama
@@ -161,52 +147,58 @@
                     <span ng-show="sortType == 'nama' && sortReverse" class="fa fa-caret-up"></span>
                     </a>                      
                   </th>
-                  <th><a style="color:#56688A" href="" ng-click="sortType = 'kategori'; sortReverse = !sortReverse">
-                    Kategori
-                    <span ng-show="sortType == 'kategori' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'kategori' && sortReverse" class="fa fa-caret-up"></span>
-                    </a></th>
                   <th><a style="color:#56688A" href="" ng-click="sortType = 'profesi'; sortReverse = !sortReverse">
-                    Profesi
+                    Pekerjaan yang Diminati
                     <span ng-show="sortType == 'profesi' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'profesi' && sortReverse" class="fa fa-caret-up"></span>
-                    </a></th>
+                  </a></th>
                   <th><a style="color:#56688A" href="" ng-click="sortType = 'gender'; sortReverse = !sortReverse">
                     Jenis Kelamin
                     <span ng-show="sortType == 'gender' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'gender' && sortReverse" class="fa fa-caret-up"></span>
-                    </a></th>                  
+                  </a></th>
+                  <th><a style="color:#56688A" href="" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+                    Status
+                    <span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+                  </a></th>                                                      
                   <th><a style="color:#56688A" href="" ng-click="sortType = 'lokasi'; sortReverse = !sortReverse">
                     Lokasi
                     <span ng-show="sortType == 'lokasi' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'lokasi' && sortReverse" class="fa fa-caret-up"></span>
-                    </a></th>
-                  <th><a style="color:#56688A">
-                    Edit
                   </a></th>
-                  <th><a style="color:#56688A">
-                    Book
+                  <th><a style="color:#56688A" href="" ng-click="sortType = 'gaji'; sortReverse = !sortReverse">
+                    Gaji
+                    <span ng-show="sortType == 'gaji' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'gaji' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
-                  <!--<th width="50">&nbsp;</th>-->
+                  <th><a style="color:#56688A" href="" ng-click="sortType = 'suku'; sortReverse = !sortReverse">
+                    Suku
+                    <span ng-show="sortType == 'suku' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'suku' && sortReverse" class="fa fa-caret-up"></span>
+                  </a></th>
+                  <th width="50">Edit</th>
+                  <th width="50">Book</th>
                   
                 </thead>
                 <tbody>
-                  <tr dir-paginate="data in datas | filter:filter | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
-                    <td>{{data.$id}}</td>
-                    <td><span style="font-weight:bold">{{data.nama}}</span></td>
-                    <td>{{data.kategori}}</td>
-                    <td>{{data.profesi}}</td>
-                    <td>{{data.gender}}</td>                   
-                    <td>{{data.lokasi}}</td>
+                  <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">                    
+                    <td><span style="font-weight:bold">{{pus.nama}}</span></td>
+                    <td>{{pus.profesi}}</td>
+                    <td>{{pus.gender}}</td>
+                    <td>{{pus.status}}</td>
+                    <td>{{pus.lokasi}}</td>                   
+                    <td>{{pus.gaji}}</td>
+                    <td>{{pus.suku}}</td>
                     <td>
-                      <button title="Edit Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(data)">
-                        <span class="fa fa-pencil"></span>
-                      </button>
-                    </td>
-                    <td>
-                      <button title="Book Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(data)">
-                        <span class="fa fa-book"></span>
-                      </button>
+                      <button title="Edit Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(pus)">
+                       <span class="fa fa-pencil"></span>
+                     </button>
+                   </td>
+                   <td>
+                     <button title="Book Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(pus)">
+                       <span class="fa fa-book"></span>
+                     </button>
                     </td>
                   </tr>                  
                 </tbody>
