@@ -3,6 +3,7 @@ var db = angular.module("dbApp", ["firebase", "angularUtils.directives.dirPagina
 var URL = "https://jobcenter.firebaseio.com/";
 
 db.controller("tagsCtrl", function($scope, $http) {
+  //needs "ngTagsInput" in var db
   $scope.tags = [
     { text: 'Tag1' },
     { text: 'Tag2' },
@@ -11,9 +12,29 @@ db.controller("tagsCtrl", function($scope, $http) {
 
   $scope.loadTags = function(query) {
     return $http.get('tags.json');
-  };  
+  };
+  
+  $scope.tagAdded = function(tag) {
+        console.log('Tag added: ', tag);
+  };
+    
+  $scope.tagRemoved = function(tag) {
+      console.log('Tag removed: ', tag);
+  }; 
 });
 
+db.controller("addTagsCtrl", ['$scope', '$firebaseArray', function ($scope, $firebaseArray) {    
+  
+  var ref = new Firebase(URL + 'tags');
+  $scope.push = $firebaseArray(ref);
+  
+  $scope.registerTag = function() {
+  $scope.push.$add({
+    nama: $scope.inputTag
+  })
+   };
+}]);
+    
 db.controller("searchController", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$firebaseObject', '$http', function($scope, $firebaseArray, $state, $stateParams, $rootScope, $firebaseObject, $http) {
   
   var ref = new Firebase(URL + 'branch');
