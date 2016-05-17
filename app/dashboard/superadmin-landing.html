@@ -1,6 +1,40 @@
 <!-- page container -->
         <div class="page-container">
+        <script>
+        // Initialize a Line chart in the container with the ID chart1
+        // new Chartist.Line('#chart1', {
+        //     labels: [1, 2, 3, 4],
+        //     series: [[100, 120, 180, 200]]
+        // });
 
+        // Initialize a Line chart in the container with the ID chart2
+        new Chartist.Bar('#chart2', {
+            labels: [1, 2, 3, 4],
+            series: [[5, 2, 8, 3]]
+        });
+        
+        
+        var legend = $('.ct-legend'),
+            data = {
+                labels: ['Available', 'Unavailable', 'Booked', 'Cancelled'],
+                series: [40, 25, 12, 23]
+            };
+          
+        var options2 = {
+          width: '300px',
+          height: '200px'
+        };
+        
+        Chartist.Pie('.ct-chart', data, options2);
+
+        $.each(data.labels, function(i, val) {
+            var listItem = $('<li />')
+                .addClass('ct-series-' + i)
+                .html('<strong>' + val + '</strong>: ' + data.series[i] + '%')
+                .appendTo(legend);
+        });
+        </script>
+        
             <!-- page header -->
             <div class="page-header">
 
@@ -64,7 +98,70 @@
                       <div class="container">
                       <br>
                       <br>
-                      <p> Insert GOOGLE analytics here</p>
+                      <div class="well">
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-success" style="width: 35%">
+                          35 Unique Visitors<span class="sr-only">35% Complete (success)</span>
+                        </div>
+                        <div class="progress-bar progress-bar-info" style="width: 65%">
+                          65 Returning Visitors<span class="sr-only">65% Complete (info)</span>
+                        </div>
+                      </div>
+                      <h1>Total Visitors <strong> 100</strong></h1>
+                      </div>
+                      
+                      <div class="container">
+                        <button class="btn btn-info" type="button">
+                          Verify Workers <span class="badge">5</span>
+                        </button>
+                        <button class="btn btn-success" type="button">
+                          Available Workers <span class="badge">5</span>
+                        </button>
+                        <button class="btn btn-warning" type="button">
+                          Unavailable Workers <span class="badge">2</span>
+                        </button>
+                        <button class="btn btn-danger" type="button">
+                          Cancelled Workers <span class="badge">3</span>
+                        </button>
+                      </div>
+                        <br>
+                        <br>
+                      <div class="col-md-3">
+                        <div class="panel panel-info">
+                            <div class="panel-heading clearfix">
+                                <h1 class="panel-title">Verify Workers <span class="badge">5</span></h1>
+                            </div>
+                            <div class="panel-body"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Available Workers <span class="badge">5</span></h1>
+                            </div>
+                            <div class="panel-body"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Unavailable Workers <span class="badge">2</span></h1>
+                            </div>
+                            <div class="panel-body"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Cancelled Workers <span class="badge">5</span></h1>
+                            </div>
+                            <div class="panel-body"></div>
+                        </div>
+                      </div>
+                      <div class="ct-chart"></div>
+                      <ul class="ct-legend"></ul>
+                      <div class="ct-chart ct-golden-section" id="chart2"></div>
+                      <br>
                       <br>
                       <br>
                      </div>
