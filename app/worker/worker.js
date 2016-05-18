@@ -40,6 +40,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             agama: $scope.inputAgama,
             suku: $scope.inputSuku,
             gaji: gaji.value,
+            gajiNum: $scope.inputGaji,
             ketrampilan: $scope.tags,
             anjing: $scope.inputAnjing,
             exp: $scope.inputExp,
