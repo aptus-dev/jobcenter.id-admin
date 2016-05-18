@@ -24,6 +24,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             foto: $scope.data.b64,
             nama: $scope.inputNama,
             tanggallahir: tanggal.value,
+            tanggal: $scope.inputTanggal.getTime(),
             asal: $scope.inputAsal,
             alamat: $scope.inputAlamat,
             lokasi: $scope.inputLokasi,
