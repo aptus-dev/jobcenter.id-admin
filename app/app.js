@@ -193,7 +193,7 @@ angular
         // }
       })
       
-      .state('offices.add', {
+      .state('offices-add', {
         url: '/add',
         controller: 'AuthCtrl as authCtrl',
         templateUrl: 'office/office-add.html',
@@ -221,7 +221,7 @@ angular
         // }
       })
       
-      .state('offices.edit', {
+      .state('offices-edit', {
         url: '/edit/:branchId',
         controller: 'searchController',
         templateUrl: 'office/branch-edit.html',

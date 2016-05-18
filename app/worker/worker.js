@@ -1,10 +1,10 @@
 var worker = angular.module("worker", ["firebase", "angularUtils.directives.dirPagination", "ngTagsInput"]);
 
 var URL = "https://jobcenter.firebaseio.com/";
+var brRef = new Firebase(URL + 'branch');
 
 worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$http', '$firebaseObject', function ($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {
 
-    var brRef = new Firebase(URL + 'branch');
     $scope.branches = $firebaseArray(brRef);
 
     var workRef = new Firebase(URL + 'worker');
@@ -24,6 +24,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             foto: $scope.data.b64,
             nama: $scope.inputNama,
             tanggallahir: tanggal.value,
+            tanggal: $scope.inputTanggal.getTime(),
             asal: $scope.inputAsal,
             alamat: $scope.inputAlamat,
             lokasi: $scope.inputLokasi,
@@ -39,6 +40,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             agama: $scope.inputAgama,
             suku: $scope.inputSuku,
             gaji: gaji.value,
+            gajiNum: $scope.inputGaji,
             ketrampilan: $scope.tags,
             anjing: $scope.inputAnjing,
             exp: $scope.inputExp,
@@ -190,7 +192,6 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 
 worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject){
     
-    var brRef = new Firebase(URL + 'branch');
     $scope.branches = $firebaseArray(brRef);
 
     var workRef = new Firebase(URL + 'worker');
@@ -227,7 +228,7 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
       $state.go('worker-available');
   };  //end of remove worker
   
-  //pagination
+    //pagination
     $scope.currentPage = 1;
     $scope.pageSize = 15;
 
@@ -320,3 +321,19 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
     
 });  //end available worker controller
 //-----------------------------------------------------------//
+
+worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope){
+        
+    var bookRef = new Firebase(URL + 'booked');
+    var ref = new Firebase("https://jobcenter.firebaseio.com/booked/" + $stateParams.workerId);
+    $scope.push = $firebaseArray(bookRef);
+    $scope.branches = $firebaseArray(brRef);
+    
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 15;
+
+    //sort table
+    $scope.sortType = "bookDate";
+    $scope.sortReverse = true;
+})

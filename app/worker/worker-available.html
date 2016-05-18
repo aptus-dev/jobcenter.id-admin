@@ -177,7 +177,7 @@
                     <span ng-show="sortType == 'suku' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
                   <th width="50">Edit</th>
-                  
+                  <!--<th width="50">Book</th>-->
                 </thead>
                 <tbody>
                   <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">                    
@@ -195,6 +195,11 @@
                    </td>
                    <td>
                     </td>
+                   <!--<td>
+                     <button title="Book Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(pus)">
+                       <span class="fa fa-book"></span>
+                     </button>
+                    </td>-->
                   </tr>                  
                 </tbody>
               </table>
