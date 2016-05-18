@@ -62,31 +62,58 @@
                       <div class="container">
                       <br>
                       <br>
-                      <p> Insert GOOGLE analytics here</p>
-                      <form ng-controller="tagsCtrl" class="form-horizontal">
-                        <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
-                        <div class="col-sm-8">
-                            <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan ketrampilan pekerja" required>
-                              <auto-complete source="loadTags($query)"></auto-complete>
-                            </tags-input>
-                            <p>Model: {{tags}}</p>
-                            <p ng-repeat="tag in tags">data: {{tag.text}}</p>
-                            <div class="panel-heading">
-                            <span class="label label-default label-form" ng-repeat="tag in tags">{{tag.text}}</span>
-                            
-                            </div>                            
+                      <br>
+                      <canvas style="font-size: 20px" id="myChart" width="auto" height="100%"></canvas>
+                      <br>
+                      <div class="well">
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-success" style="width: 35%">
+                          35 Unique Visitors<span class="sr-only">35% Complete (success)</span>
                         </div>
-                      <!--<h3>Markup</h3>
-                      <p>Just add <code>data-role="tagsinput"</code> to your input field to automatically change it to a tags input field.</p>
-                      <div class="bs-example">
-                        <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />
-                        <input type="text" value="Audi,Ramjos,Au,Tito,Farry" data-role="tagsinput"/>
-                      </div>-->
-                    
-                        <button type="submit" ng-click="submit()">BUTANG</button>
-                    </form>
-                      <br>
-                      <br>
+                        <div class="progress-bar progress-bar-info" style="width: 65%">
+                          65 Returning Visitors<span class="sr-only">65% Complete (info)</span>
+                        </div>
+                      </div>
+                      <h1>Today's Visitors <strong> 100</strong></h1>
+                      </div>
+                      
+                        <br>
+                     <a ui-sref="worker">
+                      <div class="col-md-3">
+                        <div  class="panel panel-info">
+                            <div class="panel-heading clearfix">
+                                <h1 class="panel-title">&nbsp&nbsp Unverified Workers &nbsp &nbsp &nbsp<span style="font-size: 20px; padding: 8px 12px;" class="badge">5</span></h1>
+                            </div>
+                        </div>
+                      </div>
+                      </a>
+                      <a ui-sref="worker-available">
+                      <div class="col-md-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">&nbsp&nbspAvailable Workers &nbsp&nbsp&nbsp<span style="font-size: 20px; padding: 8px 12px;" class="badge">5</span></h1>
+                            </div>
+                        </div>
+                      </div>
+                      </a>
+                      <a ui-sref="worker.unavailable">
+                      <div class="col-md-3">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">&nbsp&nbspUnavailable Workers &nbsp&nbsp&nbsp<span style="font-size: 20px; padding: 8px 12px;" class="badge">2</span></h1>
+                            </div>
+                        </div>
+                      </div>
+                      </a>
+                      <a ui-sref="worker.cancelled">
+                      <div class="col-md-3">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">&nbsp&nbsp Cancelled Workers &nbsp&nbsp&nbsp<span style="font-size: 20px; padding: 8px 12px;" class="badge">5</span></h1>
+                            </div>
+                        </div>
+                      </div>
+                      </a>
                      </div>
 
                     </div>

@@ -13,14 +13,13 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="fa fa-bars"></span>
                       </button>
-                      <a class="brand" ui-sref="home"><img class="img-responsive" src="../img/logo.png"/></a>
+                      <a class="brand" ui-sref="superadmin"><img class="img-responsive" src="../img/logo.png"/></a>
                     </div>
                 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="navbar-collapse-2">
                       <ul class="nav navbar-nav navbar-right">
-                        <!--<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>-->
-                        <!--<li><a ui-sref="home">Landing Page</a></li>-->
+                        <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
                         <li><a ui-sref="admin-list">Admins</a></li>
                         <li>
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,7 +54,7 @@
                 <!-- page content wrapper -->
                 <div class="page-content-wrap">
                     <div class="container">
-                        <h2>Daftar Pekerja:    <small> Book atau Edit Pekerja yang telah di verifikasi. </small></h2>
+                        <h2>Daftar Pekerja:    <small> Edit Pekerja yang telah di verifikasi. </small></h2>
                     </div>
                     <br>
                     <div class="divider"><div class="box"><span class="fa fa-angle-down"></span></div></div>
@@ -178,7 +177,6 @@
                     <span ng-show="sortType == 'suku' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
                   <th width="50">Edit</th>
-                  <th width="50">Book</th>
                   
                 </thead>
                 <tbody>
@@ -196,9 +194,6 @@
                      </button>
                    </td>
                    <td>
-                     <button title="Book Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(pus)">
-                       <span class="fa fa-book"></span>
-                     </button>
                     </td>
                   </tr>                  
                 </tbody>

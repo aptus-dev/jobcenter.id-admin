@@ -13,7 +13,8 @@ angular
     'firebase',
     'ui.router',
     'dbApp',
-    'worker'
+    'worker',
+    'angulartics'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -148,17 +149,17 @@ angular
         // controller: 'searchController',
         templateUrl: 'worker/worker-available.html'
       })
-      .state('worker.booked', {
+      .state('worker-booked', {
         url: '/booked',
         // controller: 'searchController',
         templateUrl: 'worker/worker-booked.html'
       })
-      .state('worker.unavailable', {
+      .state('worker-unavailable', {
         url: '/unavailable',
         // controller: 'searchController',
         templateUrl: 'worker/worker-unavailable.html'
       })
-      .state('worker.cancelled', {
+      .state('worker-cancelled', {
         url: '/cancelled',
         // controller: 'searchController',
         templateUrl: 'worker/worker-cancelled.html'
