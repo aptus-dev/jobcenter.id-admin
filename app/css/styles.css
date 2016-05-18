@@ -38,6 +38,11 @@ body {
   background: #ffffff;
 }
 
+.canvas{
+      width: 100% !important;
+      max-width: 800px;
+      height: 100% !important;
+  }
 .edit {
   color: #0063DB;
 }
