@@ -14,7 +14,8 @@ angular
     'ui.router',
     'dbApp',
     'worker',
-    'angulartics'
+    'angulartics',
+    'office'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -153,6 +154,15 @@ angular
         url: '/booked',
         // controller: 'searchController',
         templateUrl: 'worker/worker-booked.html'
+      })
+      .state('set-meeting', {
+        url: '/set-meeting/:bookId',
+        templateUrl: 'worker/worker-booked.html'
+      })
+      .state('worker-meeting', {
+        url: '/meeting',
+        // controller: 'searchController',
+        templateUrl: 'worker/worker-meeting.html'
       })
       .state('worker-unavailable', {
         url: '/unavailable',

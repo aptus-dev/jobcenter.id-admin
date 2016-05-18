@@ -190,7 +190,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 }]); //end register worker controller
 //-----------------------------------------------------------//
 
-worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject){
+worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {
     
     $scope.branches = $firebaseArray(brRef);
 
@@ -322,12 +322,65 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
 });  //end available worker controller
 //-----------------------------------------------------------//
 
-worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope){
+worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $firebaseObject) {
         
     var bookRef = new Firebase(URL + 'booked');
-    var ref = new Firebase("https://jobcenter.firebaseio.com/booked/" + $stateParams.workerId);
+    var workRef = new Firebase(URL + 'worker');
+    var cancelRef = new Firebase(URL + 'cancel');
+    var ref = new Firebase("https://jobcenter.firebaseio.com/booked/" + $stateParams.bookId);
+    
     $scope.push = $firebaseArray(bookRef);
     $scope.branches = $firebaseArray(brRef);
+    
+    //  open modal for meeting
+    $scope.modalMeeting = function (pus) {
+        $rootScope.pus = pus;    
+        $state.go('set-meeting', { bookId: $rootScope.pus.$id });   
+    };  
+    //  set meeting function
+    $scope.setMeeting = function () {                
+        workRef.child($scope.pus.id).update({            
+            tersedia: "meeting",            
+        });
+        ref.update({
+            status: "meeting",
+            meetDate: $scope.tanggal.getTime()
+        }) 
+        .then(function () {                   
+            alert('Set Meeting Berhasil!');                                   
+        })
+        .catch(function(error) {
+            alert('Error!')        
+        });        
+    };
+    
+    //  open modal for cancel booking
+    $scope.cancelModal = function (pus) {
+        $rootScope.pus = pus;    
+        $state.go('set-meeting', { bookId: $rootScope.pus.$id });   
+    };
+    //  cancel booking function
+    var date = new Date().getTime();
+    
+    $scope.cancelBooking = function () {                
+        workRef.child($scope.pus.id).update({            
+            tersedia: "available",            
+        });
+        ref.remove();
+        cancelRef.push({
+            id: $scope.pus.id,
+            nama: $scope.pus.nama,
+            user: $scope.pus.user,            
+            tanggal: date,
+            alasan: $scope.alasan
+        })  
+        .then(function () {                   
+            alert('Booking di Cancel!');                                   
+        })
+        .catch(function(error) {
+            alert('Error!')        
+        });        
+    };
     
     //pagination
     $scope.currentPage = 1;
@@ -336,4 +389,21 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
     //sort table
     $scope.sortType = "bookDate";
     $scope.sortReverse = true;
-})
+    
+    //min date to today
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("tanggal").setAttribute("min", today);
+    
+}); //end booked worker controller
+//-----------------------------------------------------------// 

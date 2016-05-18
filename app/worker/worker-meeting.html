@@ -1,0 +1,52 @@
+<!-- worker-meeting -->
+<div class="page-container">
+
+    <!-- page header-->
+    <div class="page-header">
+
+        <!-- page header holder -->
+        <nav class="navbar navbar-default-admin">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                      </button>
+                    <a class="brand" ui-sref="home"><img class="img-responsive" src="../img/logo.png" /></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
+                        <li><a ui-sref="admin-list">Admins</a></li>
+                        <li>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Workers
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" ui-sref="worker">Register Workers</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" ui-sref="worker-available">Available Workers</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" ui-sref="worker-booked">Booked Workers</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" ui-sref="worker-unavailable">Unavailable List</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
+                            </div>
+                        </li>
+                        <li><a ui-sref="offices">Offices</a></li>
+                        <!-- <li><a ng-click="dashboardCtrl.logout()"><span class="fa fa-sign-out"></span> Log Out</a></li> -->
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+        <!-- ./page header holder -->
+
+    </div>
+</div>
