@@ -373,7 +373,8 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
             user: $scope.pus.user,            
             tanggal: date,
             alasan: $scope.alasan,
-            tipe: "Cancel Booking"
+            tipe: "Cancel Booking",
+            profesi: $scope.pus.profesi
         })  
         .then(function () {                   
             alert('Booking di Cancel!');                                   
@@ -435,6 +436,7 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
             id: $scope.pus.id,
             user: $scope.pus.user,
             lokasi: $scope.pus.lokasi,
+            profesi: $scope.data.profesi,
             email: $scope.pus.email,
             contact: $scope.pus.contact,
             bookDate: $scope.pus.bookDate,
@@ -468,7 +470,8 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
         cancelRef.push({
             id: $scope.pus.id,
             nama: $scope.pus.nama,
-            user: $scope.pus.user,            
+            user: $scope.pus.user,
+            profesi: $scope.data.profesi,            
             tanggal: date,
             alasan: $scope.alasan,
             tipe: "Cancel Meeting"
@@ -493,12 +496,50 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
 //-----------------------------------------------------------//
 
 worker.controller("unWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope)  {
+    
     var unRef = new Firebase(URL + 'unavailable');
+    var workRef = new Firebase(URL + 'worker');
     $scope.push = $firebaseArray(unRef);
     $scope.branches = $firebaseArray(brRef);
+    var date = new Date().getTime();
+    
+    //  open modal for cancel booking
+    $scope.statusModal = function (pus) {
+        $rootScope.pus = pus;    
+        $state.go('status-modal', { bookId: $rootScope.pus.$id });   
+    };
+    
+    $scope.status = function () {                
+        workRef.child($scope.pus.id).update({            
+            tersedia: "available",            
+        });
+        unRef.child($scope.pus.$id).update({            
+            stopDate: date,            
+        })        
+        .then(function () {                   
+            alert('Pekerja Menjadi Tersedia!');                                   
+        })
+        .catch(function(error) {
+            alert('Error!')        
+        });        
+    };
     
     //pagination
     $scope.currentPage = 1;
     $scope.pageSize = 15;
     
+});
+
+worker.controller("canWorker", function($scope, $firebaseArray){
+    
+    var canRef = new Firebase(URL + 'cancel');
+    $scope.push = $firebaseArray(canRef);
+    
+    //pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 15;
+
+    //sort table
+    $scope.sortType = "tanggal";
+    $scope.sortReverse = true;
 });

@@ -174,6 +174,11 @@ angular
         // controller: 'searchController',
         templateUrl: 'worker/worker-unavailable.html'
       })
+      .state('status-modal', {
+        url: '/unavailable/:bookId',
+        // controller: 'searchController',
+        templateUrl: 'worker/worker-unavailable.html'
+      })
       .state('worker-cancelled', {
         url: '/cancelled',
         // controller: 'searchController',
