@@ -164,6 +164,11 @@ angular
         // controller: 'searchController',
         templateUrl: 'worker/worker-meeting.html'
       })
+      .state('meet-modal', {
+        url: '/meet/:bookId',
+        // controller: 'searchController',
+        templateUrl: 'worker/worker-meeting.html'
+      })
       .state('worker-unavailable', {
         url: '/unavailable',
         // controller: 'searchController',
