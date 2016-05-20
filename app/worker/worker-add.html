@@ -163,12 +163,9 @@
 
                             <div class="form-group">
                                 <label for="gender" class="col-lg-3 control-label">Jenis Kelamin</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputGender" ng-model="inputGender" required>
-                                        <option value="">Select</option>
-                                        <option>Laki-laki</option>
-                                        <option>Perempuan</option>
-                                        </select>
+                                <div class="col-sm-8">                                    
+                                    <label><input type="radio" ng-model="inputGender" value="Laki-laki" ng-checked="true"> Laki-laki</label>&nbsp
+                                    <label><input type="radio" ng-model="inputGender" value="Perempuan"> Perempuan</label>
                                 </div>
                             </div>
 
@@ -180,7 +177,7 @@
                                         <option>Menginap</option>
                                         <option>Infal</option>
                                         <option>Pulang-pergi</option>
-                                        </select>
+                                        </select>                                   
                                 </div>
                             </div>
 
@@ -238,7 +235,7 @@
                                         <option>Hindu</option>
                                         <option>Budha</option>
                                         <option>Lainnya</option>
-                                        </select>
+                                    </select>
                                 </div>
                             </div>                            
 
@@ -257,7 +254,7 @@
                                         <option>Madura</option>
                                         <option>Melayu</option>
                                         <option>Lainnya</option>
-                                        </select>
+                                    </select>
                                 </div>
                             </div>
 
@@ -280,12 +277,9 @@
 
                             <div class="form-group">
                                 <label for="anjing" class="col-lg-3 control-label">Takut Anjing?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputAnjing" ng-model="inputAnjing" required>
-                                        <option value="">Select</option>
-                                        <option>Ya</option>
-                                        <option>Tidak</option>
-                                        </select>
+                                <div class="col-sm-8">                                    
+                                    <label><input type="radio" ng-model="inputAnjing" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                    <label><input type="radio" ng-model="inputAnjing" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
@@ -299,23 +293,17 @@
 
                             <div class="form-group">
                                 <label for="expln" class="col-lg-3 control-label">Pengalaman kerja di luar negri?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputExpln" ng-model="inputExpln" required>
-                                        <option value="">Select</option>
-                                        <option>Ya</option>
-                                        <option>Tidak</option>
-                                        </select>
+                                <div class="col-sm-8">                                   
+                                    <label><input type="radio" ng-model="inputExpln" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                    <label><input type="radio" ng-model="inputExpln" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="ing" class="col-lg-3 control-label">Bisa Bahasa Inggris?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputIng" ng-model="inputIng" required>
-                                        <option value="">Select</option>
-                                        <option>Ya</option>
-                                        <option>Tidak</option>
-                                        </select>
+                                <div class="col-sm-8">                                    
+                                    <label><input type="radio" ng-model="inputIng" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                    <label><input type="radio" ng-model="inputIng" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
@@ -335,33 +323,26 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group">
                                 <label for="halal" class="col-lg-3 control-label">Bisa Masak Non-halal?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputHalal" ng-model="inputHalal" required>
-                                        <option value="">Select</option>
-                                        <option>Ya</option>
-                                        <option>Tidak</option>
-                                        </select>
+                                <div class="col-sm-8">                                    
+                                    <label><input type="radio" ng-model="inputHalal" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                    <label><input type="radio" ng-model="inputHalal" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="lembur" class="col-lg-3 control-label">Bersedia Lembur?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputLembur" ng-model="inputLembur" required>
-                                        <option value="">Select</option>
-                                        <option>Ya</option>
-                                        <option>Tidak</option>
-                                        </select>
+                                <div class="col-sm-8">                                    
+                                    <label><input type="radio" ng-model="inputLembur" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                    <label><input type="radio" ng-model="inputLembur" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="gaji" class="col-lg-3 control-label">Gaji Harian</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" />
+                                    <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" ng-value="0"/>
                                     <span class="help-block">Jika Ada</span>
                                 </div>
                             </div>                            
@@ -371,6 +352,7 @@
                         </div>
                         <div class="panel-footer">
                             <button type="submit" class="btn btn-primary pull-right">Save</button>
+                            <button type="cancel" class="btn btn-default" ui-sref="worker">Cancel</button>
                             <button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>
                         </div>
                         </div>

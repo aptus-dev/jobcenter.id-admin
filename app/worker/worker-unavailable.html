@@ -162,10 +162,10 @@
                                     <span ng-show="sortType == 'contact' && !sortReverse" class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'contact' && sortReverse" class="fa fa-caret-up"></span>
                                     </a></th>
-                                <th><a style="color:#56688A" href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-                                    Email
-                                    <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                                <th><a style="color:#56688A" href="" ng-click="sortType = 'profesi'; sortReverse = !sortReverse">
+                                    Profesi
+                                    <span ng-show="sortType == 'profesi' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'profesi' && sortReverse" class="fa fa-caret-up"></span>
                                     </a></th>
                                 <th><a style="color:#56688A" href="" ng-click="sortType = 'appDate'; sortReverse = !sortReverse">
                                     Mulai Bekerja
@@ -176,6 +176,11 @@
                                     Selesai Bekerja
                                     <span ng-show="sortType == 'stopDate' && !sortReverse" class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'stopDate' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a></th>
+                                <th><a style="color:#56688A" href="" ng-click="sortType = 'jenis'; sortReverse = !sortReverse">
+                                    Lama Bekerja
+                                    <span ng-show="sortType == 'jenis' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'jenis' && sortReverse" class="fa fa-caret-up"></span>
                                     </a></th>
                                 <th width="80"><a style="color:#56688A">
                                     Ubah Status
@@ -192,9 +197,10 @@
                                     <td><span style="font-weight:bold">{{pus.nama}}</span></td>
                                     <td>{{pus.user}}</td>
                                     <td>{{pus.contact}}</td>
-                                    <td>{{pus.email}}</td>
+                                    <td>{{pus.profesi}}</td>
                                     <td>{{pus.appDate | date}}</td>
                                     <td>{{pus.stopDate | date}}</td>
+                                    <td>{{pus.tempo}} {{pus.jenis}}</td>
                                     <td>
                                         <button title="Ubah Status" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" 
                                             ui-sref="status-modal({ '#': 'statusModal' })" ng-click="statusModal(pus)">
@@ -234,12 +240,11 @@
                                         <form name="userForm">
 
                                             <label>Apakah <span class="text-danger"> {{pus.nama}}</span> telah selesai bekerja dengan <span class="text-danger"> {{pus.user}} ?</span></label>                                                                                                                                                                              
-
                                             <ul id="check-box-list" class="list-group checked-list-box">
                                                 <div class="checkbox"><label><input type="checkbox" ng-model="term">Benar</label></div>
                                             </ul>
 
-                                            <button ng-disabled="!term" type="submit" class="btn btn-primary" id="close" ng-click="status(userForm)" data-dismiss="modal">Submit</button>
+                                            <button ng-disabled="!term" type="submit" class="btn btn-primary" id="close" ng-click="status(userForm)">Submit</button>
                                             <br>
                                         </form>
 

@@ -156,7 +156,7 @@ angular
         templateUrl: 'worker/worker-booked.html'
       })
       .state('set-meeting', {
-        url: '/set-meeting/:bookId',
+        url: '/booked/:bookId',
         templateUrl: 'worker/worker-booked.html'
       })
       .state('worker-meeting', {
@@ -165,7 +165,7 @@ angular
         templateUrl: 'worker/worker-meeting.html'
       })
       .state('meet-modal', {
-        url: '/meet/:bookId',
+        url: '/meeting/:bookId',
         // controller: 'searchController',
         templateUrl: 'worker/worker-meeting.html'
       })

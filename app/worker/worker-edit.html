@@ -68,7 +68,7 @@
             <div class="page-content-wrap">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="form-horizontal" ng-submit="editWorker()">
+                        <form class="form-horizontal">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
@@ -361,7 +361,7 @@
                             <div class="form-group">
                                 <label for="gajih" class="col-lg-3 control-label">Gaji Harian</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputGajih" ng-model="data.Gajih" name="number" />
+                                    <input type="text" class="form-control" id="inputGajih" ng-model="pus.Gajih" name="number" />
                                     <span class="help-block">Jika Ada</span>
                                 </div>
                             </div>
@@ -417,8 +417,8 @@
                                 <br>
                             
                             <div class="panel-footer">
-                                <button type="submit" class="btn btn-primary pull-right" id="btnSubmit">Save</button>
-                                <button type="cancel" class="btn btn-danger mb-control" data-box="#message-box-danger" ng-click="removeWorker(pus)">Remove</button>
+                                <button type="submit" class="btn btn-primary pull-right" id="btnSubmit" ng-click="editWorker()">Save</button>
+                                <button class="btn btn-danger mb-control" ng-click="removeWorker(pus)">Remove</button>
                                 <!--<button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>-->
                                 <button type="cancel" class="btn btn-primary col-sm-offset-10" ui-sref="worker-available">Cancel</button>
                             </div>

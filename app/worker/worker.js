@@ -53,9 +53,9 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             gajih: $scope.inputGajih
         })
             .then(function () {
-                alert('Pekerja Telah Berhasil Ditambahkan!');
+                alertify.alert('Pekerja Telah Berhasil Ditambahkan!');                
             }).catch(function (error) {
-                alert('Error!')
+                alertify.error('Error!')
             });
         $state.go('worker');
     };  //end of push worker
@@ -73,9 +73,9 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             tersedia: "available"     
              })
         .then(function () {
-            alert('Worker Updated!');
+            alertify.alert('Worker Updated!');
         }).catch(function (error) {
-            alert('Error!');
+            alertify.error('Error!');
         });
         $state.go('worker');
     };  //end of publish worker
@@ -211,23 +211,33 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
     $scope.pus.$save();
     ref.update({tanggallahir: tanggal.value, gaji: gaji.value})
     .then(function() {
-        alert('Pekerja Telah Di Update!');
-      }).catch(function(error) {
-        alert('Error!')        
+        alertify.alert('Pekerja Telah Di Update!');
+      })
+      .catch(function(error) {
+        alertify.error('Error!')        
       });
       $state.go('worker-available');
   };  //end of edit worker
   
-  $scope.removeWorker = function (pus) {         
-    $scope.pus.$remove()
-    .then(function() {
-        alert('Pekerja Telah Di Hapus!');
-      }).catch(function(error) {
-        alert('Error!')        
-      });
-      $state.go('worker-available');
-  };  //end of remove worker
-  
+  $scope.removeWorker = function (pus) {
+      
+      alertify.confirm("Apakah anda yakin akan menghapus pekerja?", function (e) {    
+        if (e) {
+            $scope.pus.$remove()
+            .then(function() {
+            alertify.alert('Pekerja Telah Di Hapus!');
+            })
+            .catch(function(error) {
+            alertify.error('Error!')        
+            });
+            $state.go('worker-available');    
+            
+        } else {    
+            $state.go('worker-available');    
+        }
+        }); 
+  };   //end of remove worker
+      
     //pagination
     $scope.currentPage = 1;
     $scope.pageSize = 15;
@@ -347,10 +357,11 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
             meetDate: $scope.tanggal.getTime()
         }) 
         .then(function () {                   
-            alert('Set Meeting Berhasil!');                                   
+            alertify.alert('Set Meeting Berhasil!');
+            $("#meetModal").modal("hide");
         })
         .catch(function(error) {
-            alert('Error!')        
+            alertify.error('Error!')        
         });        
     };
     
@@ -377,10 +388,11 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
             profesi: $scope.pus.profesi
         })  
         .then(function () {                   
-            alert('Booking di Cancel!');                                   
+            alertify.alert('Booking di Cancel!');
+            $("#cbookModal").modal("hide");
         })
         .catch(function(error) {
-            alert('Error!')        
+            alertify.error('Error!')        
         });        
     };
     
@@ -426,7 +438,7 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
         $rootScope.pus = pus;    
         $state.go('meet-modal', { bookId: $rootScope.pus.$id });   
     };  
-    //  set meeting function
+    //  approve meeting function
     $scope.appMeeting = function () {                
         workRef.child($scope.pus.id).update({            
             tersedia: "unavailable",            
@@ -436,7 +448,7 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
             id: $scope.pus.id,
             user: $scope.pus.user,
             lokasi: $scope.pus.lokasi,
-            profesi: $scope.data.profesi,
+            profesi: $scope.pus.profesi,
             email: $scope.pus.email,
             contact: $scope.pus.contact,
             bookDate: $scope.pus.bookDate,
@@ -447,10 +459,13 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
         });
         ref.remove()         
         .then(function () {                   
-            alert('Selamat!');                                   
+            alertify.alert('Selamat!');                                                           
+        })
+        .then(function () {
+            $("#appModal").modal("hide");
         })
         .catch(function(error) {
-            alert('Error!')        
+            alertify.error('Error!')        
         });        
     };
     
@@ -471,16 +486,17 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
             id: $scope.pus.id,
             nama: $scope.pus.nama,
             user: $scope.pus.user,
-            profesi: $scope.data.profesi,            
+            profesi: $scope.pus.profesi,            
             tanggal: date,
             alasan: $scope.alasan,
             tipe: "Cancel Meeting"
         })  
         .then(function () {                   
-            alert('Meeting Telah di Cancel!');                                   
+            alertify.alert('Meeting Telah di Cancel!');
+            $("#cancelModal").modal("hide");
         })
         .catch(function(error) {
-            alert('Error!')        
+            alertify.error('Error!')        
         });        
     };
     
@@ -503,12 +519,12 @@ worker.controller("unWorker", function($scope, $firebaseArray, $state, $statePar
     $scope.branches = $firebaseArray(brRef);
     var date = new Date().getTime();
     
-    //  open modal for cancel booking
+    //  open modal for change status
     $scope.statusModal = function (pus) {
         $rootScope.pus = pus;    
         $state.go('status-modal', { bookId: $rootScope.pus.$id });   
     };
-    
+    // change status to available function
     $scope.status = function () {                
         workRef.child($scope.pus.id).update({            
             tersedia: "available",            
@@ -517,18 +533,23 @@ worker.controller("unWorker", function($scope, $firebaseArray, $state, $statePar
             stopDate: date,            
         })        
         .then(function () {                   
-            alert('Pekerja Menjadi Tersedia!');                                   
+            alertify.alert('Pekerja Menjadi Tersedia!');
+            $("#statusModal").modal("hide");
         })
         .catch(function(error) {
-            alert('Error!')        
+            alertify.error('Error!')        
         });        
     };
     
     //pagination
     $scope.currentPage = 1;
     $scope.pageSize = 15;
+    //sort table
+    $scope.sortType = "appDate";
+    $scope.sortReverse = true;
     
-});
+}); //end unavailable worker controller
+//-----------------------------------------------------------// 
 
 worker.controller("canWorker", function($scope, $firebaseArray){
     
@@ -542,4 +563,5 @@ worker.controller("canWorker", function($scope, $firebaseArray){
     //sort table
     $scope.sortType = "tanggal";
     $scope.sortReverse = true;
-});
+}); //end cancel worker controller
+//-----------------------------------------------------------//
