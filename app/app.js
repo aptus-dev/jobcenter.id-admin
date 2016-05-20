@@ -242,8 +242,8 @@ angular
       })
       
       .state('offices-edit', {
-        url: '/edit/:branchId',
-        controller: 'searchController',
+        url: '/office-edit/:branchId',
+        //controller: 'searchController',
         templateUrl: 'office/branch-edit.html',
         // resolve: {
         //   auth: function($state, Users, Auth){
