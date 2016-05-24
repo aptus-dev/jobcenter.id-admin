@@ -367,28 +367,28 @@ angular
 
       .state('admin-profile', {
         url: '/admin-profile',
-        // controller: 'ProfileCtrl as profileCtrl',
+        controller: 'ProfileCtrl as profileCtrl',
         templateUrl: 'admin/admin-profile.html',
-        // resolve: {
-        //   auth: function($state, Users, Auth){
-        //     return Auth.$requireAuth().catch(function(){
-        //       $state.go('login');
-        //     });
-        //   },
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.displayName){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin-profile');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       
       .state('admin-add', {

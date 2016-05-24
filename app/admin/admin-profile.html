@@ -1,6 +1,7 @@
 <!-- page container -->
 <div class="page-container">
 
+
     <!-- page header -->
     <div class="page-header">
 
@@ -103,9 +104,9 @@
                                         <label for="lokasi" class="col-lg-3 control-label">Lokasi Cabang:</label>
                                         <div class="col-lg-8">
                                             <select class="form-control" id="lokasi" ng-model="profileCtrl.profile.branch">
-                                                <option>Select</option>
-                                                <option>Jakarta</option>
-                                                <option>Bandung</option>
+                                                <option value="">Select</option>
+                                                <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
+                                                <!--<option>Bandung</option>
                                                 <option>Surabaya</option>
                                                 <option>Medan</option>
                                                 <option>Semarang</option>
@@ -139,12 +140,12 @@
                                                 <option>Tangerang</option>
                                                 <option>Tasikmalaya</option>
                                                 <option>Tegal</option>
-                                                <option>Yogyakarta</option>
+                                                <option>Yogyakarta</option>-->
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-lg-offset-2">
-                                        <button type="submit" class="btn btn-primary" ng-click="profileCtrl.updateProfile()">Save</button>
+                                        <button type="submit" class="btn btn-primary"  ng-click="profileCtrl.updateProfile()">Save</button>
                                         <button type="submit" class="btn btn-primary" ui-sref="admin-list">Cancel</button>
                                     </div>
                                 </form>
