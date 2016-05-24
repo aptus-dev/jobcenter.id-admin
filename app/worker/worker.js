@@ -3,14 +3,15 @@ var worker = angular.module("worker", ["firebase", "angularUtils.directives.dirP
 var URL = "https://jobcenter.firebaseio.com/";
 var brRef = new Firebase(URL + 'branch');
 
-worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$http', '$firebaseObject', function ($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {
-
-    $scope.branches = $firebaseArray(brRef);
+worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$http', '$firebaseObject', function ($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {    
 
     var workRef = new Firebase(URL + 'worker');
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
+    var docRef = new Firebase(URL + 'document');
+    
     $scope.push = $firebaseArray(workRef);
     $scope.pus = $firebaseObject(ref);
+    $scope.branches = $firebaseArray(brRef);
 
     var tanggal = document.getElementById('inputTanggal');
     var gaji = document.getElementById('inputGaji');
@@ -29,7 +30,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             alamat: $scope.inputAlamat,
             lokasi: $scope.inputLokasi,
             kategori: $scope.inputKategori,
-            profesi: $scope.inputProfesi,
+            profesi: $scope.checkbox,
             tersedia: "registered",
             gender: $scope.inputGender,
             waktu: $scope.inputWaktu,
@@ -52,11 +53,11 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             lembur: $scope.inputLembur,
             gajih: $scope.inputGajih
         })
-            .then(function () {
-                alertify.alert('Pekerja Telah Berhasil Ditambahkan!');                
-            }).catch(function (error) {
-                alertify.error('Error!')
-            });
+        .then(function () {
+            alertify.alert('Pekerja Telah Berhasil Ditambahkan!');                
+        }).catch(function (error) {
+            alertify.error('Error!')
+        });
         $state.go('worker');
     };  //end of push worker
     
@@ -66,12 +67,16 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     }; //end of verify worker
     
     $scope.publishWorker = function () {
-        ref.update({
+        ref.update({            
+            tersedia: "available"     
+        });
+        docRef.child($scope.pus.$id).set({
             ktp: $scope.data.ktp,
             kk: $scope.data.kk,
             sk: $scope.data.sk,
-            tersedia: "available"     
-             })
+            id: $scope.pus.$id,
+            nama: $scope.pus.nama
+        })
         .then(function () {
             alertify.alert('Worker Updated!');
         }).catch(function (error) {
@@ -177,7 +182,20 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
         $('#inputGajih').number(true, '', '.');
 
         //https://github.com/customd/jquery-number.
-    });    
+    });
+    
+    // $scope.checkbox = {
+    //     value1: "Infal / Cuci-gosok",
+    //     value2: "Pembantu (Full-time)",
+    //     value3: "Tukang Kebun",
+    //     value4: "Penjaga Binatang Peliharaan",
+    //     value5: "Sopir",
+    //     value6: "Tukang / Maintenance",
+    //     value7: "Baby Sitter",
+    //     value8: "Nanny / Perawat Orang Sakit",
+    //     value9: "Satpam",
+    //     value10: "Pekerja Umum"
+    // };    
 
     // $scope.filter = {};
     // $scope.input = {};

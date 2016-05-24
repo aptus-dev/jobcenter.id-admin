@@ -197,7 +197,7 @@
                                     <td><span style="font-weight:bold">{{pus.nama}}</span></td>
                                     <td>{{pus.user}}</td>
                                     <td>{{pus.contact}}</td>
-                                    <td>{{pus.profesi}}</td>
+                                    <td><label ng-repeat="ket in pus.profesi">{{ket.value + ',&nbsp'}}</label></td>
                                     <td>{{pus.appDate | date}}</td>
                                     <td>{{pus.stopDate | date}}</td>
                                     <td>{{pus.tempo}} {{pus.jenis}}</td>

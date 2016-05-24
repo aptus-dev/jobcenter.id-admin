@@ -185,7 +185,7 @@
               <tbody>
                 <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
                   <td><span style="font-weight:bold">{{pus.nama}}</span></td>
-                  <td>{{pus.profesi}}</td>
+                  <td><label ng-repeat="ket in pus.profesi">{{ket.value + ',&nbsp'}}</label></td>
                   <td>{{pus.gender}}</td>
                   <td>{{pus.status}}</td>
                   <td>{{pus.lokasi}}</td>

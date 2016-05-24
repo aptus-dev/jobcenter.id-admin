@@ -133,16 +133,9 @@
                                         <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>                            
 
-                            <div class="form-group">
-                                <label for="kategori" class="col-lg-3 control-label">Profesi</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputKategori" ng-model="inputKategori" placeholder="Masukkan Profesi Pekerja" required/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
                                 <div class="col-sm-8">
                                     <select class="form-control select" id="inputProfesi" ng-model="inputProfesi" required>
@@ -159,14 +152,60 @@
                                         <option>Pekerja Umum</option>
                                     </select>
                                 </div>
+                            </div>-->
+                            
+                            <div class="form-group" >
+                                <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
+                                <div class="col-sm-8" >
+                                    <div class="row" ng-init="checkbox[1].value = 'Infal / Cuci-gosok'">
+                                        <div class="col-sm-6">
+                                            <label>
+                                        <input type="checkbox" ng-model="checkbox[1].value" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="null" >
+                                            Infal / Cuci-gosok  &nbsp</label>
+                                            <label>
+                                        <input type="checkbox" ng-model="checkbox[2].value" ng-true-value="'Pembantu (Full-time)'" ng-false-value="null">
+                                            Pembantu (Full-time)  &nbsp</label>
+                                            <label>
+                                        <input type="checkbox" ng-model="checkbox[3].value" ng-true-value="'Tukang Kebun'" ng-false-value="null">
+                                            Tukang Kebun &nbsp</label>
+                                            <label>
+                                        <input type="checkbox" ng-model="checkbox[4].value" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="null">
+                                            Penjaga Binatang Peliharaan  &nbsp</label>
+                                            <label>
+                                        <input type="checkbox" ng-model="checkbox[5].value" ng-true-value="'Sopir'" ng-false-value="null">
+                                            Sopir  &nbsp</label>                                   
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <label>
+                                            <input type="checkbox" ng-model="checkbox[6].value" ng-true-value="'Tukang / Maintenance'" ng-false-value="null">
+                                                Tukang / Maintenance  &nbsp</label>
+                                            <label><input type="checkbox" ng-model="checkbox[7].value" ng-true-value="'Baby Sitter'" ng-false-value="null">
+                                                Baby Sitter  &nbsp</label>
+                                            <label><input type="checkbox" ng-model="checkbox[8].value" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="null">
+                                                Nanny / Perawat Orang Sakit  &nbsp</label>
+                                            <label><input type="checkbox" ng-model="checkbox[9].value" ng-true-value="'Satpam'" ng-false-value="null">
+                                                Satpam  &nbsp</label><br>
+                                            <label><input type="checkbox" ng-model="checkbox[10].value" ng-true-value="'Pekerja Umum'" ng-false-value="null">
+                                                Pekerja Umum  &nbsp</label>                                                                                               
+                                        </div>
+                                    </div>                                                                       
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="kategori" class="col-lg-3 control-label">Profesi</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputKategori" ng-model="inputKategori" placeholder="Masukkan Profesi Pekerja" required/>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="gender" class="col-lg-3 control-label">Jenis Kelamin</label>
-                                <div class="col-sm-8">                                    
-                                    <label><input type="radio" ng-model="inputGender" value="Laki-laki" ng-checked="true"> Laki-laki</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputGender = 'Laki-laki'">                                    
+                                    <label><input type="radio" ng-model="inputGender" value="Laki-laki"> Laki-laki</label>&nbsp
                                     <label><input type="radio" ng-model="inputGender" value="Perempuan"> Perempuan</label>
-                                </div>
+                                </div>                               
                             </div>
 
                             <div class="form-group">
@@ -277,8 +316,8 @@
 
                             <div class="form-group">
                                 <label for="anjing" class="col-lg-3 control-label">Takut Anjing?</label>
-                                <div class="col-sm-8">                                    
-                                    <label><input type="radio" ng-model="inputAnjing" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputAnjing = 'Ya'">                                    
+                                    <label><input type="radio" ng-model="inputAnjing" value="Ya"> Ya</label>&nbsp
                                     <label><input type="radio" ng-model="inputAnjing" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
@@ -293,16 +332,16 @@
 
                             <div class="form-group">
                                 <label for="expln" class="col-lg-3 control-label">Pengalaman kerja di luar negri?</label>
-                                <div class="col-sm-8">                                   
-                                    <label><input type="radio" ng-model="inputExpln" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputExpln = 'Ya'">                                   
+                                    <label><input type="radio" ng-model="inputExpln" value="Ya"> Ya</label>&nbsp
                                     <label><input type="radio" ng-model="inputExpln" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="ing" class="col-lg-3 control-label">Bisa Bahasa Inggris?</label>
-                                <div class="col-sm-8">                                    
-                                    <label><input type="radio" ng-model="inputIng" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputIng = 'Ya'">                                    
+                                    <label><input type="radio" ng-model="inputIng" value="Ya"> Ya</label>&nbsp
                                     <label><input type="radio" ng-model="inputIng" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
@@ -318,23 +357,23 @@
                             <div class="form-group">
                                 <label for="berat" class="col-lg-3 control-label">Berat Badan</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputBerat" string-to-number ng-model="inputBerat" min="20" max="250" required/>
+                                    <input type="number" class="form-control" id="inputBerat" string-to-number ng-model="inputBerat" min="<2></2>0" max="250" required/>
                                     <span class="help-block">Kg</span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="halal" class="col-lg-3 control-label">Bisa Masak Non-halal?</label>
-                                <div class="col-sm-8">                                    
-                                    <label><input type="radio" ng-model="inputHalal" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputHalal = 'Ya'">                                    
+                                    <label><input type="radio" ng-model="inputHalal" value="Ya"> Ya</label>&nbsp
                                     <label><input type="radio" ng-model="inputHalal" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="lembur" class="col-lg-3 control-label">Bersedia Lembur?</label>
-                                <div class="col-sm-8">                                    
-                                    <label><input type="radio" ng-model="inputLembur" value="Ya" ng-checked="true"> Ya</label>&nbsp
+                                <div class="col-sm-8" ng-init="inputLembur = 'Ya'">                                    
+                                    <label><input type="radio" ng-model="inputLembur" value="Ya"> Ya</label>&nbsp
                                     <label><input type="radio" ng-model="inputLembur" value="Tidak"> Tidak</label>
                                 </div>
                             </div>
@@ -342,7 +381,7 @@
                             <div class="form-group">
                                 <label for="gaji" class="col-lg-3 control-label">Gaji Harian</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" ng-value="0"/>
+                                    <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" ng-init="inputGajih = null"/>
                                     <span class="help-block">Jika Ada</span>
                                 </div>
                             </div>                            
