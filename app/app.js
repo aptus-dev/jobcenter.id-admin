@@ -107,7 +107,7 @@ angular
       // WORKER PAGES - Admin Page UI Routes
       .state('worker', {
         url: '/worker',
-        // controller: 'AuthCtrl as authCtrl',
+        controller: 'LogoutCtrl as logoutCtrl',
         templateUrl: 'worker/worker-registered.html',
         resolve: {
           auth: function($state, Users, Auth){
@@ -147,13 +147,53 @@ angular
       })
       .state('worker-available', {
         url: '/available',
-        // controller: 'searchController',
-        templateUrl: 'worker/worker-available.html'
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-available.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-booked', {
         url: '/booked',
-        // controller: 'searchController',
-        templateUrl: 'worker/worker-booked.html'
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-booked.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('set-meeting', {
         url: '/booked/:bookId',
@@ -161,8 +201,28 @@ angular
       })
       .state('worker-meeting', {
         url: '/meeting',
-        // controller: 'searchController',
-        templateUrl: 'worker/worker-meeting.html'
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-meeting.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('meet-modal', {
         url: '/meeting/:bookId',
@@ -171,8 +231,28 @@ angular
       })
       .state('worker-unavailable', {
         url: '/unavailable',
-        // controller: 'searchController',
-        templateUrl: 'worker/worker-unavailable.html'
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-unavailable.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('status-modal', {
         url: '/unavailable/:bookId',
@@ -181,36 +261,51 @@ angular
       })
       .state('worker-cancelled', {
         url: '/cancelled',
-        // controller: 'searchController',
-        templateUrl: 'worker/worker-cancelled.html'
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-cancelled.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       // END WORKER PAGES - Admin Page UI Routes
 
       // OFFICE PAGES - Admin Page UI Routes
       .state('offices', {
         url: '/offices',
-        // controller: 'searchController',
+        controller: 'LogoutCtrl as logoutCtrl',
         templateUrl: 'office/offices-list.html',
-        // resolve: {
-        //   auth: function($state, Users, Auth){
-        //     return Auth.$requireAuth().catch(function(){
-        //       $state.go('login');
-        //     });
-        //   },
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.displayName){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin-profile');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        resolve: {
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       })
       
       .state('offices-add', {
@@ -323,18 +418,23 @@ angular
       })
       .state('admin-list', {
         url: '/admin-list',
-        // controller: 'AdminCtrl as adminCtrl',
+        controller: 'LogoutCtrl as logoutCtrl',
         templateUrl: 'admin/admin-list.html',
-        // resolve: {
-        //   auth: function($state, Users, Auth){
-        //     return Auth.$requireAuth().catch(function(){
-        //       $state.go('login');
-        //     });
-        //   },
-        //   adminList: function($state, Users){
-        //     return Users.all.$loaded();
-        //   }
-        // }
+        resolve: {
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
       });
       // END ADMIN USER PAGES - Admin Page UI Routes
     // END Admin page UI Routes
