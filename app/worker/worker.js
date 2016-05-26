@@ -14,7 +14,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     $scope.branches = $firebaseArray(brRef);
 
     var tanggal = document.getElementById('inputTanggal');
-    var gaji = document.getElementById('inputGaji');
+    //var gaji = document.getElementById('inputGaji');
 
     // $scope.loadTags = function (query) {
     //     return $http.get('https://jobcenter.firebaseio.com/tags.json');
@@ -40,7 +40,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             telp: $scope.inputTelp,
             agama: $scope.inputAgama,
             suku: $scope.inputSuku,
-            gaji: gaji.value,
+            //gaji: gaji.value,
             gajiNum: $scope.inputGaji,
             ketrampilan: $scope.tags,
             anjing: $scope.inputAnjing,
@@ -176,13 +176,13 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     $scope.sortType = "profesi";
     $scope.sortReverse = true;
 
-    $(function () {
-        // Set up the number formatting.
-        $('#inputGaji').number(true, '', '.');
-        $('#inputGajih').number(true, '', '.');
+    // $(function () {
+    //     // Set up the number formatting.
+    //     $('#inputGaji').number(true, '', '.');
+    //     $('#inputGajih').number(true, '', '.');
 
-        //https://github.com/customd/jquery-number.
-    });
+    //     //https://github.com/customd/jquery-number.
+    // });
     
     // $scope.checkbox = {
     //     value1: "Infal / Cuci-gosok",
@@ -223,11 +223,11 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
     }; //end of update worker
   
   var tanggal = document.getElementById('inputTanggal');
-  var gaji = document.getElementById('inputGaji');
+  //var gaji = document.getElementById('inputGaji');
    
   $scope.editWorker = function () {      
     $scope.pus.$save();
-    ref.update({tanggallahir: tanggal.value, gaji: gaji.value})
+    ref.update({tanggallahir: tanggal.value})
     .then(function() {
         alertify.alert('Pekerja Telah Di Update!');
       })
@@ -473,7 +473,8 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
             meetDate: $scope.pus.meetDate,
             appDate: date,
             tempo: $scope.tempo,
-            jenis: $scope.jenis
+            jenis: $scope.jenis,
+            status: "working"
         });
         ref.remove()         
         .then(function () {                   
@@ -548,7 +549,8 @@ worker.controller("unWorker", function($scope, $firebaseArray, $state, $statePar
             tersedia: "available",            
         });
         unRef.child($scope.pus.$id).update({            
-            stopDate: date,            
+            stopDate: date,
+            status: "stop"            
         })        
         .then(function () {                   
             alertify.alert('Pekerja Menjadi Tersedia!');

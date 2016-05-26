@@ -254,10 +254,35 @@ angular
           }
         }
       })
+      .state('worker-status', {
+        url: '/status',
+        controller: 'LogoutCtrl as logoutCtrl',
+        templateUrl: 'worker/worker-status.html',
+        resolve: {
+          auth: function($state, Users, Auth){
+            return Auth.$requireAuth().catch(function(){
+              $state.go('login');
+            });
+          },
+          profile: function($state, Users, Auth){
+            return Auth.$requireAuth().then( function(auth){
+              return Users.getProfile(auth.uid).$loaded().then( function (profile){
+                if(profile.displayName){
+                  return profile;
+                } else {
+                  $state.go('admin-profile');
+                }
+              });
+            }, function(error){
+              $state.go('login');
+            });
+          }
+        }
+      })
       .state('status-modal', {
-        url: '/unavailable/:bookId',
+        url: '/status/:bookId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-unavailable.html'
+        templateUrl: 'worker/worker-status.html'
       })
       .state('worker-cancelled', {
         url: '/cancelled',

@@ -75,7 +75,7 @@
                          </div>
                          <div class="col-md-7">
                           <button ui-sref="worker-add" class="btn btn-primary pull-right">
-                            <span class="glyphicon glyphicon-plus-sign"></span> Register New Worker
+                            <span class="glyphicon glyphicon-plus-sign"></span> Tambah Pekerja Baru
                           </button>
                          </div>
                        </div>
@@ -191,7 +191,7 @@
                     <td>{{pus.gender}}</td>
                     <td>{{pus.status}}</td>
                     <td>{{pus.lokasi}}</td>                   
-                    <td>{{pus.gaji}}</td>
+                    <td>{{pus.gajiNum | number}}</td>
                     <td>{{pus.suku}}</td>                    
                     <td>
                       <button title="Verify or Publish Worker" class="btn btn-default btn-rounded btn-sm" ng-click="verifyWorker(pus)">

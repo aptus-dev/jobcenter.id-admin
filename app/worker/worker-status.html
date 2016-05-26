@@ -59,7 +59,7 @@
         <!-- page content wrapper -->
         <div class="page-content-wrap">
             <div class="container">
-                <h2>List Pekerja  <small> yang tidak tersedia / sedang bekerja </small></h2>
+                <h2>Ubah Status Pekerja  <small> yang telah selesai bekerja </small></h2>
             </div>
             <br>
             <div class="divider">
@@ -77,12 +77,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <h3 class="text-left">Filter:</h3>
-                                </div>
-                                <div class="col-md-7">
-                                    <button ui-sref="worker-status" class="btn btn-primary pull-right">
-                                        <span class="glyphicon glyphicon-plus-sign"></span> Ubah Status Pekerja
-                                    </button>
-                                </div>
+                                </div>                                
                             </div>
                             <div class="well" style="max-height: 400px;overflow: auto;">
 
@@ -98,6 +93,9 @@
                                         <option value="">Lokasi Cabang</option>
                                         <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="" id="status" ng-model="input.status" ng-init="input.status='working'" hidden/>
                                     </div>
                                     <!--<div class="form-group">
                                         <input type="text" class="" id="tersedia" ng-model="input.status" ng-init="input.status='meeting'" hidden/>
@@ -175,17 +173,19 @@
                                     Mulai Bekerja
                                     <span ng-show="sortType == 'appDate' && !sortReverse" class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'appDate' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
-                                <th><a style="color:#56688A" href="" ng-click="sortType = 'stopDate'; sortReverse = !sortReverse">
-                                    Selesai Bekerja
-                                    <span ng-show="sortType == 'stopDate' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'stopDate' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
+                                    </a></th>                                
                                 <th><a style="color:#56688A" href="" ng-click="sortType = 'jenis'; sortReverse = !sortReverse">
                                     Lama Bekerja
                                     <span ng-show="sortType == 'jenis' && !sortReverse" class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'jenis' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>                                                               
+                                    </a></th>
+                                <th width="80"><a style="color:#56688A">
+                                    Ubah Status
+                                </a></th>
+                                <!--<th width="60"><a style="color:#56688A">
+                                    Cancel Meeting
+                                </a></th>-->
+                                <!--<th width="50">&nbsp;</th>-->
                             </thead>
 
                             <tbody>
@@ -196,14 +196,62 @@
                                     <td>{{pus.contact}}</td>
                                     <td><label ng-repeat="ket in pus.profesi">{{ket.value + ',&nbsp'}}</label></td>
                                     <td>{{pus.appDate | date}}</td>
-                                    <td>{{pus.stopDate | date}}</td>
-                                    <td>{{pus.tempo}} {{pus.jenis}}</td>                                                                       
+                                    <td>{{pus.tempo}} {{pus.jenis}}</td>
+                                    <td>
+                                        <button title="Ubah Status" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" 
+                                            ui-sref="status-modal({ '#': 'statusModal' })" ng-click="statusModal(pus)">
+                                        <span class="fa fa-check"></span>
+                                        </button>
+                                    </td>
+                                    <!--<td>
+                                        <button title="Cancel Meeting" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" 
+                                            ui-sref="meet-modal({ '#': 'cancelModal' })" ng-click="cancelModal(pus)">
+                                        <span class="fa fa-calendar-times-o"></span>
+                                        </button>
+                                    </td>-->
                                 </tr>
                             </tbody>
                         </table>
                         <div class="text-center">
                             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./search/dirPagination.tpl.html"></dir-pagination-controls>
-                        </div>                                               
+                        </div>
+
+                        <!-- Status Modal -->
+                        <div id="statusModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"> Ubah Status Menjadi Tersedia                                                                            
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!--<div class="alert alert-danger" ng-show="notValid">
+                                            <span>Harap isi semua field di form ini.</span>
+                                            </div>-->
+                                        <!-- ANGULAR VALIDATION FORM ============ -->
+
+                                        <form name="userForm">
+
+                                            <label>Apakah <span class="text-danger"> {{pus.nama}}</span> telah selesai bekerja dengan <span class="text-danger"> {{pus.user}} ?</span></label>                                                                                                                                                                              
+                                            <ul id="check-box-list" class="list-group checked-list-box">
+                                                <div class="checkbox"><label><input type="checkbox" ng-model="term">Benar</label></div>
+                                            </ul>
+
+                                            <button ng-disabled="!term" type="submit" class="btn btn-primary" id="close" ng-click="status(userForm)">Submit</button>
+                                            <br>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./Status Modal -->                        
 
                     </div>
                 </div>
