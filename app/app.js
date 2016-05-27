@@ -10,135 +10,51 @@
  */
 angular
   .module('mainApp', [
+    'auth0',
     'firebase',
     'ui.router',
     'dbApp',
+    'mainApp.home',
+    'angular-storage',
+    'angular-jwt',
     'worker',
     'angulartics',
     'office'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config( function ( $stateProvider, $urlRouterProvider, authProvider, $httpProvider, 
+    jwtInterceptorProvider) {
+    $urlRouterProvider.otherwise('/login');
     $stateProvider
-    
-    // Front page UI Routes
-      // .state('home', {
-      //   url: '/',
-      //   // controller: 'DashboardCtrl as dashboardCtrl',
-      //   templateUrl: 'dashboard/admin-landing.html'
-      // })
-      // .state('contact-us', {
-      //   url: '/contact-us',
-      //   templateUrl: 'views/contact-us.html'
-      // })
-      // .state('search', {
-      //   url: '/search',
-      //   templateUrl: 'search/search.html',
-      //   controller: 'searchController'
-      // })
-      // .state('profiles', {
-      //   url: '/profiles/:workerId',
-      //   controller: 'profileViewController',
-      //   templateUrl: 'profiles/workerprofile.html'
-      // })
-    // END Front page UI Routes  
-    
-    
-    // Admin page UI Routes
-      .state('login', {
-        url: '/login',
-        controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'auth/login.html',
-        resolve: {
-          requireNoAuth: function($state, Auth){
-            return Auth.$requireAuth().then(function(auth){
-              $state.go('superadmin');
-            }, function(error){
-              return;
-            });
-          }
-        }
-      })
-      .state('reset-password', {
-        url: '/reset-password',
-        controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'auth/reset-password.html'
-      })
-      .state('admin', {
-        url: '/admin',
-        controller: 'DashboardCtrl as dashboardCtrl',
-        templateUrl: 'dashboard/admin-landing.html',
-        resolve: {
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
-      })
-      .state('superadmin', {
-        url: '/superadmin',
-        controller: 'DashboardCtrl as dashboardCtrl',
-        templateUrl: 'dashboard/superadmin-landing.html',
-        resolve: {
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.super){
-                  return profile;
-                } else {
-                  $state.go('admin');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
-      })
-      
+      .state('/', {
+          url: '/',
+          controller: 'HomeCtrl',
+          templateUrl: 'dashboard/superadmin-landing.html',
+          data: { requiresLogin: true }
+        })
+      .state('login', { 
+        url: '/login', 
+        controller: 'LoginCtrl',
+        templateUrl: 'login/login.html'
+      })  
       // WORKER PAGES - Admin Page UI Routes
       .state('worker', {
         url: '/worker',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-registered.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
+
       })
       .state('worker-add', {
         url: '/worker-add',
         // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'worker/worker-add.html'
+        templateUrl: 'worker/worker-add.html',
+        data: { requiresLogin: true }
       })
       .state('worker-verify', {
         url: '/verify/:workerId',
         // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'worker/worker-verify.html'
+        templateUrl: 'worker/worker-verify.html',
+        data: { requiresLogin: true }
       })
       .state('worker-edit', {
         url: '/edit/:workerId',
@@ -147,53 +63,15 @@ angular
       })
       .state('worker-available', {
         url: '/available',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-available.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       .state('worker-booked', {
         url: '/booked',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-booked.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       .state('set-meeting', {
         url: '/booked/:bookId',
@@ -201,28 +79,9 @@ angular
       })
       .state('worker-meeting', {
         url: '/meeting',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-meeting.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       .state('meet-modal', {
         url: '/meeting/:bookId',
@@ -231,160 +90,43 @@ angular
       })
       .state('worker-unavailable', {
         url: '/unavailable',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-unavailable.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
-      })
-      .state('worker-status', {
-        url: '/status',
-        controller: 'LogoutCtrl as logoutCtrl',
-        templateUrl: 'worker/worker-status.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       .state('status-modal', {
-        url: '/status/:bookId',
+        url: '/unavailable/:bookId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-status.html'
+        templateUrl: 'worker/worker-unavailable.html'
       })
       .state('worker-cancelled', {
         url: '/cancelled',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'worker/worker-cancelled.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       // END WORKER PAGES - Admin Page UI Routes
 
       // OFFICE PAGES - Admin Page UI Routes
       .state('offices', {
         url: '/offices',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'office/offices-list.html',
-        resolve: {
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       
       .state('offices-add', {
         url: '/add',
-        controller: 'AuthCtrl as authCtrl',
+        // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'office/office-add.html',
-        // resolve: {
-        //   requireNoAuth: function($state, Auth){
-        //     return Auth.$requireAuth().then(function(auth){
-        //       return;
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   },
-        //   profile: function($state, Users, Auth){
-        //     return Auth.$requireAuth().then( function(auth){
-        //       return Users.getProfile(auth.uid).$loaded().then( function (profile){
-        //         if(profile.displayName){
-        //           return profile;
-        //         } else {
-        //           $state.go('admin-profile');
-        //         }
-        //       });
-        //     }, function(error){
-        //       $state.go('login');
-        //     });
-        //   }
-        // }
+        data: { requiresLogin: true }
       })
       
       .state('offices-edit', {
         url: '/office-edit/:branchId',
         //controller: 'searchController',
         templateUrl: 'office/branch-edit.html',
-        // resolve: {
-        //   auth: function($state, Users, Auth){
-        //     return Auth.$requireAuth().catch(function(){
-        //       $state.go('login');
-        //     });
-        //   }          
-        // },
-          // profile: function($state, Users, Auth){
-          //   return Auth.$requireAuth().then( function(auth){
-          //     return Users.getProfile(auth.uid).$loaded().then( function (profile){
-          //       if(profile.displayName){
-          //         return profile;
-          //       } else {
-          //         $state.go('admin-profile');
-          //       }
-          //     });
-          //   }, function(error){
-          //     $state.go('login');
-          //   });
-          // }
+        data: { requiresLogin: true }
        })
       // END OFFICE PAGES - Admin Page UI Routes
 
@@ -392,79 +134,82 @@ angular
 
       .state('admin-profile', {
         url: '/admin-profile',
-        controller: 'ProfileCtrl as profileCtrl',
+        // controller: 'ProfileCtrl as profileCtrl',
         templateUrl: 'admin/admin-profile.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-          },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       
       .state('admin-add', {
         url: '/admin-add',
-        controller: 'AuthCtrl as authCtrl',
+        // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'admin/add-admins.html',
-        resolve: {
-          auth: function($state, Users, Auth){
-            return Auth.$requireAuth().catch(function(){
-              $state.go('login');
-            });
-        },
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       })
       .state('admin-list', {
         url: '/admin-list',
-        controller: 'LogoutCtrl as logoutCtrl',
+        controller: 'HomeCtrl',
         templateUrl: 'admin/admin-list.html',
-        resolve: {
-          profile: function($state, Users, Auth){
-            return Auth.$requireAuth().then( function(auth){
-              return Users.getProfile(auth.uid).$loaded().then( function (profile){
-                if(profile.displayName){
-                  return profile;
-                } else {
-                  $state.go('admin-profile');
-                }
-              });
-            }, function(error){
-              $state.go('login');
-            });
-          }
-        }
+        data: { requiresLogin: true }
       });
       // END ADMIN USER PAGES - Admin Page UI Routes
     // END Admin page UI Routes
 
+    authProvider.init({
+      domain: AUTH0_DOMAIN,
+      clientID: AUTH0_CLIENT_ID,
+      loginState: 'login' // matches login state
+    });
 
-    $urlRouterProvider.otherwise('/superadmin');
+    authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
+      console.log("Login Success");
+      profilePromise.then(function(profile) {
+        store.set('profile', profile);
+        store.set('token', idToken);
+      });
+      $location.path('/');
+    });
+
+    authProvider.on('loginFailure', function() {
+      alert("Error");
+    });
+
+    authProvider.on('authenticated', function($location) {
+      console.log("Authenticated");
+
+    });
+
+    jwtInterceptorProvider.tokenGetter = function(store) {
+      return store.get('token');
+    };
+
+    // Add a simple interceptor that will fetch all requests and add the jwt token to its authorization header.
+    // NOTE: in case you are calling APIs which expect a token signed with a different secret, you might
+    // want to check the delegation-token example
+    $httpProvider.interceptors.push('jwtInterceptor');
   })
-  .constant('FirebaseUrl', 'https://jobcenter-id-auth.firebaseio.com/');
+    .run(function($rootScope, auth, store, jwtHelper, $location) {
+      $rootScope.$on('$locationChangeStart', function() {
+
+        var token = store.get('token');
+        if (token) {
+          if (!jwtHelper.isTokenExpired(token)) {
+            if (!auth.isAuthenticated) {
+              auth.authenticate(store.get('profile'), token);
+            }
+          } else {
+            // Either show the login page or use the refresh token to get a new idToken
+            $location.path('/');
+          }
+        }
+
+      });
+    })
+    .controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+      $scope.$on('$routeChangeSuccess', function(e, nextRoute){
+        if ( nextRoute.$$route && angular.isDefined( nextRoute.$$route.pageTitle ) ) {
+          $scope.pageTitle = nextRoute.$$route.pageTitle + ' | Auth0 Sample' ;
+        }
+      });
+    });
+    
+    $urlRouterProvider.otherwise('/');

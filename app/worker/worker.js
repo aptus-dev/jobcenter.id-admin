@@ -78,7 +78,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             nama: $scope.pus.nama
         })
         .then(function () {
-            alertify.alert('Worker Updated!');
+            alertify.alert('Pekerja telah di verifikasi!');
         }).catch(function (error) {
             alertify.error('Error!');
         });

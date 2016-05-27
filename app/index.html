@@ -22,6 +22,17 @@
 
         <!--<link rel="stylesheet" type="text/css" href="./css/admin-index.css"/>        -->
         
+        <!-- Auth0 Dependencies -->
+        <script type="text/javascript" src="auth0-variables.js"></script>
+        <script type="text/javascript" src="https://cdn.auth0.com/js/lock-9.0.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+        <script src="//cdn.auth0.com/w2/auth0-angular-4.js"></script>
+        <script src="//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
+        <script src="//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
+        <!-- END Auth0 Dependencies -->
+        
         <script type="text/javascript" src="vendor/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="vendor/plugins/jquery/jquery-ui.min.js"></script>
         <!--<script type="text/javascript" src="vendor/plugins/bootstrap/bootstrap.min.js"></script>-->
@@ -33,7 +44,6 @@
         <script type="text/javascript" src="vendor/plugins/revolution-slider/jquery.themepunch.revolution.min.js"></script>
         
         
-        <script src="./vendor/angular.min.js"></script>
         <script src="./vendor/bootstrap.min.js"></script>
         <script src="./vendor/firebase.js"></script>
         <script src="./vendor/angularfire.min.js"></script>
@@ -50,7 +60,7 @@
 
         <ui-view></ui-view>
         
-        <script>
+        <!--<script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -58,7 +68,7 @@
         
           ga('create', 'UA-77908735-1', 'auto');
         
-        </script>       
+        </script>       -->
          
         <!-- START FRONT PAGE PLUGINS -->
         
@@ -72,13 +82,12 @@
         <!-- END FRONT PAGE PLUGINS -->
         
         <!--ADMIN PAGE PLUGINS -->
-        <script type="text/javascript" src="vendor/plugins/icheck/icheck.min.js"></script>
+        <!--<script type="text/javascript" src="vendor/plugins/icheck/icheck.min.js"></script>
         <script type="text/javascript" src="vendor/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
         <script type="text/javascript" src="vendor/plugins/scrolltotop/scrolltopcontrol.js"></script>
 
         <script type="text/javascript" src="vendor/plugins/morris/raphael-min.js"></script>
         <script type="text/javascript" src="vendor/plugins/morris/morris.min.js"></script>
-        <!--<script type="text/javascript" src="vendor/plugins/rickshaw/d3.v3.js"></script>-->
         <script type="text/javascript" src="vendor/plugins/rickshaw/rickshaw.min.js"></script>
         <script type="text/javascript" src="vendor/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
         <script type="text/javascript" src="vendor/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
@@ -86,7 +95,7 @@
         <script type="text/javascript" src="vendor/plugins/owl/owl.carousel.min.js"></script>
 
         <script type="text/javascript" src="vendor/plugins/moment.min.js"></script>
-        <script type="text/javascript" src="vendor/plugins/daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="vendor/plugins/daterangepicker/daterangepicker.js"></script>-->
         <!--END ADMIN PAGE PLUGINS-->
         
         <!--Google Analytics PLUGINS-->
@@ -103,6 +112,8 @@
         <!--CUSTOM SCRIPT-->
         
         <script src="app.js"></script>
+        <script type="text/javascript" src="home/home.js"></script>
+        <script type="text/javascript" src="login/login.js"></script>
         <script src="./search/db.js"></script>
         <script src="./worker/worker.js"></script>
         <script src="./office/office.js"></script>
@@ -114,7 +125,6 @@
         <script type="text/javascript" src="admin/profile.controller.js"></script>
         <script type="text/javascript" src="admin/admin.controller.js"></script>
         <script type="text/javascript" src="dashboard/dashboard.controller.js"></script>
-        <script type="text/javascript" src="dashboard/logout.controller.js"></script>
 
         <script src="vendor/Chart.js"></script>
 
