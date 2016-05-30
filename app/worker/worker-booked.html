@@ -19,10 +19,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-2">
           <ul class="nav navbar-nav navbar-right">
-            <!--<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
-                <li><a ui-sref="admin-list">Admins</a></li>
-                <li><a ui-sref="offices">Offices</a></li>-->
-                <li>
+            <li ng-show="auth.profile.roles[0] === 'superadmin'"><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
+            <li ng-show="auth.profile.roles[0] === 'superadmin'"><a ui-sref="admin-list">Admins</a></li>
+            <li>
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Workers
                     </a>
@@ -40,6 +39,7 @@
                       <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
                     </div>
                 </li>
+                <li ng-show="auth.profile.roles[0] === 'superadmin'"><a ui-sref="offices">Offices</a></li>
             <li><a href="" ng-click="logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
           </ul>
         </div>
@@ -89,12 +89,12 @@
                 </div>
 
                 <div class="col-sm-3">
-                  <!--<div class="form-group">
+                  <div class="form-group" ng-show="auth.profile.roles[0] === 'superadmin'">
                     <select class="form-control" id="lokasi" ng-model="input.lokasi">
                       <option value="">Lokasi Cabang</option>
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>
-                  </div>-->
+                  </div>
                   <div class="form-group">
                     <input type="text" class="" id="tersedia" ng-model="input.status" ng-init="input.status='booked'" hidden/>
                   </div>

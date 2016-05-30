@@ -23,25 +23,27 @@ angular
   ])
   .config( function ( $stateProvider, $urlRouterProvider, authProvider, $httpProvider,
     jwtInterceptorProvider) {
-    $urlRouterProvider.otherwise('/admin');
+    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('/', {
         url: '/',
         controller: 'HomeCtrl',
         templateUrl: 'dashboard/admin-landing.html',
         resolve: {
-          "check": function(auth, $state) {
+          "check": function(auth, $location) {
             if (auth.profile.roles[0] === 'admin'){
-              $state.go('worker');
+              console.log('saya admin');
+              $location.path('/admin');
             }
             else if (auth.profile.roles[0] === 'superadmin'){
-              $state.go('super');
+              console.log('salam super');
+              $location.path('/super');
             } 
             // else {
             //   $state.go('login');
             // }
           }
-        }
+        } 
         // data: { 
         //   requiresLogin: true, 
         // }
@@ -52,8 +54,23 @@ angular
         controller: 'HomeCtrl',
         templateUrl: 'dashboard/admin-landing.html',
         data: { 
-          requiresLogin: true, 
-        }
+          requiresLogin: true,
+        },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              $location.path('/admin');
+            }
+            else if (auth.profile.roles[0] === 'superadmin'){
+              console.log('salam super');
+              $location.path('/super');
+            } 
+            // else {
+            //   $state.go('login');
+            // }
+          }
+        } 
       })
       .state('super', {
         url: '/super',
@@ -61,7 +78,22 @@ angular
         templateUrl: 'dashboard/superadmin-landing.html',
         data: { 
           requiresLogin: true, 
-        }
+        },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              $location.path('/admin');
+            }
+            else if (auth.profile.roles[0] === 'superadmin'){
+              console.log('salam super');
+              $location.path('/super');
+            } 
+            // else {
+            //   $state.go('login');
+            // }
+          }
+        } 
       })
       .state('login', { 
         url: '/login', 
@@ -145,52 +177,106 @@ angular
       })
       // END WORKER PAGES - Admin Page UI Routes
 
-    //   // OFFICE PAGES - Admin Page UI Routes
-    //   .state('offices', {
-    //     url: '/offices',
-    //     controller: 'HomeCtrl',
-    //     templateUrl: 'office/offices-list.html',
-    //     data: { requiresLogin: true }
-    //   })
+      // OFFICE PAGES - Admin Page UI Routes
+      .state('offices', {
+        url: '/offices',
+        controller: 'HomeCtrl',
+        templateUrl: 'office/offices-list.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        } 
+      })
       
-    //   .state('offices-add', {
-    //     url: '/add',
-    //     // controller: 'AuthCtrl as authCtrl',
-    //     templateUrl: 'office/office-add.html',
-    //     data: { requiresLogin: true }
-    //   })
+      .state('offices-add', {
+        url: '/add',
+        // controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'office/office-add.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        }
+      })
       
-    //   .state('offices-edit', {
-    //     url: '/office-edit/:branchId',
-    //     //controller: 'searchController',
-    //     templateUrl: 'office/branch-edit.html',
-    //     data: { requiresLogin: true }
-    //    })
-    //   // END OFFICE PAGES - Admin Page UI Routes
+      .state('offices-edit', {
+        url: '/office-edit/:branchId',
+        //controller: 'searchController',
+        templateUrl: 'office/branch-edit.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        }
+       })
+      // END OFFICE PAGES - Admin Page UI Routes
 
     //   // ADMIN USER PAGES - Admin Page UI Routes
 
-    //   .state('admin-profile', {
-    //     url: '/admin-profile',
-    //     // controller: 'ProfileCtrl as profileCtrl',
-    //     templateUrl: 'admin/admin-profile.html',
-    //     data: { requiresLogin: true }
-    //   })
+      .state('admin-profile', {
+        url: '/admin-profile',
+        // controller: 'ProfileCtrl as profileCtrl',
+        templateUrl: 'admin/admin-profile.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        }
+      })
       
-    //   .state('admin-add', {
-    //     url: '/admin-add',
-    //     // controller: 'AuthCtrl as authCtrl',
-    //     templateUrl: 'admin/add-admins.html',
-    //     data: { requiresLogin: true }
-    //   })
-    //   .state('admin-list', {
-    //     url: '/admin-list',
-    //     controller: 'HomeCtrl',
-    //     templateUrl: 'admin/admin-list.html',
-    //     data: { requiresLogin: true }
-    //   });
-    //   // END ADMIN USER PAGES - Admin Page UI Routes
-    // // END Admin page UI Routes
+      .state('admin-add', {
+        url: '/admin-add',
+        // controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'admin/add-admins.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        }
+      })
+      .state('admin-list', {
+        url: '/admin-list',
+        controller: 'HomeCtrl',
+        templateUrl: 'admin/admin-list.html',
+        data: { requiresLogin: true },
+        resolve: {
+          "check": function(auth, $location) {
+            if (auth.profile.roles[0] === 'admin'){
+              console.log('saya admin');
+              reject();
+              $location.path('/admin');
+            }            
+          }
+        }
+      });
+      // END ADMIN USER PAGES - Admin Page UI Routes
+    // END Admin page UI Routes
 
     authProvider.init({
       domain: AUTH0_DOMAIN,

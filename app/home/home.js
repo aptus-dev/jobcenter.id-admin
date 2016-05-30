@@ -21,7 +21,16 @@ angular.module( 'mainApp.home', [
   //     }
   //   });
   // };
-
+  
+  // if (auth.profile.roles[0] === 'admin'){
+  //  console.log('saya admin');
+  //     $state.go('admin');
+  //   }
+  //   else if (auth.profile.roles[0] === 'superadmin'){
+  //     console.log('salam super');
+  //     $state.go('super');
+  //   }; 
+    
   $scope.logout = function() {
     auth.signout();
     store.remove('profile');
