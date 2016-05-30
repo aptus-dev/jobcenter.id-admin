@@ -19,27 +19,27 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
-                        <li><a ui-sref="admin-list">Admins</a></li>
+                        <!--<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>-->
+                        <li><a ng-if = "auth.profile.roles[0] === 'superadmin'" ui-sref="admin-list">Admins</a></li>
+                        <li><a ng-if = "auth.profile.roles[0] === 'superadmin'" ui-sref="offices">Offices</a></li>
                         <li>
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Workers
-                                        </a>
+                              Workers
+                            </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" ui-sref="worker">Register Workers</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="worker-available">Available Workers</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="worker-booked">Booked Workers</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="worker-meeting">Meeting List</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="worker-unavailable">Unavailable List</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
+                              <a class="dropdown-item" ui-sref="worker">Register Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-available">Available Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-booked">Booked Workers</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-meeting">Meeting List</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-unavailable">Unavailable List</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
                             </div>
                         </li>
-                        <li><a ui-sref="offices">Offices</a></li>
                         <li><a href="" ng-click="logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
                     </ul>
                 </div>

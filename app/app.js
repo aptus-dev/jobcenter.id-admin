@@ -191,7 +191,7 @@ angular
               $location.path('/admin');
             }            
           }
-        } 
+        }         
       })
       
       .state('offices-add', {
@@ -227,7 +227,7 @@ angular
        })
       // END OFFICE PAGES - Admin Page UI Routes
 
-    //   // ADMIN USER PAGES - Admin Page UI Routes
+      // ADMIN USER PAGES - Admin Page UI Routes
 
       .state('admin-profile', {
         url: '/admin-profile',
