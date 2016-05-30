@@ -4,7 +4,7 @@ angular.module( 'mainApp.home', [
 .controller( 'HomeCtrl', function HomeController( $scope, auth, $http, $state, store, $rootScope ) {
 
   $scope.auth = auth;
-console.log($rootScope.profile);
+  // console.log($rootScope.profile);
   // $scope.callApi = function() {
   //   // Just call the API as you'd do using $http
   //   $http({
@@ -26,7 +26,7 @@ console.log($rootScope.profile);
     auth.signout();
     store.remove('profile');
     store.remove('token');
-    $state.go('login');;
+    $state.go('login');
   }
 
 });
