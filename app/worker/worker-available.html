@@ -87,12 +87,12 @@
                 </div>
 
                 <div class="col-sm-3">
-                  <div class="form-group">
+                  <!--<div class="form-group">
                     <select class="form-control" id="lokasi" ng-model="input.lokasi">
                       <option value="">Lokasi Cabang</option>
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>
-                  </div>
+                  </div>-->
                   <div class="form-group">
                     <input type="text" class="" id="tersedia" ng-model="input.tersedia" ng-init="input.tersedia='available'" hidden/>
                   </div>
@@ -185,7 +185,7 @@
               <tbody>
                 <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
                   <td><span style="font-weight:bold">{{pus.nama}}</span></td>
-                  <td><label ng-repeat="ket in pus.profesi">{{ket.value + ',&nbsp'}}</label></td>
+                  <td><label ng-repeat="ket in pus.profesi">{{ket + ',&nbsp'}}</label></td>
                   <td>{{pus.gender}}</td>
                   <td>{{pus.status}}</td>
                   <td>{{pus.lokasi}}</td>

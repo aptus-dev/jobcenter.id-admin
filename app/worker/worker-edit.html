@@ -89,11 +89,7 @@
                                     <img ng-src="{{pus.foto}}" style="max-width:280px"/>
                                     <div class="caption">
                                         <h5>Ganti Gambar</h5>
-                                        <img ng-src="{{data.b64}}" style="max-width:280px"/>
-                                        <a class="btn btn-info" role="button" ng-click="click()">Browse</a>                                        
-                                        <div style="word-wrap:break-word" ng-if="data.b64">
-                                            <h5>Gambar berhasil diganti!</h5>                                           
-                                        </div>
+                                        <a class="btn btn-info" role="button" ng-click="click()">Browse</a>                                                                                
                                     </div>
                                 </div>
                             </div>
@@ -169,34 +165,34 @@
                                     <div class="row" >
                                         <div class="col-sm-6">
                                             <label>
-                                        <input type="checkbox" ng-model="pus.profesi[1].value" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="null" >
+                                        <input type="checkbox" ng-model="pus.profesi.value1" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="null" >
                                             Infal / Cuci-gosok  &nbsp</label>
                                             <label>
-                                        <input type="checkbox" ng-model="pus.profesi[2].value"  ng-true-value="'Pembantu (Full-time)'" ng-false-value="null">
+                                        <input type="checkbox" ng-model="pus.profesi.value2"  ng-true-value="'Pembantu (Full-time)'" ng-false-value="null">
                                             Pembantu (Full-time)  &nbsp</label>
                                             <label>
-                                        <input type="checkbox" ng-model="pus.profesi[3].value"  ng-true-value="'Tukang Kebun'" ng-false-value="null">
+                                        <input type="checkbox" ng-model="pus.profesi.value3"  ng-true-value="'Tukang Kebun'" ng-false-value="null">
                                             Tukang Kebun &nbsp</label>
                                             <label>
-                                        <input type="checkbox" ng-model="pus.profesi[4].value" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="null">
+                                        <input type="checkbox" ng-model="pus.profesi.value4" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="null">
                                             Penjaga Binatang Peliharaan  &nbsp</label>
                                             <label>
-                                        <input type="checkbox" ng-model="pus.profesi[5].value" ng-true-value="'Sopir'" ng-false-value="null">
+                                        <input type="checkbox" ng-model="pus.profesi.value5" ng-true-value="'Sopir'" ng-false-value="null">
                                             Sopir  &nbsp</label>                                   
                                         </div>
                                         
                                         <div class="col-sm-6">
                                             <label>
-                                            <input type="checkbox" ng-model="pus.profesi[6].value" ng-true-value="'Tukang / Maintenance'" ng-false-value="null">
+                                            <input type="checkbox" ng-model="pus.profesi.value6" ng-true-value="'Tukang / Maintenance'" ng-false-value="null">
                                                 Tukang / Maintenance  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="pus.profesi[7].value" ng-true-value="'Baby Sitter'" ng-false-value="null">
+                                            <label><input type="checkbox" ng-model="pus.profesi.value7" ng-true-value="'Baby Sitter'" ng-false-value="null">
                                                 Baby Sitter  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="pus.profesi[8].value" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="null">
+                                            <label><input type="checkbox" ng-model="pus.profesi.value8" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="null">
                                                 Nanny / Perawat Orang Sakit  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="pus.profesi[9].value" ng-true-value="'Satpam'" ng-false-value="null">
+                                            <label><input type="checkbox" ng-model="pus.profesi.value9" ng-true-value="'Satpam'" ng-false-value="null">
                                                 Satpam  &nbsp</label><br>
-                                            <label><input type="checkbox" ng-model="pus.profesi[10].value" ng-true-value="'Pekerja Umum'" ng-false-value="null">
-                                                Pekerja Umum  &nbsp</label>
+                                            <label><input type="checkbox" ng-model="pus.profesi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="null">
+                                                Pekerja Umum  &nbsp</label><br>
                                         </div>
                                     </div>                                                                        
                                 </div>
@@ -314,7 +310,6 @@
                                 <tags-input ng-model="pus.ketrampilan" add-on-paste="true" placeholder="Masukkan Ketrampilan Pekerja (enter untuk lebih dari 1)" required>
                                 <!--<auto-complete source="loadTags($query)"></auto-complete>-->
                                 </tags-input>
-                                <p>Model: {{pus.ketrampilan}}</p>
                                 </div>
                              </div>
 
@@ -412,14 +407,10 @@
                                 <div class="col-md-4">
                                         <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-2" align="center">
-                                        <img ng-src="{{pus.ktp}}" style="max-width:280px"/>
+                                        <img ng-src="{{docs.ktp}}" style="max-width:280px"/>
                                         <div class="caption">
                                             <h5>Ganti KTP</h5>
-                                            <img ng-src="{{data.ktp}}" style="max-width:280px"/>
-                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>                                            
-                                            <div style="word-wrap:break-word" ng-if="data.ktp">
-                                                <h5>KTP berhasil diganti!</h5>                                           
-                                            </div>
+                                            <a class="btn btn-info" role="button" ng-click="clickKtp()">Browse</a>                                                                                       
                                         </div>
                                         </div>
                                         </div>
@@ -427,28 +418,20 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="col-lg-8 col-lg-offset-2" align="center">
-                                        <img ng-src="{{pus.kk}}" style="max-width:280px"/>
+                                        <img ng-src="{{docs.kk}}" style="max-width:280px"/>
                                         <div class="caption">
                                             <h5>Ganti Kartu Keluarga</h5>
-                                            <img ng-src="{{data.kk}}" style="max-width:280px"/>
-                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>                                            
-                                            <div style="word-wrap:break-word" ng-if="data.kk">
-                                                <h5>KK berhasil diganti!</h5>                                           
-                                            </div>
+                                            <a class="btn btn-info" role="button" ng-click="clickKk()">Browse</a>                                                                                        
                                         </div>
                                         </div>
                                         </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="col-lg-8 col-lg-offset-2" align="center">
-                                        <img ng-src="{{pus.sk}}" style="max-width:280px"/>
+                                        <img ng-src="{{docs.sk}}" style="max-width:280px"/>
                                         <div class="caption">
                                             <h5>Ganti Surat Keterangan</h5>
-                                            <img ng-src="{{data.sk}}" style="max-width:280px"/>
-                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>                                            
-                                            <div style="word-wrap:break-word" ng-if="data.sk">
-                                                <h5>SK berhasil diganti!</h5>                                           
-                                            </div>
+                                            <a class="btn btn-info" role="button" ng-click="clickSk()">Browse</a>                                                                                                                                   
                                         </div>
                                         </div>
                                         </div>

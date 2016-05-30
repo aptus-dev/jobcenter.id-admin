@@ -2,12 +2,13 @@ var worker = angular.module("worker", ["firebase", "angularUtils.directives.dirP
 
 var URL = "https://jobcenter.firebaseio.com/";
 var brRef = new Firebase(URL + 'branch');
+var workRef = new Firebase(URL + 'worker');
+var docRef = new Firebase(URL + 'document');
 
 worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$http', '$firebaseObject', function ($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {    
 
-    var workRef = new Firebase(URL + 'worker');
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
-    var docRef = new Firebase(URL + 'document');
+    var tagsRef = new Firebase(URL + 'tags');
     
     $scope.push = $firebaseArray(workRef);
     $scope.pus = $firebaseObject(ref);
@@ -16,9 +17,9 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     var tanggal = document.getElementById('inputTanggal');
     //var gaji = document.getElementById('inputGaji');
 
-    // $scope.loadTags = function (query) {
-    //     return $http.get('https://jobcenter.firebaseio.com/tags.json');
-    // };
+    $scope.loadTags = function (query) {
+        return $http.get('https://jobcenter.firebaseio.com/tags.json');
+    };
 
     $scope.registerWorker = function () {
         $scope.push.$add({
@@ -52,7 +53,8 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             nonhalal: $scope.inputHalal,
             lembur: $scope.inputLembur,
             gajih: $scope.inputGajih
-        })
+        });
+        tagsRef.update($scope.tags)
         .then(function () {
             alertify.alert('Pekerja Telah Berhasil Ditambahkan!');                
         }).catch(function (error) {
@@ -208,26 +210,30 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 }]); //end register worker controller
 //-----------------------------------------------------------//
 
-worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {
+worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {        
     
-    $scope.branches = $firebaseArray(brRef);
-
-    var workRef = new Firebase(URL + 'worker');
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
     $scope.push = $firebaseArray(workRef);
     $scope.pus = $firebaseObject(ref);
+    $scope.branches = $firebaseArray(brRef);
+    $scope.docs = $firebaseObject(docRef.child($scope.pus.$id));        
     
     $scope.updateWorker = function (pus) {
         $rootScope.pus = pus;
-        $state.go('worker-edit', {workerId: $rootScope.pus.$id});        
+        $state.go('worker-edit', {workerId: $rootScope.pus.$id});
     }; //end of update worker
-  
+
   var tanggal = document.getElementById('inputTanggal');
   //var gaji = document.getElementById('inputGaji');
    
   $scope.editWorker = function () {      
     $scope.pus.$save();
     ref.update({tanggallahir: tanggal.value})
+    $scope.docs.$save()
+    //     // ktp: $scope.data.ktp,
+    //     // kk: $scope.data.kk,
+    //     // sk: $scope.data.sk
+    // })
     .then(function() {
         alertify.alert('Pekerja Telah Di Update!');
       })
@@ -237,8 +243,7 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
       $state.go('worker-available');
   };  //end of edit worker
   
-  $scope.removeWorker = function (pus) {
-      
+  $scope.removeWorker = function (pus) {      
       alertify.confirm("Apakah anda yakin akan menghapus pekerja?", function (e) {    
         if (e) {
             $scope.pus.$remove()
@@ -291,13 +296,12 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
         var f = fileSelect.files[0], r = new FileReader();
 
         r.onloadend = function (e) { //callback after files finish loading
-            $scope.data.b64 = e.target.result;
+            $scope.pus.foto = e.target.result;
             $scope.$apply();
-            console.log($scope.data.b64.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //console.log($scope.data.b64.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
 
             //here you can send data over your server as desired
         }
-
         r.readAsDataURL(f); //once defined all callbacks, begin reading the file
     };
     // end of upload profile picture and convert to base64
@@ -309,9 +313,9 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
         var f = fileSelectKtp.files[0], ktp = new FileReader();
 
         ktp.onloadend = function (e) { //callback after files finish loading
-            $scope.data.ktp = e.target.result;
+            $scope.docs.ktp = e.target.result;
             $scope.$apply();
-            console.log($scope.data.ktp.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //console.log($scope.data.ktp.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
             //here you can send data over your server as desired
         }
         ktp.readAsDataURL(f);
@@ -324,9 +328,9 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
         var f = fileSelectKk.files[0], kk = new FileReader();
 
         kk.onloadend = function (e) { //callback after files finish loading
-            $scope.data.kk = e.target.result;
+            $scope.docs.kk = e.target.result;
             $scope.$apply();
-            console.log($scope.data.kk.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
+            //console.log($scope.data.kk.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
             //here you can send data over your server as desired
         }
         kk.readAsDataURL(f);
@@ -339,7 +343,7 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
         var f = fileSelectSk.files[0], sk = new FileReader();
 
         sk.onloadend = function (e) { //callback after files finish loading
-            $scope.data.sk = e.target.result;
+            $scope.docs.sk = e.target.result;
             $scope.$apply();
             console.log($scope.data.sk.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
             //here you can send data over your server as desired
