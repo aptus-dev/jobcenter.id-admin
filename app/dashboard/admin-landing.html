@@ -13,7 +13,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="fa fa-bars"></span>
                       </button>
-                      <a class="brand" ui-sref="admin"><img class="img-responsive" src="../img/logo.png"/></a>
+                      <a class="brand" ui-sref="/"><img class="img-responsive" src="../img/logo.png"/></a>
                     </div>
                 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,7 +54,7 @@
                 <!-- page content wrapper -->
                 <div class="page-content-wrap">
                     <div class="container">
-                        <h2>Admin Page:    <small> Welcome, {{ dashboardCtrl.profile.displayName }}. </small></h2>
+                        <h2>Admin Page:    <small> Welcome, {{auth.profile.nickname}}. </small></h2>
                     </div>
                     <div class="divider"><div class="box"><span class="fa fa-angle-down"></span></div></div>
 

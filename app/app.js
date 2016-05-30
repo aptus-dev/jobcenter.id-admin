@@ -26,11 +26,30 @@ angular
     $urlRouterProvider.otherwise('/login');
     $stateProvider
       .state('/', {
-          url: '/',
-          controller: 'HomeCtrl',
-          templateUrl: 'dashboard/superadmin-landing.html',
-          data: { requiresLogin: true }
-        })
+        url: '/',
+        controller: 'HomeCtrl',
+        templateUrl: 'dashboard/superadmin-landing.html',
+        data: { 
+          requiresLogin: true, 
+        },
+        // resolve: {
+        //   function (user, context){
+        //     if (user.roles.indexOf('superadmin') === -1){
+        //       return profile;
+        //     } else {
+        //       $state.go('admin');
+        //     }
+        //   }
+        // }
+      })
+      .state('admin', {
+        url: '/admin',
+        controller: 'HomeCtrl',
+        templateUrl: 'dashboard/admin-landing.html',
+        data: { 
+          requiresLogin: true, 
+        }
+      })
       .state('login', { 
         url: '/login', 
         controller: 'LoginCtrl',
@@ -92,6 +111,12 @@ angular
         url: '/unavailable',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-unavailable.html',
+        data: { requiresLogin: true }
+      })
+      .state('worker-status', {
+        url: '/status',
+        controller: 'HomeCtrl',
+        templateUrl: 'worker/worker-status.html',
         data: { requiresLogin: true }
       })
       .state('status-modal', {
@@ -165,6 +190,7 @@ angular
       profilePromise.then(function(profile) {
         store.set('profile', profile);
         store.set('token', idToken);
+        console.log(profile)
       });
       $location.path('/');
     });
