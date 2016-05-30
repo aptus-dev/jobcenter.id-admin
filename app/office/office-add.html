@@ -59,7 +59,7 @@
         <!-- page content wrapper -->
         <div class="page-content-wrap">
             <div class="container">
-                <h2>Admins Profile Page:    <small> Edit your details </small></h2>
+                <h2>Branch Page:    <small> Add your Branch </small></h2>
             </div>
             <div class="divider">
                 <div class="box"><span class="fa fa-angle-down"></span></div>
@@ -67,58 +67,118 @@
 
             <!-- page content holder -->
             <div class="page-content-wrap">
-                            <div class="container">
-                                <div class="row">
-
-                                    <form ng-controller="branchPushController" class="form-horizontal col-lg-8 col-sm-offset-1">
-                                                    
-                                                        <div class="form-group">
-                                                            <br>
-                                                            <br>
-                                                            <label class="col-md-3 col-xs-12 control-label">Kotamadya</label>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <input type="text" class="form-control" id="inputKodya" placeholder="Ex: Jakarta Pusat" required/>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="col-md-3 col-xs-12 control-label">Kantor</label>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <input type="text" class="form-control" id="inputNama" placeholder="Nama Kantor" required/>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="col-md-3 col-xs-12 control-label">Alamat</label>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <textarea class="form-control" rows="5" id="inputAlamat" placeholder="Alamat Baru" required></textarea>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label class="col-md-3 col-xs-12 control-label">No. Telp</label>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <input type="text" class="form-control" id="inputTelp" placeholder="ex: 021-2132123" onkeypress="return event.charCode >= 45 && event.charCode <=57" required/>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-xs-9">
-                                                        <button type="submit" id="buttonAdd" class="btn btn-primary pull-right">
-                                                        Add Branch</button>
-                                                        <button type="cancel" id="bt" class="btn btn-warning col-xs-offset-2" ui-sref="offices">
-                                                        Cancel</button>  
-                                                        <br>
-                                                        <br>                                                                         
-                                                    </div>
-                                        </form>
-
+                <div class="container">
+                    <div class="row">
+                        <form ng-controller="officeCtrl" class="form-horizontal">
+                            <div class="col-lg-6">          
+                            <div class="form-group">
+                                <br>
+                                <br>
+                                <label class="col-md-3 col-xs-12 control-label">Kotamadya</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="text" class="form-control" ng-model="kodya" placeholder="Ex: Jakarta Pusat" required/>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Kantor</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="text" class="form-control" ng-model="nama" placeholder="Nama Kantor" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Alamat</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <textarea class="form-control" rows="5" id="alamat" placeholder="Alamat Baru" ng-model="alamat" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">No. Telp</label>
+                                <div class="col-md-6 col-xs-12">
+                                    <input type="text" class="form-control" ng-model="telp" placeholder="ex: 021-2132123" onkeypress="return event.charCode >= 45 && event.charCode <=57" required/>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-10">
+                            <button type="submit" ng-click="addBranch()" class="btn btn-primary pull-right">
+                            Add Branch</button>
+                            <button type="cancel" id="bt" class="btn btn-warning col-xs-offset-1" ui-sref="offices">
+                            Cancel</button>  
+                            <br>
+                            <br>                                                                         
+                        </div>
+                        </div>  
+                        
+                        <div class="col-lg-6">
+                        <br>                        
+                        <div id="map" style="width: 600px; height: 400px;"></div>                        
+                            <input type="text"  id="lat" ng-model="lat" />
+                            <input type="text"  id="long" ng-model="long" />
+                    </div>
+                    </form>
+                            <!--maps google-->
+                    
+                </div>
+                    </br>
+                    
+                    <!--<pre>
+                    Location: &lt;input type="text" id="us2-address" style="width: 200px"/&gt;
+                    Radius: &lt;input type="text" id="us2-radius"/&gt;
+                    &lt;div id="us2" style="width: 500px; height: 400px;">&lt;/div&gt;
+                    Lat.: &lt;input type="text" id="us2-lat"/&gt;
+                    Long.: &lt;input type="text" id="us2-lon"/&gt;
+                    &lt;script>$('#us2').locationpicker({
+                        location: {latitude: 46.15242437752303, longitude: 2.7470703125},
+                        radius: 300,
+                        inputBinding: {
+                            latitudeInput: $('#us2-lat'),
+                            longitudeInput: $('#us2-lon'),
+                            radiusInput: $('#us2-radius'),
+                            locationNameInput: $('#us2-address')
+                        }
+                        });
+                    &lt;/script&gt;
+                </pre>-->
+    <!--<div class="container text-center">
+        <div class="well">                
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Location:</label>
+
+            <div class="col-sm-5">
+                <input type="{{ message }}" class="form-control"   />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Radius:</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="us2-radius" />
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="m-t-small">
+            <label class="p-r-small col-sm-1 control-label">Lat: </label>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <script>
+        
+    </script>
+        </div>
+        </div>-->
+                    </br></br>  
+                    <!--end of trial-->
+                </div>
                         </div>
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->                 
             </div>            
             <!-- END PAGE CONTENT -->
+            
         </div>
         <!-- END PAGE CONTAINER -->
 
