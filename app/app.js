@@ -145,52 +145,52 @@ angular
       })
       // END WORKER PAGES - Admin Page UI Routes
 
-    //   // OFFICE PAGES - Admin Page UI Routes
-    //   .state('offices', {
-    //     url: '/offices',
-    //     controller: 'HomeCtrl',
-    //     templateUrl: 'office/offices-list.html',
-    //     data: { requiresLogin: true }
-    //   })
+      // OFFICE PAGES - Admin Page UI Routes
+      .state('offices', {
+        url: '/offices',
+        controller: 'HomeCtrl',
+        templateUrl: 'office/offices-list.html',
+        data: { requiresLogin: true }
+      })
       
-    //   .state('offices-add', {
-    //     url: '/add',
-    //     // controller: 'AuthCtrl as authCtrl',
-    //     templateUrl: 'office/office-add.html',
-    //     data: { requiresLogin: true }
-    //   })
+      .state('offices-add', {
+        url: '/add',
+        // controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'office/office-add.html',
+        data: { requiresLogin: true }
+      })
       
-    //   .state('offices-edit', {
-    //     url: '/office-edit/:branchId',
-    //     //controller: 'searchController',
-    //     templateUrl: 'office/branch-edit.html',
-    //     data: { requiresLogin: true }
-    //    })
-    //   // END OFFICE PAGES - Admin Page UI Routes
+      .state('offices-edit', {
+        url: '/office-edit/:branchId',
+        //controller: 'searchController',
+        templateUrl: 'office/branch-edit.html',
+        data: { requiresLogin: true }
+       })
+      // END OFFICE PAGES - Admin Page UI Routes
 
-    //   // ADMIN USER PAGES - Admin Page UI Routes
+      // ADMIN USER PAGES - Admin Page UI Routes
 
-    //   .state('admin-profile', {
-    //     url: '/admin-profile',
-    //     // controller: 'ProfileCtrl as profileCtrl',
-    //     templateUrl: 'admin/admin-profile.html',
-    //     data: { requiresLogin: true }
-    //   })
+      .state('admin-profile', {
+        url: '/admin-profile',
+        // controller: 'ProfileCtrl as profileCtrl',
+        templateUrl: 'admin/admin-profile.html',
+        data: { requiresLogin: true }
+      })
       
-    //   .state('admin-add', {
-    //     url: '/admin-add',
-    //     // controller: 'AuthCtrl as authCtrl',
-    //     templateUrl: 'admin/add-admins.html',
-    //     data: { requiresLogin: true }
-    //   })
-    //   .state('admin-list', {
-    //     url: '/admin-list',
-    //     controller: 'HomeCtrl',
-    //     templateUrl: 'admin/admin-list.html',
-    //     data: { requiresLogin: true }
-    //   });
-    //   // END ADMIN USER PAGES - Admin Page UI Routes
-    // // END Admin page UI Routes
+      .state('admin-add', {
+        url: '/admin-add',
+        // controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'admin/add-admins.html',
+        data: { requiresLogin: true }
+      })
+      .state('admin-list', {
+        url: '/admin-list',
+        controller: 'HomeCtrl',
+        templateUrl: 'admin/admin-list.html',
+        data: { requiresLogin: true }
+      });
+      // END ADMIN USER PAGES - Admin Page UI Routes
+    // END Admin page UI Routes
 
     authProvider.init({
       domain: AUTH0_DOMAIN,
