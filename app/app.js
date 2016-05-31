@@ -23,7 +23,7 @@ angular
   ])
   .config( function ( $stateProvider, $urlRouterProvider, authProvider, $httpProvider,
     jwtInterceptorProvider) {
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/admin');
     $stateProvider
       .state('/', {
         url: '/',
@@ -60,7 +60,7 @@ angular
           "check": function(auth, $location) {
             if (auth.profile.roles[0] === 'admin'){
               console.log('saya admin');
-              $location.path('/admin');
+              //$location.path('/admin');
             }
             else if (auth.profile.roles[0] === 'superadmin'){
               console.log('salam super');
@@ -87,7 +87,7 @@ angular
             }
             else if (auth.profile.roles[0] === 'superadmin'){
               console.log('salam super');
-              $location.path('/super');
+              //$location.path('/super');
             } 
             // else {
             //   $state.go('login');
