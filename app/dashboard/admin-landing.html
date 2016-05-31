@@ -19,9 +19,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="navbar-collapse-2">
                       <ul class="nav navbar-nav navbar-right">
-                        <!--<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>-->
+                        <!--<li ng-show="auth.profile.roles[0] === 'superadmin'"><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
+                        <<li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
                         <li><a ng-if = "auth.profile.roles[0] === 'superadmin'" ui-sref="admin-list">Admins</a></li>
-                        <li><a ng-if = "auth.profile.roles[0] === 'superadmin'" ui-sref="offices">Offices</a></li>
+                        <li><a ng-if = "auth.profile.roles[0] === 'superadmin'" ui-sref="offices">Offices</a></li>-->
                         <li>
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Workers
@@ -57,8 +58,8 @@
                 <div class="page-content-wrap">
                     <div class="container">
                         <h2>Admin Page:    <small> Welcome, {{auth.profile.roles[0]}} {{auth.profile.nickname}}. </small></h2>
-                        <H3 ng-if = "auth.profile.roles[0] === 'admin'">HALO BANG</H3>
-                        <H3 ng-if = "auth.profile.roles[0] === 'superadmin'">HALO Super BANG</H3>
+                        <h3 ng-if = "auth.profile.roles[0] === 'admin'">HALO BANG</h3>
+                        <h3 ng-if = "auth.profile.roles[0] === 'superadmin'">HALO Super BANG</h3>
                         <br>
                     </div>
                     <div class="divider"><div class="box"><span class="fa fa-angle-down"></span></div></div>
