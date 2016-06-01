@@ -92,7 +92,7 @@
                                         <div class="col-md-6">
 
                                             <div class="form-group">
-                                                <div class="col-lg-8" align="center">
+                                                <div class="col-lg-8" align="center" ng-init="data.ktp=null">
                                                     <img ng-src="{{data.ktp}}" style="max-width:280px" />
                                                     <div class="caption">
                                                         <h5>Upload KTP</h5>
@@ -105,7 +105,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <div class="col-lg-8" align="center">
+                                                <div class="col-lg-8" align="center" ng-init="data.kk=null">
                                                     <img ng-src="{{data.kk}}" style="max-width:280px" />
                                                     <div class="caption">
                                                         <h5>Upload KK</h5>
@@ -118,7 +118,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <div class="col-lg-8" align="center">
+                                                <div class="col-lg-8" align="center" ng-init="data.sk=null">
                                                     <img ng-src="{{data.sk}}" style="max-width:280px" />
                                                     <div class="caption">
                                                         <h5>Upload SK Domisili</h5>
@@ -127,14 +127,18 @@
                                                             <h5>Surat Keterangan berhasil diupload!</h5>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </div>
+                                            <div class="col-lg-8" align="center">
+                                                <p class="text-danger" ng-hide="data.sk || data.kk || data.ktp" align="center">
+                                                    Upload Paling tidak 1 dokumen diatas</p> 
+                                            </div>                                            
                                             <br>
                                         </div>
 
                                         <div class="panel-footer">
                                             <!-- Publish button goes to 'available' workflow and data is published on the website -->
-                                            <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                                            <button type="submit" class="btn btn-primary pull-right" ng-if="data.sk || data.kk || data.ktp">Publish</button>
                                             <button type="reset" class="btn btn-default pull-left" ui-sref="worker">Cancel</button>
                                         </div>
                                         <br>

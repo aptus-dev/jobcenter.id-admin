@@ -10,9 +10,9 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="fa fa-bars"></span>
-                      </button>
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+          </button>
           <a class="brand" ui-sref="/"><img class="img-responsive" src="../img/logo.png" /></a>
         </div>
 
@@ -95,28 +95,18 @@
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>
                   </div>
-                  <!--<div class="form-group">
-                                        <input type="text" class="" id="tersedia" ng-model="input.status" ng-init="input.status='meeting'" hidden/>
-                                    </div>-->
+                 
                 </div>
 
-                <!--<div class="col-sm-3">
-                            <div class="form-group">
-                                <select class="form-control select" id="profesi" ng-model="input.profesi">
-                                    <option value="">Pekerjaan yang Diminati</option>
-                                    <option>Infal / Cuci-gosok</option>
-                                    <option>Pembantu (Full-time)</option>
-                                    <option>Tukang Kebun</option>
-                                    <option>Penjaga Binatang Peliharaan</option>
-                                    <option>Sopir</option>
-                                    <option>Tukang / Maintenance</option>
-                                    <option>Baby Sitter</option>
-                                    <option>Nanny / Perawat Orang Sakit</option>
-                                    <option>Satpam</option>
-                                    <option>Pekerja Umum</option>
-                                </select>
-                            </div>                          
-                        </div>-->
+                <div class="col-sm-3">
+                  <div class="form-group">                                      
+                    <select class="form-control" ng-model="input.tipe">
+                      <option value="">Tipe Cancel</option>
+                      <option>Cancel Booking</option>
+                      <option>Cancel Meeting</option>
+                    </select>
+                  </div>
+                </div>
 
                 <!--<div class="col-sm-3">
                             <div class="form-group">
