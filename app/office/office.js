@@ -14,6 +14,7 @@ $scope.addBranch = function() {
     nama: $scope.nama,
     alamat: $scope.alamat,
     telp: $scope.telp,
+    email: $scope.email,
     kotamadya: $scope.kodya,
     lat: $scope.lat,
     long: $scope.long
