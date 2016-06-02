@@ -81,43 +81,38 @@
               </div>
               <div class="well" style="max-height: 200px;overflow: auto;">
 
-                <div class="col-sm-3">
+                <div class="col-md-3">
                   <div class="form-group">
-                    <input placeholder="Masukkan Nama" class="form-control" id="nama" ng-model="input.nama" />
+                    <input placeholder="Masukkan Nama" class="form-control" id="nama" ng-model="input.nama" />                    
                   </div>
+                  <label>
+                      <input type="checkbox" ng-model="isi.value1" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="" >
+                          Infal / Cuci-gosok  &nbsp</label>
+                    <label>
+                      <input type="checkbox" ng-model="isi.value2" ng-true-value="'Pembantu (Full-time)'" ng-false-value="">
+                          Pembantu (Full-time)  &nbsp</label>
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-3">
                   <div class="form-group" ng-show="auth.profile.roles[0] === 'superadmin'">
                     <select class="form-control" id="lokasi" ng-model="input.lokasi">
                       <option value="">Lokasi Cabang</option>
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>
                   </div>
+                  <label>
+                      <input type="checkbox" ng-model="isi.value3" ng-true-value="'Tukang Kebun'" ng-false-value="">
+                          Tukang Kebun &nbsp</label>
+                    <label>
+                      <input type="checkbox" ng-model="isi.value4" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="">
+                          Penjaga Binatang Peliharaan  &nbsp</label>
+                          
                   <div class="form-group">
                     <input type="text" class="" id="tersedia" ng-model="input.tersedia" ng-init="input.tersedia='available'" hidden/>
                   </div>
                 </div>
-
-                <div class="col-sm-3">
-                  <div class="form-group">
-                    <select class="form-control select" id="profesi" ng-model="input.profesi">
-                      <option value="">Pekerjaan yang Diminati</option>
-                      <option>Infal / Cuci-gosok</option>
-                      <option>Pembantu (Full-time)</option>
-                      <option>Tukang Kebun</option>
-                      <option>Penjaga Binatang Peliharaan</option>
-                      <option>Sopir</option>
-                      <option>Tukang / Maintenance</option>
-                      <option>Baby Sitter</option>
-                      <option>Nanny / Perawat Orang Sakit</option>
-                      <option>Satpam</option>
-                      <option>Pekerja Umum</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-sm-3">
+                
+                <div class="col-md-3">
                   <div class="form-group">
                     <select class="form-control" id="gender" ng-model="input.gender">
                         <option value="">Jenis Kelamin</option>
@@ -125,9 +120,27 @@
                         <option>Perempuan</option>
                     </select>
                   </div>
-                  <br>
+                  <label>
+                    <input type="checkbox" ng-model="isi.value5" ng-true-value="'Sopir'" ng-false-value="">
+                        Sopir </label><br>
+                  <label>
+                    <input type="checkbox" ng-model="isi.value6" ng-true-value="'Tukang / Maintenance'" ng-false-value="">
+                        Tukang / Maintenance</label>
                 </div>
-
+                
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><input type="checkbox" ng-model="isi.value7" ng-true-value="'Baby Sitter'" ng-false-value="">
+                      Baby Sitter  &nbsp</label>
+                  <label><input type="checkbox" ng-model="isi.value8" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="">
+                      Nanny / Perawat Orang Sakit  &nbsp</label>
+                  <label><input type="checkbox" ng-model="isi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="">
+                      Pekerja Umum  &nbsp</label><br>
+                    
+                    <label><input type="checkbox" ng-model="isi.value9" ng-true-value="'Satpam'" ng-false-value="">
+                          Satpam  &nbsp</label>                               
+                  </div>                                                                                                                                      
+                </div>            
               </div>
               <!--<a class="btn btn-primary pull-right" ng-click="apply()">
                       <span class="glyphicon glyphicon-filter"></span> Update
@@ -160,11 +173,11 @@
                     <span ng-show="sortType == 'gender' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'gender' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
-                <th><a style="color:#56688A" href="" ng-click="sortType = 'status'; sortReverse = !sortReverse">
-                    Status
-                    <span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
-                  </a></th>
+               <th><a style="color:#56688A" href="" ng-click="sortType = 'telp'; sortReverse = !sortReverse">
+                    No. Telp
+                    <span ng-show="sortType == 'telp' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'telp' && sortReverse" class="fa fa-caret-up"></span>
+                  </a></th> 
                 <th><a style="color:#56688A" href="" ng-click="sortType = 'lokasi'; sortReverse = !sortReverse">
                     Lokasi
                     <span ng-show="sortType == 'lokasi' && !sortReverse" class="fa fa-caret-down"></span>
@@ -175,23 +188,23 @@
                     <span ng-show="sortType == 'gaji' && !sortReverse" class="fa fa-caret-down"></span>
                     <span ng-show="sortType == 'gaji' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
-                <th><a style="color:#56688A" href="" ng-click="sortType = 'suku'; sortReverse = !sortReverse">
-                    Suku
-                    <span ng-show="sortType == 'suku' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'suku' && sortReverse" class="fa fa-caret-up"></span>
+                <th><a style="color:#56688A" href="" ng-click="sortType = 'agama'; sortReverse = !sortReverse">
+                    Agama
+                    <span ng-show="sortType == 'agama' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'agama' && sortReverse" class="fa fa-caret-up"></span>
                   </a></th>
                 <th width="50">Edit</th>
                 <!--<th width="50">Book</th>-->
               </thead>
               <tbody>
-                <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
+                <tr dir-paginate="pus in push | filter:input | filter:{profesi: isi} | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
                   <td><span style="font-weight:bold">{{pus.nama}}</span></td>
                   <td><label ng-repeat="ket in pus.profesi">{{ket + ','}}</label></td>
                   <td>{{pus.gender}}</td>
-                  <td>{{pus.status}}</td>
+                  <td>{{pus.telp}}</td>
                   <td>{{pus.lokasi}}</td>
                   <td>{{pus.gajiNum | number}}</td>
-                  <td>{{pus.suku}}</td>
+                  <td>{{pus.agama}}</td>
                   <td>
                     <button title="Edit Worker" class="btn btn-default btn-rounded btn-sm" ng-click="updateWorker(pus)">
                        <span class="fa fa-pencil"></span>

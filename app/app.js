@@ -123,7 +123,8 @@ angular
       .state('worker-edit', {
         url: '/edit/:workerId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-edit.html'
+        templateUrl: 'worker/worker-edit.html',
+        data: { requiresLogin: true }
       })
       .state('worker-available', {
         url: '/available',
@@ -139,7 +140,8 @@ angular
       })
       .state('set-meeting', {
         url: '/booked/:bookId',
-        templateUrl: 'worker/worker-booked.html'
+        templateUrl: 'worker/worker-booked.html',
+        data: { requiresLogin: true }
       })
       .state('worker-meeting', {
         url: '/meeting',
@@ -150,7 +152,8 @@ angular
       .state('meet-modal', {
         url: '/meeting/:bookId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-meeting.html'
+        templateUrl: 'worker/worker-meeting.html',
+        data: { requiresLogin: true }
       })
       .state('worker-unavailable', {
         url: '/unavailable',
@@ -165,9 +168,10 @@ angular
         data: { requiresLogin: true }
       })
       .state('status-modal', {
-        url: '/unavailable/:bookId',
+        url: '/status/:bookId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-unavailable.html'
+        templateUrl: 'worker/worker-status.html',
+        data: { requiresLogin: true }
       })
       .state('worker-cancelled', {
         url: '/cancelled',

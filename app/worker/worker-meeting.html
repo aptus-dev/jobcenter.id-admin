@@ -21,7 +21,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li ng-show="auth.profile.roles[0] === 'superadmin'"><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
                         <li ng-show="auth.profile.roles[0] === 'superadmin'"><a ui-sref="admin-list">Admins</a></li>                                                
-]                        <li>
+                        <li>
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Workers
                             </a>
@@ -85,6 +85,12 @@
                                     <div class="form-group">
                                         <input placeholder="Masukkan Nama" class="form-control" id="nama" ng-model="input.nama" />
                                     </div>
+                                    <label>
+                                    <input type="checkbox" ng-model="isi.value1" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="" >
+                                        Infal / Cuci-gosok  &nbsp</label>
+                                    <label>
+                                    <input type="checkbox" ng-model="isi.value2" ng-true-value="'Pembantu (Full-time)'" ng-false-value="">
+                                        Pembantu (Full-time)  &nbsp</label>
                                 </div>
 
                                 <div class="col-sm-3">
@@ -94,39 +100,29 @@
                                         <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                                         </select>
                                     </div>
+                                    <label>
+                                    <input type="checkbox" ng-model="isi.value3" ng-true-value="'Tukang Kebun'" ng-false-value="">
+                                    Tukang Kebun &nbsp</label>
+                                    <label>
+                                    <input type="checkbox" ng-model="isi.value4" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="">
+                                    Penjaga Binatang Peliharaan  &nbsp</label>
                                     <div class="form-group">
                                         <input type="text" class="" id="tersedia" ng-model="input.status" ng-init="input.status='meeting'" hidden/>
                                     </div>
                                 </div>
 
-                                <!--<div class="col-sm-3">
-                            <div class="form-group">
-                                <select class="form-control select" id="profesi" ng-model="input.profesi">
-                                    <option value="">Pekerjaan yang Diminati</option>
-                                    <option>Infal / Cuci-gosok</option>
-                                    <option>Pembantu (Full-time)</option>
-                                    <option>Tukang Kebun</option>
-                                    <option>Penjaga Binatang Peliharaan</option>
-                                    <option>Sopir</option>
-                                    <option>Tukang / Maintenance</option>
-                                    <option>Baby Sitter</option>
-                                    <option>Nanny / Perawat Orang Sakit</option>
-                                    <option>Satpam</option>
-                                    <option>Pekerja Umum</option>
-                                </select>
-                            </div>                          
-                        </div>-->
-
-                                <!--<div class="col-sm-3">
-                            <div class="form-group">
-                                <select class="form-control" id="gender" ng-model="input.gender">
-                                    <option value="">Jenis Kelamin</option>
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
-                                </select>
-                            </div>                           
-                            <br>                            
-                        </div>                        -->
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label><input type="checkbox" ng-model="isi.value7" ng-true-value="'Baby Sitter'" ng-false-value="">
+                                            Baby Sitter  &nbsp</label>
+                                        <label><input type="checkbox" ng-model="isi.value8" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="">
+                                            Nanny / Perawat Orang Sakit  &nbsp</label>
+                                        <label><input type="checkbox" ng-model="isi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="">
+                                            Pekerja Umum  &nbsp</label><br>                            
+                                        <label><input type="checkbox" ng-model="isi.value9" ng-true-value="'Satpam'" ng-false-value="">
+                                                Satpam  &nbsp</label>                               
+                                    </div>                 
+                        </div>
 
                             </div>
                             <!--<a class="btn btn-primary pull-right" ng-click="apply()">
@@ -177,16 +173,16 @@
                                     <span ng-show="sortType == 'comment' && sortReverse" class="fa fa-caret-up"></span>
                                     </a></th>
                                 <th width="60"><a style="color:#56688A">
-                                    Approve Meeting
+                                    Approve
                                 </a></th>
                                 <th width="60"><a style="color:#56688A">
-                                    Cancel Meeting
+                                    Cancel
                                 </a></th>
                                 <!--<th width="50">&nbsp;</th>-->
                             </thead>
 
                             <tbody>
-                                <tr dir-paginate="pus in push | filter:input | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
+                                <tr dir-paginate="pus in push | filter:input | filter:{profesi: isi} | orderBy:sortType:sortReverse | itemsPerPage: pageSize" current-page="currentPage">
                                     <!--<td>{{pus.id}}</td>-->
                                     <td><span style="font-weight:bold">{{pus.nama}}</span></td>
                                     <td>{{pus.user}}</td>
