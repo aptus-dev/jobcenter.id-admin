@@ -89,10 +89,16 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Alamat</label>
+                                            <label class="col-md-3 col-xs-12 control-label">Alamat Baru</label>
                                             <div class="col-md-6 col-xs-12">
-                                                <textarea class="form-control" rows="5" id="alamat" ng-model="branch.alamat" required></textarea>
-                                                
+                                               <textarea class="form-control" rows="5" id="alamat" ng-model="branch.alamat" required></textarea>
+                                                <span class="text-danger"><small>*Masukkan spasi setelah memilih alamat baru dari google!</small><br></span>
+                                               <br>
+                                            </div>
+                                            <label class="col-md-3 col-xs-12 control-label">Alamat Lama</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <p>{{branch.alamat}}</p>
+                                                <!--<textarea rows="5" id="alamat" ng-model="branch.alamat" value="{{branch.alamat}}" hidden></textarea>                                                -->
                                             </div>
                                         </div>
 
@@ -127,10 +133,11 @@
                                        </div>
                                        
                                 <div class="col-lg-6">
+                                   
                                         <br>                        
                                 <div id="map" style="width: 600px; height: 400px;"></div>                        
-                                    <input type="text"  id="lat" ng-model="branch.lat" />
-                                    <input type="text"  id="long" ng-model="branch.long" />
+                                    <input type="text"   ng-model="branch.lat" />
+                                    <input type="text"   ng-model="branch.long" />
                                 </div>
                                     </form>
 

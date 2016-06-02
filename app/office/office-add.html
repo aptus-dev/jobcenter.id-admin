@@ -91,6 +91,7 @@
                                 <label class="col-md-3 col-xs-12 control-label">Alamat</label>
                                 <div class="col-md-6 col-xs-12">
                                     <textarea class="form-control" rows="5" id="alamat" placeholder="Alamat Baru" ng-model="alamat" required></textarea>
+                                    <span class="text-danger"><small>*Masukkan spasi setelah memilih alamat baru dari google!</small><br></span>        
                                 </div>
                             </div>
 
@@ -104,7 +105,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 col-xs-12 control-label">Email</label>
                                 <div class="col-md-6 col-xs-12">
-                                    <input type="text" class="form-control" ng-model="email" placeholder="nama@domainemail.com" />
+                                    <input type="text" class="form-control" ng-model="email" placeholder="nama@domainemail.com" required/>
                                 </div>
                             </div>
                             
@@ -120,9 +121,10 @@
                         
                         <div class="col-lg-6">
                         <br>                        
-                        <div id="map" style="width: 600px; height: 400px;"></div>                        
-                            <input type="text"  id="lat" ng-model="lat" />
-                            <input type="text"  id="long" ng-model="long" />
+                        <div id="map" style="width: 600px; height: 400px;"></div> 
+                                               
+                            <input type="text"  id="lat"  />
+                            <input type="text"  id="long"  />
                     </div>
                     </form>
                             <!--maps google-->
