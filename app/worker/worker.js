@@ -56,7 +56,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
         });
         tagsRef.update($scope.tags)
         .then(function () {
-            alertify.alert('Pekerja Telah Berhasil Ditambahkan!');                
+            alertify.success('Pekerja Telah Berhasil Ditambahkan!');                
         }).catch(function (error) {
             alertify.error('Error!')
         });
@@ -80,7 +80,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             nama: $scope.pus.nama
         })
         .then(function () {
-            alertify.alert('Pekerja telah di verifikasi!');
+            alertify.success('Pekerja telah di verifikasi!');
         }).catch(function (error) {
             alertify.error('Error!');
         });
@@ -210,14 +210,14 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 }]); //end register worker controller
 //-----------------------------------------------------------//
 
-worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {        
+worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject, auth) {        
     
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
     $scope.push = $firebaseArray(workRef);
     $scope.pus = $firebaseObject(ref);
     $scope.branches = $firebaseArray(brRef);
     $scope.docs = $firebaseObject(docRef.child($scope.pus.$id));        
-    
+        
     $scope.updateWorker = function (pus) {
         $rootScope.pus = pus;
         $state.go('worker-edit', {workerId: $rootScope.pus.$id});
@@ -235,7 +235,7 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
     //     // sk: $scope.data.sk
     // })
     .then(function() {
-        alertify.alert('Pekerja Telah Di Update!');
+        alertify.success('Pekerja Telah Di Update!');
       })
       .catch(function(error) {
         alertify.error('Error!')        
