@@ -9,10 +9,8 @@ angular.module('mainApp')
     
     profileCtrl.updateProfile = function(){
         profileCtrl.profile.$save();
-        alertify.alert("Profile Saved!")
-        .then(function(){
-          $state.go('admin-profile');
-        });
+        alertify.success("Profile Saved!");
+        $state.go('super');
     };
     
   });

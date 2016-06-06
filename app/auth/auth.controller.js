@@ -13,19 +13,11 @@ angular.module('mainApp')
         
         authCtrl.login = function() {
             Auth.$authWithPassword(authCtrl.user).then(function(auth){
-                $state.go('superadmin');
+                $state.go('super');
             }, function(error){
                 authCtrl.error = error;
             });
         };
-        
-        // authCtrl.superLogin = function() {
-        //     Auth.$authWithPassword(authCtrl.user).then(function(auth){
-        //         $state.go('superadmin');
-        //     }, function(error){
-        //         authCtrl.error = error;
-        //     });
-        // };
         
         authCtrl.register = function (){
             if (authCtrl.user.password != authCtrl.passVal) {
@@ -57,8 +49,3 @@ angular.module('mainApp')
             });
         };
     });
-    // .controller('AlertCtrl', [
-    //     '$scope', '$rootScope', function($scope, $rootScope) {
-    //         $rootScope.alert = {};
-    //     }
-    // ]);
