@@ -8,336 +8,284 @@
  *
  * Main module of the application.
  */
+
 angular
   .module('mainApp', [
-    'auth0',
     'firebase',
     'ui.router',
     'dbApp',
-    'mainApp.home',
-    'angular-storage',
-    'angular-jwt',
     'worker',
-    'angulartics',
     'office'
   ])
-  .config( function ( $stateProvider, $urlRouterProvider, authProvider, $httpProvider,
-    jwtInterceptorProvider) {
-    $urlRouterProvider.otherwise('/admin');
+  .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('/', {
-        url: '/',
-        controller: 'HomeCtrl',
-        templateUrl: 'dashboard/admin-landing.html',
+      .state('login', {
+        url: '/login',
+        controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'auth/login.html',
         resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              $location.path('/admin');
-            }
-            else if (auth.profile.roles[0] === 'superadmin'){
-              console.log('salam super');
-              $location.path('/super');
-            } 
-            // else {
-            //   $state.go('login');
-            // }
+          requireNoAuth: function($state, Auth) {
+            return Auth.$requireAuth().then(function(auth) {
+              $state.go('super');
+            }, function(error) {
+              return
+            });
           }
-        } 
-        // data: { 
-        //   requiresLogin: true, 
-        // }
-        
+        }
       })
       .state('admin', {
         url: '/admin',
-        controller: 'HomeCtrl',
+        controller: 'DashboardCtrl as dashboardCtrl',
         templateUrl: 'dashboard/admin-landing.html',
-        data: { 
-          requiresLogin: true,
-        },
         resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              //$location.path('/admin');
-            }
-            else if (auth.profile.roles[0] === 'superadmin'){
-              console.log('salam super');
-              $location.path('/super');
-            } 
-            // else {
-            //   $state.go('login');
-            // }
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          },
+          profile: function($state, Auth, Users) {
+            return Auth.$requireAuth().then(function(auth) {
+              return Users.getProfile(auth.uid).$loaded().then(function(profile) {
+                if (profile.displayName) {
+                  return profile;
+                }
+                else {
+                  $state.go('profile')
+                }
+              });
+            }, function(error) {
+              $state.go('login');
+            });
           }
-        } 
+        }
       })
       .state('super', {
         url: '/super',
-        controller: 'HomeCtrl',
+        controller: 'DashboardCtrl as dashboardCtrl',
         templateUrl: 'dashboard/superadmin-landing.html',
-        data: { 
-          requiresLogin: true, 
-        },
         resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              $location.path('/admin');
-            }
-            else if (auth.profile.roles[0] === 'superadmin'){
-              console.log('salam super');
-              //$location.path('/super');
-            } 
-            // else {
-            //   $state.go('login');
-            // }
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          },
+          profile: function($state, Auth, Users) {
+            return Auth.$requireAuth().then(function(auth) {
+              return Users.getProfile(auth.uid).$loaded().then(function(profile) {
+                if (profile.displayName && profile.super) {
+                  return profile;
+                }
+                else if (!profile.super) {
+                  $state.go('admin');
+                }
+                else {
+                  $state.go('profile')
+                }
+              });
+            }, function(error) {
+              $state.go('login');
+            });
           }
-        } 
+        }
       })
-      .state('login', { 
-        url: '/login', 
-        controller: 'LoginCtrl',
-        templateUrl: 'login/login.html'
-      })  
-      // WORKER PAGES - Admin Page UI Routes
-      .state('worker', {
+
+    // WORKER PAGES - Admin Page UI Routes
+    .state('worker', {
         url: '/worker',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-registered.html',
-        data: { requiresLogin: true }
-
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-add', {
         url: '/worker-add',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-add.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-verify', {
         url: '/verify/:workerId',
         // controller: 'AuthCtrl as authCtrl',
         templateUrl: 'worker/worker-verify.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-edit', {
         url: '/edit/:workerId',
         // controller: 'searchController',
         templateUrl: 'worker/worker-edit.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-available', {
         url: '/available',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-available.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-booked', {
         url: '/booked',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-booked.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('set-meeting', {
         url: '/booked/:bookId',
         templateUrl: 'worker/worker-booked.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-meeting', {
         url: '/meeting',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-meeting.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('meet-modal', {
         url: '/meeting/:bookId',
         // controller: 'searchController',
         templateUrl: 'worker/worker-meeting.html',
-        data: { requiresLogin: true }
       })
       .state('worker-unavailable', {
         url: '/unavailable',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-unavailable.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('worker-status', {
         url: '/status',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-status.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       .state('status-modal', {
         url: '/status/:bookId',
         // controller: 'searchController',
-        templateUrl: 'worker/worker-status.html',
-        data: { requiresLogin: true }
+        templateUrl: 'worker/worker-status.html'
       })
       .state('worker-cancelled', {
         url: '/cancelled',
         controller: 'HomeCtrl',
         templateUrl: 'worker/worker-cancelled.html',
-        data: { requiresLogin: true }
+        resolve: {
+          auth: function($state, Users, Auth) {
+            return Auth.$requireAuth().catch(function() {
+              $state.go('login');
+            });
+          }
+        }
       })
       // END WORKER PAGES - Admin Page UI Routes
 
-      // OFFICE PAGES - Admin Page UI Routes
-      .state('offices', {
-        url: '/offices',
-        controller: 'HomeCtrl',
-        templateUrl: 'office/offices-list.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
-        }         
-      })
-      
-      .state('offices-add', {
-        url: '/add',
-        // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'office/office-add.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
-        }
-      })
-      
-      .state('offices-edit', {
+    // OFFICE PAGES - Admin Page UI Routes
+    .state('offices', {
+      url: '/offices',
+      controller: 'HomeCtrl',
+      templateUrl: 'office/offices-list.html'
+    })
+
+    .state('offices-add', {
+      url: '/add',
+      // controller: 'AuthCtrl as authCtrl',
+      templateUrl: 'office/office-add.html'
+    })
+
+    .state('offices-edit', {
         url: '/office-edit/:branchId',
         //controller: 'searchController',
-        templateUrl: 'office/branch-edit.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
-        }
-       })
+        templateUrl: 'office/branch-edit.html'
+      })
       // END OFFICE PAGES - Admin Page UI Routes
 
-      // ADMIN USER PAGES - Admin Page UI Routes
+    // ADMIN USER PAGES - Admin Page UI Routes
 
-      .state('admin-profile', {
-        url: '/admin-profile',
-        // controller: 'ProfileCtrl as profileCtrl',
-        templateUrl: 'admin/admin-profile.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
+    .state('admin-profile', {
+      url: '/admin-profile',
+      controller: 'ProfileCtrl as profileCtrl',
+      templateUrl: 'admin/admin-profile.html',
+      resolve: {
+        auth: function($state, Users, Auth) {
+          return Auth.$requireAuth().catch(function() {
+            $state.go('home');
+          });
+        },
+        profile: function(Users, Auth) {
+          return Auth.$requireAuth().then(function(auth) {
+            return Users.getProfile(auth.uid).$loaded();
+          });
         }
-      })
-      
-      .state('admin-add', {
+      }
+    })
+
+    .state('admin-add', {
         url: '/admin-add',
-        // controller: 'AuthCtrl as authCtrl',
-        templateUrl: 'admin/add-admins.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
-        }
+        controller: 'AuthCtrl as authCtrl',
+        templateUrl: 'admin/add-admins.html'
       })
       .state('admin-list', {
         url: '/admin-list',
-        controller: 'HomeCtrl',
-        templateUrl: 'admin/admin-list.html',
-        data: { requiresLogin: true },
-        resolve: {
-          "check": function(auth, $location) {
-            if (auth.profile.roles[0] === 'admin'){
-              console.log('saya admin');
-              reject();
-              $location.path('/admin');
-            }            
-          }
-        }
-      });
-      // END ADMIN USER PAGES - Admin Page UI Routes
+        // controller: 'HomeCtrl',
+        templateUrl: 'admin/admin-list.html'
+      })
+
+    // END ADMIN USER PAGES - Admin Page UI Routes
     // END Admin page UI Routes
-
-    authProvider.init({
-      domain: AUTH0_DOMAIN,
-      clientID: AUTH0_CLIENT_ID,
-      loginState: 'login' // matches login state
-    });
-
-    authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      console.log("Login Success");
-      profilePromise.then(function(profile) {
-        store.set('profile', profile);
-        store.set('token', idToken);
-        console.log(profile)
-      });
-      $location.path('/');
-    });
-
-    authProvider.on('loginFailure', function() {
-      alert("Error");
-    });
-
-    authProvider.on('authenticated', function($location) {
-      console.log("Authenticated");
-
-    });
-
-    jwtInterceptorProvider.tokenGetter = function(store) {
-      return store.get('token');
-    };
-
-    // Add a simple interceptor that will fetch all requests and add the jwt token to its authorization header.
-    // NOTE: in case you are calling APIs which expect a token signed with a different secret, you might
-    // want to check the delegation-token example
-    $httpProvider.interceptors.push('jwtInterceptor');
+    $urlRouterProvider.otherwise('login');
   })
-    .run(function($rootScope, auth, store, jwtHelper, $location) {
-      $rootScope.$on('$locationChangeStart', function() {
-
-        var token = store.get('token');
-        if (token) {
-          if (!jwtHelper.isTokenExpired(token)) {
-            if (!auth.isAuthenticated) {
-              auth.authenticate(store.get('profile'), token);
-            }
-          } else {
-            // Either show the login page or use the refresh token to get a new idToken
-            $location.path('/');
-          }
-        }
-
-      });
-    })
-    .controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-      $scope.$on('$routeChangeSuccess', function(e, nextRoute){
-        if ( nextRoute.$$route && angular.isDefined( nextRoute.$$route.pageTitle ) ) {
-          $scope.pageTitle = nextRoute.$$route.pageTitle + ' | Auth0 Sample' ;
-        }
-      });
-    });
-    
+  .constant('FirebaseUrl', 'https://jobcenter-admin.firebaseio.com/');
