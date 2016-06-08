@@ -13,7 +13,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="fa fa-bars"></span>
                       </button>
-          <a class="brand" ui-sref="/"><img class="img-responsive" src="../img/logo.png" /></a>
+          <a class="brand" ui-sref="admin"><img class="img-responsive" src="../img/logo.png" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +40,7 @@
                     </div>
                 </li>
                 <li ng-show="auth.profile.roles[0] === 'superadmin'"><a ui-sref="offices">Offices</a></li>
-            <li><a href="" ng-click="logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
+            <li><a href="" ng-click="profileCtrl.logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -99,10 +99,11 @@
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <div class="form-group" ng-show="auth.profile.roles[0] === 'superadmin'">
-                                        <select class="form-control" id="lokasi" ng-model="input.lokasi">
-                                        <option value="">Lokasi Cabang</option>
-                                        <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
+                                    <div class="form-group" >
+                                        <input type="text" ng-model="input.lokasi" ng-init="input.lokasi = profileCtrl.profile.branch" hidden>
+                                        <select class="form-control" id="lokasi" ng-model="input.lokasi" ng-show="profileCtrl.profile.super">
+                                            <option value="">Lokasi Cabang</option>
+                                            <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                                         </select>
                                     </div>
                                     <label>
@@ -135,6 +136,7 @@
 
                     <!--/Search RESULTS-->
                     <div class="container">
+                        <label class="text-danger pull-right" >Lokasi: {{profileCtrl.profile.branch}}</label>
                         <h3>Search Results:</h3>
                         <hr>
 

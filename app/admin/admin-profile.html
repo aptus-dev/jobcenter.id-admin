@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a title="Edit my profile" ui-sref="admin-profile"><span class="fa fa-cog"></span></a></li>
-                        <li><a ui-sref="admin-list">Admins</a></li>
+                        <!--<li><a ui-sref="admin-list">Admins</a></li>
                         <li>
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Workers
@@ -39,7 +39,7 @@
                               <a class="dropdown-item" ui-sref="worker-cancelled">Cancelled Workers</a>
                             </div>
                         </li>                        
-                        <li><a ui-sref="offices">Offices</a></li>
+                        <li><a ui-sref="offices">Offices</a></li>-->
                         <!--<li><a class="btn" title="Log Out"><span class="fa fa-sign-out"></span></a></li>-->
                     </ul>
                 </div>
@@ -101,45 +101,10 @@
 
                                     <div class="form-group">
                                         <label for="lokasi" class="col-lg-3 control-label">Lokasi Cabang:</label>
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-8" ng-hide="profileCtrl.profile.branch">
                                             <select class="form-control" id="lokasi" ng-model="profileCtrl.profile.branch">
                                                 <option value="">Select</option>
-                                                <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
-                                                <!--<option>Bandung</option>
-                                                <option>Surabaya</option>
-                                                <option>Medan</option>
-                                                <option>Semarang</option>
-                                                <option>Ambon</option>
-                                                <option>Balikpapan</option>
-                                                <option>Banda Aceh</option>
-                                                <option>Bandar Lampung</option>
-                                                <option>Banjarmasin</option>
-                                                <option>Batam</option>
-                                                <option>Bekasi</option>
-                                                <option>Bengkulu</option>
-                                                <option>Bogor</option>
-                                                <option>Cirebon</option>
-                                                <option>Denpasar</option>
-                                                <option>Depok</option>
-                                                <option>Gorontalo</option>
-                                                <option>Jambi</option>
-                                                <option>Jayapura</option>
-                                                <option>Kediri</option>
-                                                <option>Kendari</option>
-                                                <option>Madiun</option>
-                                                <option>Makassar</option>
-                                                <option>Malang</option>
-                                                <option>Manado</option>
-                                                <option>Padang</option>
-                                                <option>Palembang</option>
-                                                <option>Pekanbaru</option>
-                                                <option>Pontianak</option>
-                                                <option>Samarinda</option>
-                                                <option>Serang</option>
-                                                <option>Tangerang</option>
-                                                <option>Tasikmalaya</option>
-                                                <option>Tegal</option>
-                                                <option>Yogyakarta</option>-->
+                                                <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                                
                                             </select>
                                         </div>
                                     </div>

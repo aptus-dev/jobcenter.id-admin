@@ -13,7 +13,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="fa fa-bars"></span>
                       </button>
-          <a class="brand" ui-sref="/"><img class="img-responsive" src="../img/logo.png" /></a>
+          <a class="brand" ui-sref="admin"><img class="img-responsive" src="../img/logo.png" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +41,7 @@
                 </li>
                 <li ng-show="auth.profile.roles[0] === 'superadmin'"><a ui-sref="offices">Offices</a></li>
 
-            <li><a href="" ng-click="logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
+            <li><a href="" ng-click="profileCtrl.logout()"><span class="fa fa-sign-out"></span> Log Out</a></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -60,7 +60,7 @@
     <!-- page content wrapper -->
     <div class="page-content-wrap">
       <div class="container">
-        <h2>Daftar Pekerja:    <small> Edit Pekerja yang telah di verifikasi. </small></h2>
+        <h2>Daftar Pekerja:    <small> Edit Pekerja yang telah di verifikasi. </small></h2>          
       </div>
       <br>
       <div class="divider">
@@ -75,8 +75,11 @@
             <!-- filter -->
             <div class="container">
               <div class="row">
-                <div class="col-md-5">
-                  <h3 class="text-left">Filter:</h3>
+                <div class="col-md-4">
+                  <h3 class="text-left">Filter:</h3>                  
+                </div>
+                <div class="col-md-8">
+                  <label class="text-danger pull-right" style="padding-top:20px">Lokasi: {{profileCtrl.profile.branch}}</label>
                 </div>               
               </div>
               <div class="well" style="max-height: 200px;overflow: auto;">
@@ -93,9 +96,10 @@
                           Pembantu (Full-time)  &nbsp</label>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="form-group" ng-show="auth.profile.roles[0] === 'superadmin'">
-                    <select class="form-control" id="lokasi" ng-model="input.lokasi">
+                <div class="col-md-3" >
+                  <div class="form-group" >
+                    <input type="text" ng-model="input.lokasi" ng-init="input.lokasi = profileCtrl.profile.branch" hidden>
+                    <select class="form-control" id="lokasi" ng-model="input.lokasi" ng-show="profileCtrl.profile.super">
                       <option value="">Lokasi Cabang</option>
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>

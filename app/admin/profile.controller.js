@@ -1,5 +1,5 @@
 angular.module('mainApp')
-  .controller('ProfileCtrl', function($state, auth, profile, $firebaseArray, $scope){
+  .controller('ProfileCtrl', function($state, auth, profile, $firebaseArray, $scope, Auth){
     var profileCtrl = this;
     var ref = new Firebase("https://jobcenter.firebaseio.com/branch");
     $scope.branches = $firebaseArray(ref);
@@ -12,5 +12,10 @@ angular.module('mainApp')
         alertify.success("Profile Saved!");
         $state.go('super');
     };
+
+    profileCtrl.logout = function() {
+            Auth.$unauth();
+            $state.go('login');
+        }
     
   });

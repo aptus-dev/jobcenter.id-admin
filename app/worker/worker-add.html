@@ -13,7 +13,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="fa fa-bars"></span>
                       </button>
-                    <a class="brand" ui-sref="/"><img class="img-responsive" src="../img/logo.png" /></a>
+                    <a class="brand" ui-sref="admin"><img class="img-responsive" src="../img/logo.png" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,339 +72,340 @@
             
             <!-- page content holder -->
             <div class="page-content-wrap">
-                    <div class="row">
-                        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
                         <form class="form-horizontal" ng-controller="registerWorker" ng-submit="registerWorker()">
-                        <div class="panel panel-default">
-                        <div class="panel-body">
-                        <div class="row">
-                            
-                        <div class="col-md-6">
-                                                                                                      
-                            <div class="form-group">
-                                <div class="col-lg-8 col-lg-offset-2" align="center">
-                                    <img ng-src="{{data.b64}}" style="max-width:280px"/>
-                                    <div class="caption">
-                                        <h5>Upload gambar</h5>
-                                        <a class="btn btn-info" role="button" ng-click="click()">Browse</a>
-                                        <div style="word-wrap:break-word" ng-if="data.b64">
-                                            <h5>Gambar berhasil diupload!</h5>                                           
+                            <div class="panel panel-default">
+                            <div class="panel-body">
+                            <div class="row">
+                                
+                            <div class="col-md-6">                                                                                                            
+                                <div class="form-group">
+                                    <div class="col-lg-8 col-lg-offset-2" align="center">
+                                        <img ng-src="{{data.b64}}"  id="img" />
+                                        <div class="caption">
+                                            <h5>Upload gambar</h5>
+                                            <a class="btn btn-info" role="button" ng-click="click()">Browse</a>
+                                            <div style="word-wrap:break-word" ng-if="data.b64">
+                                                <h5>Gambar berhasil diupload!</h5>                                           
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="user-name" class="col-lg-3 control-label">Nama</label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="inputNama" ng-model="inputNama" 
-                                        placeholder="Masukkan Nama Pekerja" required/>
+                                <br>
+                                <div class="form-group">
+                                    <label for="user-name" class="col-lg-3 control-label">Nama</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="inputNama" ng-model="inputNama" 
+                                            placeholder="Masukkan Nama Pekerja" required/>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="tanggal-lahir" class="col-lg-3 control-label">Tanggal Lahir</label>
-                                <div class="col-lg-8">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                    <input type="date" class="form-control datepicker" id="inputTanggal" ng-model="inputTanggal" 
-                                        max="2000-12-31" min="1900-01-01" required/>
+                                <div class="form-group">
+                                    <label for="tanggal-lahir" class="col-lg-3 control-label">Tanggal Lahir</label>
+                                    <div class="col-lg-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                        <input type="date" class="form-control datepicker" id="inputTanggal" ng-model="inputTanggal" 
+                                            max="2000-12-31" min="1900-01-01" required/>
+                                    </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="asal" class="col-lg-3 control-label">Asal/Tempat Lahir</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputAsal" ng-model="inputAsal" 
-                                       ng-init="inputAsal = null" placeholder="Masukkan Asal Pekerja" />
+                                <div class="form-group">
+                                    <label for="asal" class="col-lg-3 control-label">Asal/Tempat Lahir</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="inputAsal" ng-model="inputAsal" 
+                                            ng-init="inputAsal = null" placeholder="Masukkan Asal Pekerja" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="user-address" class="col-lg-3 control-label">Alamat Lengkap</label>
-                                <div class="col-lg-8">
-                                    <textarea class="form-control" id="inputAlamat" ng-model="inputAlamat" rows="5" required></textarea>
+                                <div class="form-group">
+                                    <label for="user-address" class="col-lg-3 control-label">Alamat Lengkap</label>
+                                    <div class="col-lg-8">
+                                        <textarea class="form-control" id="inputAlamat" ng-model="inputAlamat" rows="5" required></textarea>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="lokasi-cabang" class="col-lg-3 control-label">Lokasi Cabang</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputLokasi" ng-model="inputLokasi" required>
-                                        <option value="">Select</option>
-                                        <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
-                                    </select>
-                                </div>
-                            </div>                            
+                                <div class="form-group">
+                                    <label for="lokasi-cabang" class="col-lg-3 control-label">Lokasi Cabang</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="" ng-model="inputLokasi" ng-init="inputLokasi = profileCtrl.profile.branch" disabled>
+                                        <select class="form-control select" id="inputLokasi" ng-model="inputLokasi" ng-show="profileCtrl.profile.super" required>
+                                            <option value="">Select</option>
+                                            <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
+                                        </select>
+                                    </div>
+                                </div>                            
 
-                            <!--<div class="form-group">
-                                <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputProfesi" ng-model="inputProfesi" required>
-                                        <option value="">Select</option>
-                                        <option>Infal / Cuci-gosok</option>
-                                        <option>Pembantu (Full-time)</option>
-                                        <option>Tukang Kebun</option>
-                                        <option>Penjaga Binatang Peliharaan</option>
-                                        <option>Sopir</option>
-                                        <option>Tukang / Maintenance</option>
-                                        <option>Baby Sitter</option>
-                                        <option>Nanny / Perawat Orang Sakit</option>
-                                        <option>Satpam</option>
-                                        <option>Pekerja Umum</option>
-                                    </select>
+                                <!--<div class="form-group">
+                                    <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputProfesi" ng-model="inputProfesi" required>
+                                            <option value="">Select</option>
+                                            <option>Infal / Cuci-gosok</option>
+                                            <option>Pembantu (Full-time)</option>
+                                            <option>Tukang Kebun</option>
+                                            <option>Penjaga Binatang Peliharaan</option>
+                                            <option>Sopir</option>
+                                            <option>Tukang / Maintenance</option>
+                                            <option>Baby Sitter</option>
+                                            <option>Nanny / Perawat Orang Sakit</option>
+                                            <option>Satpam</option>
+                                            <option>Pekerja Umum</option>
+                                        </select>
+                                    </div>
+                                </div>-->
+                                
+                                <div class="form-group" >
+                                    <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
+                                    <div class="col-sm-8" >
+                                        <div class="row" >
+                                            <div class="col-sm-6" ng-init="checkbox.value1='Infal / Cuci-gosok'">
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value1" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="null" >
+                                                Infal / Cuci-gosok  &nbsp</label>
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value2" ng-true-value="'Pembantu (Full-time)'" ng-false-value="null">
+                                                Pembantu (Full-time)  &nbsp</label>
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value3" ng-true-value="'Tukang Kebun'" ng-false-value="null">
+                                                Tukang Kebun &nbsp</label>
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value4" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="null">
+                                                Penjaga Binatang Peliharaan  &nbsp</label>
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value5" ng-true-value="'Sopir'" ng-false-value="null">
+                                                Sopir  &nbsp</label>                                   
+                                            </div>
+                                            
+                                            <div class="col-sm-6">
+                                                <label>
+                                                <input type="checkbox" ng-model="checkbox.value6" ng-true-value="'Tukang / Maintenance'" ng-false-value="null">
+                                                    Tukang / Maintenance  &nbsp</label>
+                                                <label><input type="checkbox" ng-model="checkbox.value7" ng-true-value="'Baby Sitter'" ng-false-value="null">
+                                                    Baby Sitter  &nbsp</label>
+                                                <label><input type="checkbox" ng-model="checkbox.value8" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="null">
+                                                    Nanny / Perawat Orang Sakit  &nbsp</label>
+                                                <label><input type="checkbox" ng-model="checkbox.value9" ng-true-value="'Satpam'" ng-false-value="null">
+                                                    Satpam  &nbsp</label><br>
+                                                <label><input type="checkbox" ng-model="checkbox.value10" ng-true-value="'Pekerja Umum'" ng-false-value="null">
+                                                    Pekerja Umum  &nbsp</label>
+                                                    <br>                                                                                               
+                                            </div>                                        
+                                        </div>                                                                       
+                                    </div>
                                 </div>
-                            </div>-->
-                            
-                            <div class="form-group" >
-                                <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
-                                <div class="col-sm-8" >
-                                    <div class="row" >
-                                        <div class="col-sm-6" ng-init="checkbox.value1='Infal / Cuci-gosok'">
-                                            <label>
-                                        <input type="checkbox" ng-model="checkbox.value1" ng-true-value="'Infal / Cuci-gosok'" ng-false-value="null" >
-                                            Infal / Cuci-gosok  &nbsp</label>
-                                            <label>
-                                        <input type="checkbox" ng-model="checkbox.value2" ng-true-value="'Pembantu (Full-time)'" ng-false-value="null">
-                                            Pembantu (Full-time)  &nbsp</label>
-                                            <label>
-                                        <input type="checkbox" ng-model="checkbox.value3" ng-true-value="'Tukang Kebun'" ng-false-value="null">
-                                            Tukang Kebun &nbsp</label>
-                                            <label>
-                                        <input type="checkbox" ng-model="checkbox.value4" ng-true-value="'Penjaga Binatang Peliharaan'" ng-false-value="null">
-                                            Penjaga Binatang Peliharaan  &nbsp</label>
-                                            <label>
-                                        <input type="checkbox" ng-model="checkbox.value5" ng-true-value="'Sopir'" ng-false-value="null">
-                                            Sopir  &nbsp</label>                                   
-                                        </div>
-                                        
-                                        <div class="col-sm-6">
-                                            <label>
-                                            <input type="checkbox" ng-model="checkbox.value6" ng-true-value="'Tukang / Maintenance'" ng-false-value="null">
-                                                Tukang / Maintenance  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="checkbox.value7" ng-true-value="'Baby Sitter'" ng-false-value="null">
-                                                Baby Sitter  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="checkbox.value8" ng-true-value="'Nanny / Perawat Orang Sakit'" ng-false-value="null">
-                                                Nanny / Perawat Orang Sakit  &nbsp</label>
-                                            <label><input type="checkbox" ng-model="checkbox.value9" ng-true-value="'Satpam'" ng-false-value="null">
-                                                Satpam  &nbsp</label><br>
-                                            <label><input type="checkbox" ng-model="checkbox.value10" ng-true-value="'Pekerja Umum'" ng-false-value="null">
-                                                Pekerja Umum  &nbsp</label>
-                                                <br>                                                                                               
-                                        </div>                                        
-                                    </div>                                                                       
+                                
+                                <div class="form-group">
+                                    <label for="kategori" class="col-lg-3 control-label">Profesi</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="inputKategori" ng-model="inputKategori" 
+                                            ng-init="inputKategori = null" placeholder="Masukkan Profesi Pekerja" />
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="kategori" class="col-lg-3 control-label">Profesi</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputKategori" ng-model="inputKategori" 
-                                       ng-init="inputKategori = null" placeholder="Masukkan Profesi Pekerja" />
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="gender" class="col-lg-3 control-label">Jenis Kelamin</label>
-                                <div class="col-sm-8" ng-init="inputGender = 'Laki-laki'">                                    
-                                    <label><input type="radio" ng-model="inputGender" value="Laki-laki"> Laki-laki</label>&nbsp
-                                    <label><input type="radio" ng-model="inputGender" value="Perempuan"> Perempuan</label>
-                                </div>                               
-                            </div>
-
-                            <div class="form-group">
-                                <label for="waktu" class="col-lg-3 control-label">Waktu</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputWaktu" ng-model="inputWaktu" ng-init="inputWaktu = null">
-                                        <option value="">Select</option>
-                                        <option>Menginap</option>
-                                        <option>Infal</option>
-                                        <option>Pulang-pergi</option>
-                                        </select>                                   
+                                <div class="form-group">
+                                    <label for="gender" class="col-lg-3 control-label">Jenis Kelamin</label>
+                                    <div class="col-sm-8" ng-init="inputGender = 'Laki-laki'">                                    
+                                        <label><input type="radio" ng-model="inputGender" value="Laki-laki"> Laki-laki</label>&nbsp
+                                        <label><input type="radio" ng-model="inputGender" value="Perempuan"> Perempuan</label>
+                                    </div>                               
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="pendidikan" class="col-lg-3 control-label">Pendidikan Terakhir</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputPend" ng-model="inputPend" ng-init="inputPend = null">
-                                        <option value="">Select</option>
-                                        <option>SD</option>
-                                        <option>SMP</option>
-                                        <option>SMA</option>
-                                        <option>Perguruan Tinggi</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="waktu" class="col-lg-3 control-label">Waktu</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputWaktu" ng-model="inputWaktu" ng-init="inputWaktu = null">
+                                            <option value="">Select</option>
+                                            <option>Menginap</option>
+                                            <option>Infal</option>
+                                            <option>Pulang-pergi</option>
+                                            </select>                                   
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="status" class="col-lg-3 control-label">Status</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputStatus" ng-model="inputStatus" ng-init="inputStatus = null">
-                                        <option value="">Select</option>
-                                        <option>Lajang</option>
-                                        <option>Menikah</option>
-                                        <option>Janda/Duda</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="pendidikan" class="col-lg-3 control-label">Pendidikan Terakhir</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputPend" ng-model="inputPend" ng-init="inputPend = null">
+                                            <option value="">Select</option>
+                                            <option>SD</option>
+                                            <option>SMP</option>
+                                            <option>SMA</option>
+                                            <option>Perguruan Tinggi</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            
+
+                                <div class="form-group">
+                                    <label for="status" class="col-lg-3 control-label">Status</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputStatus" ng-model="inputStatus" ng-init="inputStatus = null">
+                                            <option value="">Select</option>
+                                            <option>Lajang</option>
+                                            <option>Menikah</option>
+                                            <option>Janda/Duda</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="col-md-6">
 
-                            <div class="form-group">
-                                <label for="anak" class="col-lg-3 control-label">Anak</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputAnak" string-to-number ng-model="inputAnak" 
-                                        ng-init="inputAnak = null" value="0" min="0" />
+                                <div class="form-group">
+                                    <label for="anak" class="col-lg-3 control-label">Anak</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="inputAnak" string-to-number ng-model="inputAnak" 
+                                            ng-init="inputAnak = null" value="0" min="0" />
+                                    </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="telp" class="col-lg-3 control-label">Tel/Handphone</label>
+                                    <div class="col-sm-8">
+                                        <input type="tel" class="form-control" id="inputTelp" ng-model="inputTelp" 
+                                            placeholder="Masukkan Nomor Telephone/Handphone" required/>
+                                    </div>
+                                </div>                                                        
+
+                                <div class="form-group">
+                                    <label for="agama" class="col-lg-3 control-label">Agama</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputAgama" ng-model="inputAgama" required>
+                                            <option value="">Select</option>
+                                            <option>Islam</option>
+                                            <option>Katolik</option>
+                                            <option>Kristen</option>
+                                            <option>Hindu</option>
+                                            <option>Budha</option>
+                                            <option>Lainnya</option>
+                                        </select>
+                                    </div>
+                                </div>                            
+
+                                <div class="form-group">
+                                    <label for="suku" class="col-lg-3 control-label">Suku</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select" id="inputSuku" ng-model="inputSuku" ng-init="inputSuku = null">
+                                            <option value="">Select</option>
+                                            <option>Jawa</option>
+                                            <option>Sunda</option>
+                                            <option>Banten</option>
+                                            <option>Batak</option>
+                                            <option>Bali</option>
+                                            <option>NTB/NTT</option>
+                                            <option>Lampung</option>
+                                            <option>Madura</option>
+                                            <option>Melayu</option>
+                                            <option>Lainnya</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gaji" class="col-lg-3 control-label">Gaji</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="inputGaji" ng-model="inputGaji" name="number" required/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
+                                    <div class="col-sm-8">
+                                        <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan Ketrampilan Pekerja (enter untuk lebih dari 1)" required>
+                                            <auto-complete source="loadTags($query)"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                        <!--<button type="submit" ng-click="">Tambah Ketrampilan</button>-->
+                                    </div>                                                                                                                                                                           
+
+                                <div class="form-group">
+                                    <label for="anjing" class="col-lg-3 control-label">Takut Anjing?</label>
+                                    <div class="col-sm-8" ng-init="inputAnjing = null">                                    
+                                        <label><input type="radio" ng-model="inputAnjing" value="Ya"> Ya</label>&nbsp
+                                        <label><input type="radio" ng-model="inputAnjing" value="Tidak"> Tidak</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exp" class="col-lg-3 control-label">Pengalaman Kerja</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="inputExp" string-to-number ng-model="inputExp" 
+                                            min="0" max="50" value="0" required/>
+                                        <span class="help-block">Tahun</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expln" class="col-lg-3 control-label">Pengalaman kerja di luar negri?</label>
+                                    <div class="col-sm-8" ng-init="inputExpln = null">                                   
+                                        <label><input type="radio" ng-model="inputExpln" value="Ya"> Ya</label>&nbsp
+                                        <label><input type="radio" ng-model="inputExpln" value="Tidak"> Tidak</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ing" class="col-lg-3 control-label">Bisa Bahasa Inggris?</label>
+                                    <div class="col-sm-8" ng-init="inputIng = null">                                    
+                                        <label><input type="radio" ng-model="inputIng" value="Ya"> Ya</label>&nbsp
+                                        <label><input type="radio" ng-model="inputIng" value="Tidak"> Tidak</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tinggi" class="col-lg-3 control-label">Tinggi Badan</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="inputTinggi" string-to-number ng-model="inputTinggi" 
+                                            ng-init="inputTinggi = null" min="50" max="350" />
+                                        <span class="help-block">Cm</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="berat" class="col-lg-3 control-label">Berat Badan</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="inputBerat" string-to-number ng-model="inputBerat" 
+                                            ng-init="inputBerat = null" min="20" max="250" />
+                                        <span class="help-block">Kg</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="halal" class="col-lg-3 control-label">Bisa Masak Non-halal?</label>
+                                    <div class="col-sm-8" ng-init="inputHalal = null">                                    
+                                        <label><input type="radio" ng-model="inputHalal" value="Ya"> Ya</label>&nbsp
+                                        <label><input type="radio" ng-model="inputHalal" value="Tidak"> Tidak</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lembur" class="col-lg-3 control-label">Bersedia Lembur?</label>
+                                    <div class="col-sm-8" ng-init="inputLembur = null">                                    
+                                        <label><input type="radio" ng-model="inputLembur" value="Ya"> Ya</label>&nbsp
+                                        <label><input type="radio" ng-model="inputLembur" value="Tidak"> Tidak</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gaji" class="col-lg-3 control-label">Gaji Harian</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" 
+                                            ng-init="inputGajih = null"/>
+                                        <span class="help-block">Jika Ada</span>
+                                    </div>
+                                </div>                            
+                                <p class="text-danger pull-right" style="font-size:120%; font-weight:bold" ng-show="!data.b64">Gambar Belum Dipilih!</p>
+                            </div> 
+                            
                             </div>
-
-                            <div class="form-group">
-                                <label for="telp" class="col-lg-3 control-label">Tel/Handphone</label>
-                                <div class="col-sm-8">
-                                    <input type="tel" class="form-control" id="inputTelp" ng-model="inputTelp" 
-                                        placeholder="Masukkan Nomor Telephone/Handphone" required/>
-                                </div>
-                            </div>                                                        
-
-                            <div class="form-group">
-                                <label for="agama" class="col-lg-3 control-label">Agama</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputAgama" ng-model="inputAgama" required>
-                                        <option value="">Select</option>
-                                        <option>Islam</option>
-                                        <option>Katolik</option>
-                                        <option>Kristen</option>
-                                        <option>Hindu</option>
-                                        <option>Budha</option>
-                                        <option>Lainnya</option>
-                                    </select>
-                                </div>
-                            </div>                            
-
-                            <div class="form-group">
-                                <label for="suku" class="col-lg-3 control-label">Suku</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputSuku" ng-model="inputSuku" ng-init="inputSuku = null">
-                                        <option value="">Select</option>
-                                        <option>Jawa</option>
-                                        <option>Sunda</option>
-                                        <option>Banten</option>
-                                        <option>Batak</option>
-                                        <option>Bali</option>
-                                        <option>NTB/NTT</option>
-                                        <option>Lampung</option>
-                                        <option>Madura</option>
-                                        <option>Melayu</option>
-                                        <option>Lainnya</option>
-                                    </select>
-                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="gaji" class="col-lg-3 control-label">Gaji</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputGaji" ng-model="inputGaji" name="number" required/>
-                                </div>
+                            <div class="panel-footer">
+                                <button type="submit" class="btn btn-primary pull-right">Save</button>
+                                <button type="cancel" class="btn btn-default" ui-sref="worker">Cancel</button>
+                                <button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>
                             </div>
-
-                            <div class="form-group">
-                                <label for="ketrampilan" class="col-lg-3 control-label">Ketrampilan</label>
-                                <div class="col-sm-8">
-                                    <tags-input ng-model="tags" add-on-paste="true" placeholder="Masukkan Ketrampilan Pekerja (enter untuk lebih dari 1)" required>
-                                        <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                </div>
-                                 <!--<button type="submit" ng-click="">Tambah Ketrampilan</button>-->
-                             </div>                                                                                                                                                                           
-
-                            <div class="form-group">
-                                <label for="anjing" class="col-lg-3 control-label">Takut Anjing?</label>
-                                <div class="col-sm-8" ng-init="inputAnjing = null">                                    
-                                    <label><input type="radio" ng-model="inputAnjing" value="Ya"> Ya</label>&nbsp
-                                    <label><input type="radio" ng-model="inputAnjing" value="Tidak"> Tidak</label>
-                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="exp" class="col-lg-3 control-label">Pengalaman Kerja</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputExp" string-to-number ng-model="inputExp" 
-                                        min="0" max="50" value="0" required/>
-                                    <span class="help-block">Tahun</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="expln" class="col-lg-3 control-label">Pengalaman kerja di luar negri?</label>
-                                <div class="col-sm-8" ng-init="inputExpln = null">                                   
-                                    <label><input type="radio" ng-model="inputExpln" value="Ya"> Ya</label>&nbsp
-                                    <label><input type="radio" ng-model="inputExpln" value="Tidak"> Tidak</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ing" class="col-lg-3 control-label">Bisa Bahasa Inggris?</label>
-                                <div class="col-sm-8" ng-init="inputIng = null">                                    
-                                    <label><input type="radio" ng-model="inputIng" value="Ya"> Ya</label>&nbsp
-                                    <label><input type="radio" ng-model="inputIng" value="Tidak"> Tidak</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="tinggi" class="col-lg-3 control-label">Tinggi Badan</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputTinggi" string-to-number ng-model="inputTinggi" 
-                                        ng-init="inputTinggi = null" min="50" max="350" />
-                                    <span class="help-block">Cm</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="berat" class="col-lg-3 control-label">Berat Badan</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputBerat" string-to-number ng-model="inputBerat" 
-                                        ng-init="inputBerat = null" min="20" max="250" />
-                                    <span class="help-block">Kg</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="halal" class="col-lg-3 control-label">Bisa Masak Non-halal?</label>
-                                <div class="col-sm-8" ng-init="inputHalal = null">                                    
-                                    <label><input type="radio" ng-model="inputHalal" value="Ya"> Ya</label>&nbsp
-                                    <label><input type="radio" ng-model="inputHalal" value="Tidak"> Tidak</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="lembur" class="col-lg-3 control-label">Bersedia Lembur?</label>
-                                <div class="col-sm-8" ng-init="inputLembur = null">                                    
-                                    <label><input type="radio" ng-model="inputLembur" value="Ya"> Ya</label>&nbsp
-                                    <label><input type="radio" ng-model="inputLembur" value="Tidak"> Tidak</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="gaji" class="col-lg-3 control-label">Gaji Harian</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputGajih" ng-model="inputGajih" name="number" 
-                                        ng-init="inputGajih = null"/>
-                                    <span class="help-block">Jika Ada</span>
-                                </div>
-                            </div>                            
-                            <p class="text-danger pull-right" style="font-size:120%; font-weight:bold" ng-show="!data.b64">Gambar Belum Dipilih!</p>
-                        </div> 
-                        </div>
-                        </div>
-                        <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary pull-right">Save</button>
-                            <button type="cancel" class="btn btn-default" ui-sref="worker">Cancel</button>
-                            <button type="cancel" class="btn btn-default" onclick="this.form.reset()">Reset</button>
-                        </div>
-                        </div>
                         </form>
                         
                     </div>

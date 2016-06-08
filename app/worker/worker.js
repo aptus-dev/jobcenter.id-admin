@@ -87,7 +87,12 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
         $state.go('worker');
     };  //end of publish worker
 
-    // upload picture and convert to base64
+    //upload picture and convert to base64
+    var img = document.getElementById('img');
+    if(img && img.style) {
+        img.style.height = '150px';
+        //img.style.width = '256px';
+    }
     $scope.data = {}; //init variable
     $scope.click = function () { //default function, to be override if browser supports input type='file'
         $scope.data.alert = "Your browser doesn't support HTML5 input type='File'"
@@ -109,7 +114,6 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
     $scope.click = function () { //activate function to begin input file on click
         fileSelect.click();
     }
-
     fileSelect.onchange = function () { //set callback to action after choosing file
         var f = fileSelect.files[0], r = new FileReader();
 
@@ -117,10 +121,8 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
             $scope.data.b64 = e.target.result;
             $scope.$apply();
             console.log($scope.data.b64.replace(/^data:image\/(png|jpg);base64,/, "")); //replace regex if you want to rip off the base 64 "header"
-
             //here you can send data over your server as desired
         }
-
         r.readAsDataURL(f); //once defined all callbacks, begin reading the file
     };
     // end of upload profile picture and convert to base64
@@ -210,7 +212,7 @@ worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$sta
 }]); //end register worker controller
 //-----------------------------------------------------------//
 
-worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject, auth) {        
+worker.controller("availableWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {        
     
     var ref = new Firebase("https://jobcenter.firebaseio.com/worker/" + $stateParams.workerId);
     $scope.push = $firebaseArray(workRef);
