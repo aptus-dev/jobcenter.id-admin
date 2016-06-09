@@ -4,6 +4,8 @@ var URL = "https://jobcenter.firebaseio.com/";
 var brRef = new Firebase(URL + 'branch');
 var workRef = new Firebase(URL + 'worker');
 var docRef = new Firebase(URL + 'document');
+var unRef = new Firebase(URL + 'unavailable');
+var bookRef = new Firebase(URL + 'booked');
 
 worker.controller("registerWorker", ['$scope', '$firebaseArray', '$state', '$stateParams', '$rootScope', '$http', '$firebaseObject', function ($scope, $firebaseArray, $state, $stateParams, $rootScope, $http, $firebaseObject) {    
 
@@ -248,7 +250,8 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
   $scope.removeWorker = function (pus) {      
       alertify.confirm("Apakah anda yakin akan menghapus pekerja?", function (e) {    
         if (e) {
-            $scope.pus.$remove()
+            $scope.pus.$remove();
+            $scope.docs.$remove()
             .then(function() {
             alertify.alert('Pekerja Telah Di Hapus!');
             })
@@ -358,8 +361,6 @@ worker.controller("availableWorker", function($scope, $firebaseArray, $state, $s
 
 worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope) {
         
-    var bookRef = new Firebase(URL + 'booked');
-    var workRef = new Firebase(URL + 'worker');
     var cancelRef = new Firebase(URL + 'cancel');
     var ref = new Firebase("https://jobcenter.firebaseio.com/booked/" + $stateParams.bookId);
     
@@ -409,10 +410,11 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
             tanggal: date,
             alasan: $scope.alasan,
             tipe: "Cancel Booking",
-            profesi: $scope.pus.profesi
+            profesi: $scope.pus.profesi,
+            lokasi: $scope.pus.lokasi
         })  
         .then(function () {                   
-            alertify.alert('Booking di Cancel!');
+            alertify.success('Booking di Cancel!');
             $("#cbookModal").modal("hide");
         })
         .catch(function(error) {
@@ -447,11 +449,8 @@ worker.controller("bookedWorker", function($scope, $firebaseArray, $state, $stat
 //-----------------------------------------------------------//
 
 worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope) {
-        
-    var bookRef = new Firebase(URL + 'booked');
-    var workRef = new Firebase(URL + 'worker');
+            
     var cancelRef = new Firebase(URL + 'cancel');
-    var unRef = new Firebase(URL + 'unavailable');
     var ref = new Firebase("https://jobcenter.firebaseio.com/booked/" + $stateParams.bookId);
     
     $scope.push = $firebaseArray(bookRef);
@@ -514,10 +513,11 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
             profesi: $scope.pus.profesi,            
             tanggal: date,
             alasan: $scope.alasan,
-            tipe: "Cancel Meeting"
+            tipe: "Cancel Meeting",
+            lokasi: $scope.pus.lokasi
         })  
         .then(function () {                   
-            alertify.alert('Meeting Telah di Cancel!');
+            alertify.success('Meeting Telah di Cancel!');
             $("#cancelModal").modal("hide");
         })
         .catch(function(error) {
@@ -537,9 +537,7 @@ worker.controller("meetWorker", function($scope, $firebaseArray, $state, $stateP
 //-----------------------------------------------------------//
 
 worker.controller("unWorker", function($scope, $firebaseArray, $state, $stateParams, $rootScope)  {
-    
-    var unRef = new Firebase(URL + 'unavailable');
-    var workRef = new Firebase(URL + 'worker');
+        
     $scope.push = $firebaseArray(unRef);
     $scope.branches = $firebaseArray(brRef);
     var date = new Date().getTime();

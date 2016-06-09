@@ -74,10 +74,11 @@
             <!-- filter -->
             <div class="container">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <h3 class="text-left">Filter:</h3>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-8">
+                  <label class="text-danger pull-right" style="padding-top:20px">Lokasi: {{profileCtrl.profile.branch}}</label>
                 </div>
               </div>
               <div class="well" style="max-height: 400px;overflow: auto;">
@@ -88,16 +89,14 @@
                   </div>
                 </div>
 
-                <div class="col-sm-3" ng-show="auth.profile.roles[0] === 'superadmin'">
-                  <div class="form-group">
-                    <select class="form-control" id="lokasi" ng-model="input.lokasi">
+                <div class="col-sm-3" >
+                  <input type="text" ng-model="input.lokasi" ng-init="input.lokasi = profileCtrl.profile.branch" hidden>
+                    <select class="form-control" id="lokasi" ng-model="input.lokasi" ng-show="profileCtrl.profile.super">
                       <option value="">Lokasi Cabang</option>
                       <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>                                     
                     </select>
                   </div>
                  
-                </div>
-
                 <div class="col-sm-3">
                   <div class="form-group">                                      
                     <select class="form-control" ng-model="input.tipe">
@@ -106,19 +105,7 @@
                       <option>Cancel Meeting</option>
                     </select>
                   </div>
-                </div>
-
-                <!--<div class="col-sm-3">
-                            <div class="form-group">
-                                <select class="form-control" id="gender" ng-model="input.gender">
-                                    <option value="">Jenis Kelamin</option>
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
-                                </select>
-                            </div>                           
-                            <br>                            
-                        </div>                        -->
-
+                </div>                
               </div>
               <!--<a class="btn btn-primary pull-right" ng-click="apply()">
                       <span class="glyphicon glyphicon-filter"></span> Update
@@ -137,31 +124,31 @@
                 <!--<th>Book id</th>-->
                 <th>
                   <a style="color:#56688A" href="" ng-click="sortType = 'nama'; sortReverse = !sortReverse">
-                                    Nama Pekerja
-                                    <span ng-show="sortType == 'nama' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'nama' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    Nama Pekerja
+                    <span ng-show="sortType == 'nama' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'nama' && sortReverse" class="fa fa-caret-up"></span>
+                  </a>
                 </th>
                 <th><a style="color:#56688A" href="" ng-click="sortType = 'user'; sortReverse = !sortReverse">
-                                    Nama Pencari Kerja
-                                    <span ng-show="sortType == 'user' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'user' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
+                      Nama Pencari Kerja
+                      <span ng-show="sortType == 'user' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'user' && sortReverse" class="fa fa-caret-up"></span>
+                      </a></th>
                 <th><a style="color:#56688A" href="" ng-click="sortType = 'tipe'; sortReverse = !sortReverse">
-                                    Tipe
-                                    <span ng-show="sortType == 'tipe' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'tipe' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
+                      Tipe
+                      <span ng-show="sortType == 'tipe' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'tipe' && sortReverse" class="fa fa-caret-up"></span>
+                      </a></th>
                 <th><a style="color:#56688A" href="" ng-click="sortType = 'alasan'; sortReverse = !sortReverse">
-                                    Alasan
-                                    <span ng-show="sortType == 'alasan' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'alasan' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
+                      Alasan
+                      <span ng-show="sortType == 'alasan' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'alasan' && sortReverse" class="fa fa-caret-up"></span>
+                      </a></th>
                 <th><a style="color:#56688A" href="" ng-click="sortType = 'tanggal'; sortReverse = !sortReverse">
-                                    Tanggal
-                                    <span ng-show="sortType == 'tanggal' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'tanggal' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a></th>
+                      Tanggal
+                      <span ng-show="sortType == 'tanggal' && !sortReverse" class="fa fa-caret-down"></span>
+                      <span ng-show="sortType == 'tanggal' && sortReverse" class="fa fa-caret-up"></span>
+                      </a></th>
                               
                 <!--<th width="60"><a style="color:#56688A">
                                     Cancel Meeting
@@ -177,18 +164,7 @@
                   <td>{{pus.tipe}}</td>
                   <td>{{pus.alasan}}</td>
                   <td>{{pus.tanggal | date}}</td>
-                  <!--<td>
-                    <button title="Ubah Status" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" ui-sref="status-modal({ '#': 'statusModal' })"
-                      ng-click="statusModal(pus)">
-                                        <span class="fa fa-check"></span>
-                                        </button>
-                  </td>-->
-                  <!--<td>
-                                        <button title="Cancel Meeting" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" 
-                                            ui-sref="meet-modal({ '#': 'cancelModal' })" ng-click="cancelModal(pus)">
-                                        <span class="fa fa-calendar-times-o"></span>
-                                        </button>
-                                    </td>-->
+                  
                 </tr>
               </tbody>
             </table>
