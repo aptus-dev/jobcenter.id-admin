@@ -121,7 +121,9 @@
                                         <label><input type="checkbox" ng-model="isi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="">
                                             Pekerja Umum  &nbsp</label><br>                            
                                         <label><input type="checkbox" ng-model="isi.value9" ng-true-value="'Satpam'" ng-false-value="">
-                                                Satpam  &nbsp</label>                               
+                                                Satpam  &nbsp</label>
+                                        <label><input type="checkbox" ng-model="isi.value11" ng-true-value="'SPG'" ng-false-value="">
+                                                SPG  &nbsp</label>                                
                                     </div>                  
                                 </div>                                
 
@@ -175,11 +177,7 @@
                                     </a></th>
                                 <th width="80"><a style="color:#56688A">
                                     Ubah Status
-                                </a></th>
-                                <!--<th width="60"><a style="color:#56688A">
-                                    Cancel Meeting
-                                </a></th>-->
-                                <!--<th width="50">&nbsp;</th>-->
+                                </a></th>                                
                             </thead>
 
                             <tbody>
@@ -197,12 +195,7 @@
                                         <span class="fa fa-check"></span>
                                         </button>
                                     </td>
-                                    <!--<td>
-                                        <button title="Cancel Meeting" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" 
-                                            ui-sref="meet-modal({ '#': 'cancelModal' })" ng-click="cancelModal(pus)">
-                                        <span class="fa fa-calendar-times-o"></span>
-                                        </button>
-                                    </td>-->
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -222,13 +215,9 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body">
-                                        <!--<div class="alert alert-danger" ng-show="notValid">
-                                            <span>Harap isi semua field di form ini.</span>
-                                            </div>-->
+                                       
                                         <!-- ANGULAR VALIDATION FORM ============ -->
-
                                         <form name="userForm">
-
                                             <label>Apakah <span class="text-danger"> {{pus.nama}}</span> telah selesai bekerja dengan <span class="text-danger"> {{pus.user}} ?</span></label>                                                                                                                                                                              
                                             <ul id="check-box-list" class="list-group checked-list-box">
                                                 <div class="checkbox"><label><input type="checkbox" ng-model="term">Benar</label></div>

@@ -13,7 +13,6 @@ angular
   .module('mainApp', [
     'firebase',
     'ui.router',
-    'dbApp',
     'worker',
     'office'
   ])
@@ -147,7 +146,6 @@ angular
       })
       .state('worker-verify', {
         url: '/verify/:workerId',
-        //controller: 'DashboardCtrl as dashboardCtrl',
         templateUrl: 'worker/worker-verify.html',
         resolve: {
           auth: function($state, Users, Auth) {
@@ -274,7 +272,6 @@ angular
       })
       .state('meet-modal', {
         url: '/meeting/:bookId',
-        // controller: 'searchController',
         templateUrl: 'worker/worker-meeting.html',
       })
       .state('worker-unavailable', {
@@ -331,7 +328,6 @@ angular
       })
       .state('status-modal', {
         url: '/status/:bookId',
-        // controller: 'searchController',
         templateUrl: 'worker/worker-status.html'
       })
       .state('worker-cancelled', {
@@ -365,7 +361,6 @@ angular
     // OFFICE PAGES - Admin Page UI Routes
     .state('offices', {
       url: '/offices',
-      //controller: 'HomeCtrl',
       templateUrl: 'office/offices-list.html',
       resolve: {
           auth: function($state, Users, Auth) {
@@ -392,7 +387,6 @@ angular
 
     .state('offices-add', {
       url: '/add',
-      // controller: 'AuthCtrl as authCtrl',
       templateUrl: 'office/office-add.html',
       resolve: {
           auth: function($state, Users, Auth) {
@@ -419,7 +413,6 @@ angular
 
     .state('offices-edit', {
         url: '/office-edit/:branchId',
-        //controller: 'searchController',
         templateUrl: 'office/branch-edit.html',
         resolve: {
           auth: function($state, Users, Auth) {
