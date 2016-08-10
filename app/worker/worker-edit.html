@@ -74,18 +74,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                            <!--<div class="form-group">
-                                <label for="tersedia" class="col-lg-3 control-label">Pekerja Masih Tersedia?</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" ng-model="data.tersedia" id="inputTersedia" required>
-                                            <option value="">Select</option>
-                                            <option>ya</option>
-                                            <option>tidak</option>
-                                            </select>
-                                    <span class="help-block">Pilih disini untuk merubah status ketersediaan pekerja</span>
-                                </div>
-                            </div>-->
+                                        <div class="col-md-6">                          
                             <div class="form-group">
                                 <div class="col-lg-8 col-lg-offset-2" align="center">
                                     <img ng-src="{{pus.foto}}" style="max-width:280px"/>
@@ -141,25 +130,6 @@
                                     <input type="text" class="form-control" id="inputKategori" ng-model="pus.kategori" placeholder="Masukkan Profesi Pekerja" required/>
                                 </div>
                             </div>
-
-                            <!--<div class="form-group">
-                                <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control select" id="inputProfesi" ng-model="pus.profesi" required>
-                                        <option value="">Select</option>
-                                        <option>Infal / Cuci-gosok</option>
-                                        <option>Pembantu (Full-time)</option>
-                                        <option>Tukang Kebun</option>
-                                        <option>Penjaga Binatang Peliharaan</option>
-                                        <option>Sopir</option>
-                                        <option>Tukang / Maintenance</option>
-                                        <option>Baby Sitter</option>
-                                        <option>Nanny / Perawat Orang Sakit</option>
-                                        <option>Satpam</option>
-                                        <option>Pekerja Umum</option>
-                                    </select>
-                                </div>
-                            </div>-->
                             
                             <div class="form-group" >
                                 <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
@@ -194,13 +164,44 @@
                                             <label><input type="checkbox" ng-model="pus.profesi.value9" ng-true-value="'Satpam'" ng-false-value="null">
                                                 Satpam  &nbsp</label><br>
                                             <label><input type="checkbox" ng-model="pus.profesi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="null">
-                                                Pekerja Umum  &nbsp</label><br>
-                                            <label><input type="checkbox" ng-model="pus.profesi.value11" ng-true-value="'SPG'" ng-false-value="null">
-                                                SPG  &nbsp</label><br>
+                                                Pekerja Umum  &nbsp</label><br>                                           
                                         </div>
                                     </div>                                                                        
                                 </div>
                             </div>
+                            <div class="form-group" >
+                                    <label for="profesi" class="col-lg-3 control-label">Kategori Pekerjaan(Skill)
+									</label>
+                                    <div class="col-sm-8" >
+                                        <div class="row" >
+                                            <div class="col-sm-6">                                                
+												<label><input type="checkbox" ng-model="pus.profesi.value11" ng-true-value="'SPG'" ng-false-value="null">
+                                                    SPG/SPB  &nbsp</label>																																				
+                                                <label>
+                                            <input type="checkbox" ng-model="pus.profesi.value12" ng-true-value="'Operator'" ng-false-value="null">
+                                                Operator &nbsp</label>																																				                                                
+                                                <br>												
+												<label>
+                                            <input type="checkbox" ng-model="pus.profesi.value14" ng-true-value="'Kasir'" ng-false-value="null">
+                                                Kasir &nbsp</label>
+												<br>												
+                                                <label>
+                                            <input type="checkbox" ng-model="pus.profesi.value15" ng-true-value="'Waiter'" ng-false-value="null">
+                                                Waiter  &nbsp</label>                                   
+                                            </div>                                        
+																						
+                                            <div class="col-sm-6">
+                                                <label>
+                                            <input type="checkbox" ng-model="pus.profesi.value13" ng-true-value="'Admin'" ng-false-value="null">
+                                                Admin &nbsp</label>
+                                                <label>
+                                                <input type="checkbox" ng-model="pus.profesi.value16" ng-true-value="'Umum apa saja'" ng-false-value="null">
+                                                    Umum/Apa Saja &nbsp</label>
+                                                    <br>                                                                                               
+                                            </div>                                        
+                                        </div>                                                                       
+                                    </div>
+                                </div>
 
                             <div class="form-group">
                                 <label for="gender" class="col-lg-3 control-label">Jenis Kelamin</label>

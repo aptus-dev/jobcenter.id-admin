@@ -57,11 +57,7 @@
     <div class="page-content">        
 
         <!-- PAGE CONTENT WRAPPER BEGIN UI-ROUTE -->
-        <div class="page-content-wrap">
-            <!--<ul class="nav nav-pills nav-justified">
-                      <li class="active"><a href="">Registrasi</a></li>
-                      <li><a ui-sref="worker-verify">Verifikasi</a></li>
-                    </ul>-->
+        <div class="page-content-wrap">         
             <div class="container">
                 <h2>Registrasi Pekerja:    <small> Tambah pekerja baru </small></h2>
             </div>
@@ -136,29 +132,9 @@
                                             <option ng-repeat="branch in branches">{{branch.kotamadya}}</option>
                                         </select>
                                     </div>
-                                </div>                            
-
-                                <!--<div class="form-group">
-                                    <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control select" id="inputProfesi" ng-model="inputProfesi" required>
-                                            <option value="">Select</option>
-                                            <option>Infal / Cuci-gosok</option>
-                                            <option>Pembantu (Full-time)</option>
-                                            <option>Tukang Kebun</option>
-                                            <option>Penjaga Binatang Peliharaan</option>
-                                            <option>Sopir</option>
-                                            <option>Tukang / Maintenance</option>
-                                            <option>Baby Sitter</option>
-                                            <option>Nanny / Perawat Orang Sakit</option>
-                                            <option>Satpam</option>
-                                            <option>Pekerja Umum</option>
-                                        </select>
-                                    </div>
-                                </div>-->
-                                
+                                </div>                                                            
                                 <div class="form-group" >
-                                    <label for="profesi" class="col-lg-3 control-label">Pekerjaan yang Diminati</label>
+                                    <label for="profesi" class="col-lg-3 control-label">Kategori Pekerjaan(Non Skill)</label>
                                     <div class="col-sm-8" >
                                         <div class="row" >
                                             <div class="col-sm-6" ng-init="checkbox.value1='Infal / Cuci-gosok'">
@@ -190,9 +166,45 @@
                                                 <label><input type="checkbox" ng-model="checkbox.value9" ng-true-value="'Satpam'" ng-false-value="null">
                                                     Satpam  &nbsp</label><br>
                                                 <label><input type="checkbox" ng-model="checkbox.value10" ng-true-value="'Pekerja Umum'" ng-false-value="null">
-                                                    Pekerja Umum  &nbsp</label> 
+                                                    Pekerja Umum /Apa Saja  &nbsp</label> 
+												
+                                                    <br>                                                                                               
+                                            </div>                                        
+                                        </div>                                                                       
+                                    </div>
+                                </div>                                
+								
+								<hr><br>
+								
+								<div class="form-group" >
+                                    <label for="profesi" class="col-lg-3 control-label">Kategori Pekerjaan(Skill)
+									</label>
+                                    <div class="col-sm-8" >
+                                        <div class="row" >
+                                            <div class="col-sm-6" ng-init="checkbox.value11='SPG'">
+                                                
 												<label><input type="checkbox" ng-model="checkbox.value11" ng-true-value="'SPG'" ng-false-value="null">
-                                                    SPG  &nbsp</label>
+                                                    SPG/SPB  &nbsp</label>																																				
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value12" ng-true-value="'Operator'" ng-false-value="null">
+                                                Operator &nbsp</label>																																				                                                
+                                                <br>												
+												<label>
+                                            <input type="checkbox" ng-model="checkbox.value14" ng-true-value="'Kasir'" ng-false-value="null">
+                                                Kasir &nbsp</label>
+												<br>												
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value15" ng-true-value="'Waiter'" ng-false-value="null">
+                                                Waiter  &nbsp</label>                                   
+                                            </div>                                        
+																						
+                                            <div class="col-sm-6">
+                                                <label>
+                                            <input type="checkbox" ng-model="checkbox.value13" ng-true-value="'Admin'" ng-false-value="null">
+                                                Admin &nbsp</label>
+                                                <label>
+                                                <input type="checkbox" ng-model="checkbox.value16" ng-true-value="'Umum apa saja'" ng-false-value="null">
+                                                    Umum/Apa Saja &nbsp</label>
                                                     <br>                                                                                               
                                             </div>                                        
                                         </div>                                                                       
@@ -200,7 +212,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="kategori" class="col-lg-3 control-label">Profesi</label>
+                                    <label for="kategori" class="col-lg-3 control-label">Profesi(Perjaan Yang di inginkan)</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" id="inputKategori" ng-model="inputKategori" 
                                             ng-init="inputKategori = null" placeholder="Masukkan Profesi Pekerja" />

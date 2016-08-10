@@ -113,6 +113,21 @@
                     <input type="text" class="" id="tersedia" ng-model="input.status" ng-init="input.status='booked'" hidden/>
                   </div>
                 </div>                
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <select class="form-control" id="gender" ng-model="input.gender">
+                        <option value="">Jenis Kelamin</option>
+                        <option>Laki-laki</option>
+                        <option>Perempuan</option>
+                    </select>
+                  </div>
+                  <label>
+                    <input type="checkbox" ng-model="isi.value5" ng-true-value="'Sopir'" ng-false-value="">
+                        Sopir </label><br>
+                  <label>
+                    <input type="checkbox" ng-model="isi.value6" ng-true-value="'Tukang / Maintenance'" ng-false-value="">
+                        Tukang / Maintenance</label>
+                </div>
 
                 <div class="col-sm-3">
                    <div class="form-group">
@@ -123,19 +138,54 @@
                           <label><input type="checkbox" ng-model="isi.value10" ng-true-value="'Pekerja Umum'" ng-false-value="">
                             Pekerja Umum  &nbsp</label><br>                            
                           <label><input type="checkbox" ng-model="isi.value9" ng-true-value="'Satpam'" ng-false-value="">
-                                Satpam  &nbsp</label>
-							<label><input type="checkbox" ng-model="isi.value11" ng-true-value="'SPG'" ng-false-value="">
-                                SPG  &nbsp</label>                               
+                                Satpam  &nbsp</label><br>
+							                               
                     </div>                                                                                        
                 </div>                        
-
-              </div>
-              <!--<a class="btn btn-primary pull-right" ng-click="apply()">
-                      <span class="glyphicon glyphicon-filter"></span> Update
-                    </a>-->
+              </div>             
             </div>
           </div>
           <!--end of filter-->
+		  
+		  <!-- filter -->
+            <div class="container">
+                       <div class="row">
+                         <div class="col-md-5"> 
+                          <h3 class="text-left">Filter Perkerja (Skill):</h3>
+                         </div>
+                         
+                       </div>
+                    <div class="well" style="max-height: 400px;overflow: auto;">
+                      
+                      <div class="col-sm-3">                                                      
+                          <label><input type="checkbox" ng-model="isi.value11" ng-true-value="'SPG'" ng-false-value="">
+                                SPG  &nbsp</label>    		
+                          <label>
+                          <input type="checkbox" ng-model="isi.value12" ng-true-value="'Operator'" ng-false-value="">
+                              Operator&nbsp</label><br>
+                              <label>
+                          <input type="checkbox" ng-model="isi.value15" ng-true-value="'Waiter'" ng-false-value="">
+                           Waiter 
+						          </label>						   						                                                  
+                      </div>                        
+                      <div class="col-sm-3">                          
+                        <label>
+                            <input type="checkbox" ng-model="isi.value13" ng-true-value="'Admin'" ng-false-value="">
+                              Admin &nbsp
+						            </label>						
+                        <label>
+                            <input type="checkbox" ng-model="isi.value14" ng-true-value="'Kasir'" ng-false-value="">
+                             Kasir &nbsp
+						            </label>
+                        <label>
+                        <input type="checkbox" ng-model="isi.value16" ng-true-value="'Umum apa saja'" ng-false-value="">
+                        Umum apa saja</label>                                                    
+                      </div>                                                                                                                                 
+                  </div>                                    
+                </div>
+          </div>
+          <!--end of filter-->
+
 
           <!--/Search RESULTS-->
           <div class="container">
